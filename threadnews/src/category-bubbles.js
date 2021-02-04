@@ -9,11 +9,11 @@ import TopicBubble from './TopicBubble'
 //const axios = require('axios')
 export default function CategoryBubbleSet(props){
     const options = {
-		size: 180,
+		size: 160,
 		minSize: 60,
 		gutter: 20,
 		provideProps: false,
-		numCols: 5,
+		numCols: 4,
 		fringeWidth: 120,
 		yRadius: 150,
 		xRadius: 600,
