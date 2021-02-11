@@ -8,6 +8,7 @@ export default function TopicBubble(props) {
         backgroundColor: props.bg_color+ "d0",
       }}
        className={"TopicBubble"}
+       onClick={props.onClick}
     >
       {true ? (
         <div
@@ -35,7 +36,7 @@ export default function TopicBubble(props) {
             style={{
               color: "white",
               fontSize: 18,
-              marginBottom: 6,
+              marginBottom: 10,
               fontWeight: 1000,
               maxWidth: 150,
               textAlign: "center",

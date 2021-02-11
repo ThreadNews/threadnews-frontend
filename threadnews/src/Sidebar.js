@@ -1,8 +1,9 @@
 import { extend } from "jquery";
-
+import App from './App';
 import React from 'react';
 import ProgressBar from 'react-customizable-progressbar';
 import './bootstrap_theme.css';
+import './sidebar.css';
 import Card from 'react-bootstrap/Card';
 import Button from "react-bootstrap/Button";
 
@@ -29,7 +30,8 @@ class Sidebar extends React.Component {
                 style = {{width:'20rem',paddingTop:'30px'}}
             >
                <Card.Body>
-                   <Card.Title>Progress</Card.Title>
+                   <p className={"sidebarHeader"}>hello</p>
+                   {/* <Card.Title className="sidebarHeader">Progress</Card.Title> */}
                    <Card.Subtitle>please select x more</Card.Subtitle>
                     <ProgressBar 
                         progress={11/8 *100}

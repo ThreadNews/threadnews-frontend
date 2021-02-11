@@ -1,0 +1,9 @@
+.sidebarHeader {
+  text-align: center;
+  color: "white";
+  fontSize: 50px;
+  marginBottom: 10px;
+  /* fontWeight: 1000, */
+  maxWidth: 150;
+  textAlign: "center";
+}
