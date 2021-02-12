@@ -2,12 +2,15 @@ import BubbleUI from 'react-bubble-ui'
 //import bubbleMenu from './App';
 import {useState, useEffect,useRef} from 'react'
 import 'react-bubble-ui/dist/index.css';
-import './bubbleSet.css';
+import './css/bubbleSet.css';
 import  axios from 'axios';
 import TopicBubble from './TopicBubble'
 // #import Child from './ChildComponent';
 //const axios = require('axios')
 export default function CategoryBubbleSet(props){
+
+
+  	
 
     const options = {
 		size: 160,
@@ -28,16 +31,11 @@ export default function CategoryBubbleSet(props){
 	// var interests = [];
 	console.log(b);
 
-	function add_interest(item){
-		let interests = props.interests;
-		interests.push(item)
-		setInterests()
-		console.log(interests)
-	}
+
 	
 	const children = b.map((data, i) => {
         // return <TopicBubble {...data} key={i} className='child' onClick={()=>add_interest(data.logo_path.slice(0,-4))} />
-		return <TopicBubble {...data} key={i} className='child' onClick={() => add_interest(data.logo_path)}/>
+		return <TopicBubble {...data} key={i} className='child'  onClick={()=>props.add_interest(data.topic)}/>
     });
 
    return (<BubbleUI options={options} className="bubbleSet">

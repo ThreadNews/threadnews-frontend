@@ -22,7 +22,7 @@ export default function TopicBubble(props) {
             pointerEvents: "none",
           }}
         >
-          <img
+          {/* <img
             src={`./assets/categoryIcons/${props.logo_path}`}
             alt=""
             style={{
@@ -31,11 +31,11 @@ export default function TopicBubble(props) {
               marginTop:20,
               marginBottom: 5,
             }}
-          ></img>
+          ></img> */}
           <p
             style={{
               color: "white",
-              fontSize: 18,
+              fontSize: 24,
               marginBottom: 10,
               fontWeight: 1000,
               maxWidth: 150,
