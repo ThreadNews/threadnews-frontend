@@ -1,5 +1,5 @@
 import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
-import './css/bootstrap_theme.css'
+// import './css/bootstrap_theme.css'
 import {LinkContainer} from 'react-router-bootstrap'
 export default function Top_nav(props){
 
@@ -7,7 +7,7 @@ export default function Top_nav(props){
 
 
     let nav_items = localStorage.getItem('user') ? (
-        <Nav className='ml-auto'>
+        <Nav className='ml-auto' bg="primary" variant="dark">
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>

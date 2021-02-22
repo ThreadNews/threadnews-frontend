@@ -63,11 +63,11 @@ export function ThreadPage(props){
 }
 
 ThreadPage.defaultProps ={
-    // user: {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
-    //     "username":"test username",
-    //     "first_name":"first_name",
-    //     "last_name":"last_name",
-    //     "email":"testuser@gmail.com",
-    //     "interests":["Economics","Sports","Pop Culture","Beauty","Fitness","Architcture"]
-    // }
+    user: {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
+        "username":"test username",
+        "first_name":"first_name",
+        "last_name":"last_name",
+        "email":"testuser@gmail.com",
+        "interests":["Economics","Sports","Pop Culture","Beauty","Fitness","Architcture"]
+    }
 }

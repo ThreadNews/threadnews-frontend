@@ -11,10 +11,9 @@ import Sidebar from './Sidebar';
 import {Container, Row, Col,} from 'react-bootstrap';
 import { render } from 'react-dom';
 
-// import "Welcome.css";
-//import Navbar from 'react-bootstrap/Navbar';
-const test_data = [{"name":"policy","backgroundColor":"#EE1B2D","textColor": "white"}]
-//function NavBar() {}
+
+// const test_data = [{"name":"policy","backgroundColor":"#EE1B2D","textColor": "white"}]
+
 
 
 
@@ -56,20 +55,19 @@ class App extends React.Component {
     return (
       <div className="App" width='100%'>
         <Top_nav/>
+        <div style = {{paddingTop:'20px',borderRadius:'30px',alignItems:'center'}}>
+          <h2>Welcome to Thread-News</h2>
+          <hr style={{width:'40%'}}></hr>
+          <h4>Please select some topics to get started</h4>
+        </div>
         <Container >
           <Row>
             <Col sm ={9}> 
-              {/* { CategoryBubbleSet({
-                // interests:interests,
-                add_interest: this.add_interest,
-                interests:this.interests
-              })} */}
+              
                 <CategoryBubbleSet
                   add_interest={this.add_interest}
                   interests={this.state.interests}
                   topics = {this.state.topics}
-                  
-                  
                 />
             </Col>
             
@@ -85,22 +83,6 @@ class App extends React.Component {
             </Col>
           </Row>
         </Container>
-        <header className="App-header" width='100%'>
-          {/* <p style = 'textAlign:left'>
-            Welcome to ThreadNews
-          </p> */}
-          
-          {/* <p className="welcome">Welcom to ThreadNews!</p> */}
-          <p style={{
-                color: "white",
-                fontSize: 32,
-                marginBottom: 5,
-                opacity: 0.4}}>
-            Lets get you started, Please select topics that interest you 
-          </p>
-          
-          
-        </header>
       </div>
     );
   }

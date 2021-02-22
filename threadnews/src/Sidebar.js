@@ -13,7 +13,6 @@ import ListGroup from 'react-bootstrap/ListGroup'
     
 
 export function Sidebar(props){
-    console.log("so update", props.num)
 
     function update_user_interests(){
         axios.post('http://127.0.0.1:5000/update_interests',{user_id:"test user id", new_interests:props.interests})
@@ -22,14 +21,15 @@ export function Sidebar(props){
     }
 
     return (
-        <div>
+        <div  style = {{paddingTop:'30px',alignItems:'center'}}>
         <Card
-            bg="Warning" 
-            style = {{width:'20rem',paddingTop:'30px',borderRadius:'30px'}}
+            style = {{width:'20rem',paddingTop:'20px',borderRadius:'30px',alignItems:'center'}}
         >
+                <Card.Title className="sidebarHeader">Progress</Card.Title>
+
             <Card.Body>
                 
-                <Card.Title className="sidebarHeader">Progress</Card.Title>
+                <hr></hr>
                 <Card.Subtitle>please select {5 - props.num} more</Card.Subtitle>
                 <ProgressBar 
                     progress={props.num/5 * 100}
@@ -37,10 +37,10 @@ export function Sidebar(props){
                     strokeColor={primary_color}
                 >
                     <div className="indicator">
-                        {props.num}/8
+                        {props.num}/5
                     </div>
                 </ProgressBar>
-                <Button variant={props.num<5 ? "outline-warning": "Success" } 
+                <Button variant={props.num<5 ? "outline-warning": "outline-success" } 
                     disabled={props.num<5?true:false}
                     onClick={update_user_interests}
                     size ="lg" >

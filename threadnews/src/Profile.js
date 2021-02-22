@@ -9,7 +9,7 @@ export default function Profile(props){
     return (
         <div>
             <Navbar></Navbar>
-            <Container>
+            <Container  style={{padding:'20px'}}>
             <Row >
                 <Card className='profileCard' pad='6px'>
                     <Container>

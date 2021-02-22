@@ -7,7 +7,7 @@
     /* display: flex; */
     font-weight: 400;
     font-family: TimesNewRoman;
-    background: #99eec7
+    background: #303D4E
     
   }
   
@@ -28,7 +28,8 @@
     width: 450px;
     font-family: TimesNewRoman;
     margin: auto;
-    background: #ffffff;
+    opacity: 0.9;
+    background: #eceef0;
     padding: 40px 55px 45px 55px;
     border-radius: 15px;
     transition: all .3s;

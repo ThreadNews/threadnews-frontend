@@ -60,7 +60,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route exact path="/" component={App}/>
+        <Route exact path="/"><App onFinish={login}/></Route>
         <Route path = '/threads' component={ThreadPage}/>
         <Route path = '/login'><Login onLogin={login} onSignup={signup}/></Route>
         <Route path ='/profile'><Profile {...user}/></Route>
