@@ -1,0 +1,47 @@
+.profileCard{
+    width: 90%;
+    height: 80%;
+    border-radius:25px;
+    opacity:0.9;
+    padding:30px;
+}
+
+.overview{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 48px;
+    padding-top: 20px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.profileImage{
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    overflow: hidden;
+    border-width: 3;
+    border-color: gray;
+}
+
+.profileName{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 48px;
+    padding-left: 20px;
+    width:100%
+}
+
+.divider{
+    background-color:darkgray; 
+    width:2px;
+    width:100%;
+    float: left;
+    
+}
+
+.divider2{
+    background-color:rgb(197, 197, 197); 
+    width:3px;
+    width:30%;
+    /* float: left; */
+}

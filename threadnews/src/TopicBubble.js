@@ -1,11 +1,10 @@
 import React from "react";
 
 export default function TopicBubble(props) {
-  // console.log(props);
   return (
     <div
       style={{
-        backgroundColor: props.bg_color+ "d0",
+        backgroundColor: '#F0584F' + "d0",
       }}
        className={"TopicBubble"}
        onClick={props.onClick}
@@ -22,39 +21,20 @@ export default function TopicBubble(props) {
             pointerEvents: "none",
           }}
         >
-          {/* <img
-            src={`./assets/categoryIcons/${props.logo_path}`}
-            alt=""
-            style={{
-              width: 90,
-              borderRadius: 5,
-              marginTop:20,
-              marginBottom: 5,
-            }}
-          ></img> */}
+          
           <p
             style={{
               color: "white",
-              fontSize: 24,
-              marginBottom: 10,
+              fontSize: 22,
+              marginBottom: 50,
+              marginTop:50,
               fontWeight: 1000,
-              maxWidth: 150,
+              maxWidth: 100,
               textAlign: "center",
             }}
           >
-            {props.logo_path.slice(0,-4)}
-          </p>
-          <p
-            style={{
-              color: "white",
-              fontSize: 16,
-              marginBottom: 5,
-              maxWidth: 100,
-              opacity: 0.4,
-            }}
-          >
-            {/* {props.symbol} */}
-          </p>
+            {props.topic}
+          </p>         
         </div>
       ) : null}
     </div>
