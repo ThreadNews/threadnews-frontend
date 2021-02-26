@@ -2,6 +2,19 @@ import React, {useState,} from 'react';
 import './css/Login.css'
 import axios from 'axios';
 import {LinkContainer} from 'react-router-bootstrap'
+// {"_id":{"$oid":"6035d5ebc37963b87231326b"},
+//     "user_id":"bddb3246-7658-11eb-95ba-acde48001122",
+//     "username":"userN",
+//     "first_name":"John",
+//     "last_name":"Doe",
+//     "email":"jk@g.com",
+//     "interests":[],
+//     "pass_hash":"1473a11dc0f3745bf1769c1251da96b002b1b1af6fff7da812f4daf41425ee473ec630a3af87eef90c5e6c4dc53730c16b06ce369202ba01843962cb7b17b727"}
+
+
+
+
+
 
 import Top_nav from './Nav'
 export default function Login(props) {
@@ -29,7 +42,7 @@ export default function Login(props) {
     function login(){
         // int login_count = 0;
         console.log("starting login...")
-        axios.post(`http://127.0.0.1:5000/login`,JSON.stringify({'email':email,'password':password})).then( result => {
+        axios.post(`http://127.0.0.1:5000/login`,{email:email,password:password}).then( result => {
             if (result){
                 
                 if(result.data["status"]==="Failure"){
