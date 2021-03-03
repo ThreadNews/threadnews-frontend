@@ -6,6 +6,7 @@ import { Container, Row, Col, Toast, CardColumns } from "react-bootstrap";
 import { useState, useEffect, useRef } from "react";
 import { ArticleCard } from "./ArticleCard";
 import { sentimentCard } from "./SentimentCard.js";
+import "./css/ThreadPage.css";
 export function ThreadPage(props) {
   const sampleSize = ([...arr], n = 1) => {
     let m = arr.length;
@@ -59,12 +60,12 @@ export function ThreadPage(props) {
         <Navbar></Navbar>
       </div>
       <div className="thread-page-content">
-        <Container>
-          <Row>
-            <Col sm={9}>{cards}</Col>
-            <Col sm={3}>{cards}</Col>
-          </Row>
-        </Container>
+        <div className="articles">
+          {cards}
+        </div>
+        <div className="sentiment">
+          {cards}
+        </div>
       </div>
     </div>
   );

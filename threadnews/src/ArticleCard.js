@@ -79,7 +79,7 @@ export function ArticleCard(props) {
                 </Button>{" "}
               </Col>
             </Row>
-            <div align="right">
+            {/* <div align="right">
               <img
                 className="saveButton"
                 src={"./assets/heart_icons/heart_empty.svg"}
@@ -88,7 +88,7 @@ export function ArticleCard(props) {
                 alt=""
                 onClick={() => props.likeArticle(props.articleId)}
               />
-            </div>
+            </div> */}
           </Container>
         </Card.Body>
       </Card>

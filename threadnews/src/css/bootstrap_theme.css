@@ -4766,8 +4766,9 @@
    word-wrap: break-word;
    background-color: #393e46;
    background-clip: border-box;
-   border: 0px solid #fff;
+   border: 1 px solid #fff;
    border-radius: 0;
+   max-height: 250px;
  }
  
  .card > hr {
