@@ -27,7 +27,7 @@ export function Likes(props){
             emot_ls.push([key,val])
         }
         emot_ls.sort(function(a,b){return b[1]-a[1]})
-        console.log("emot_ls:", emot_ls);
+        // console.log("emot_ls:", emot_ls);
         return emot_ls;
     }
     
