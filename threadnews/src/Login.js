@@ -2,6 +2,7 @@ import React, {useState,} from 'react';
 import './css/Login.css'
 import axios from 'axios';
 import {LinkContainer} from 'react-router-bootstrap'
+import sha256 from 'js-sha256'
 // {"_id":{"$oid":"6035d5ebc37963b87231326b"},
 //     "user_id":"bddb3246-7658-11eb-95ba-acde48001122",
 //     "username":"userN",
@@ -23,7 +24,7 @@ export default function Login(props) {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [login_count, setLoginCount, ] = useState(0);
-    const is_login = true;
+    const is_login = false;
    
 
     function signUp(){
@@ -42,15 +43,18 @@ export default function Login(props) {
     function login(){
         // int login_count = 0;
         console.log("starting login...")
-        axios.post(`http://127.0.0.1:5000/login`,{email:email,password:password}).then( result => {
+        axios.post(`http://127.0.0.1:5000/login`,{email:email,pass_hash:sha256.hex(password)}).then( result => {
             if (result){
                 
                 if(result.data["status"]==="Failure"){
                    setLoginCount(login_count + 1)
                 }
                 else{
-                    sessionStorage.setItem('user', JSON.stringify(result.data.user))
-                    props.onLogin()
+                    console.log(result)
+                    // sessionStorage.setItem('user', JSON.stringify(result.data.user))
+                    sessionStorage.setItem('user',result.data['email'])
+                    sessionStorage.setItem('pass_hash',sha256.hex(password))
+                    // props.onLogin()
                 }
             }
         })
@@ -62,7 +66,8 @@ export default function Login(props) {
             <Top_nav></Top_nav>
             <div className='inner'>
                 <form>
-                    <h3 fontfamily='TimesNewRoman'>{is_login?'Log in':'Register'}</h3>
+
+                    <h3 className="loginText" fontfamily='TimesNewRoman' color="black" >{is_login?'Log in':'Register'}</h3>
                     {is_login?null:
                         (<div className="form-group">
                             <label >Username</label>
@@ -83,12 +88,11 @@ export default function Login(props) {
                     <LinkContainer to='/threads'>
                     <button type="submit" 
                         className="btn btn-dark btn-lg btn-block"
-                        
-                        onClick={is_login? ()=>login():()=>signUp()}>{is_login?'Log in':'Sign Up'}</button>
-
-                    {/* <button type="submit">test </button> */}
-                        {/* className="btn btn-dark btn-lg btn-block"
-                        // onClick={()=>setLogin(!is_login)}>{is_login?'Log in':'Sign Up'}</button> */}
+                        href={is_login?'/threads/':'/'}
+                        onClick={is_login? ()=>login():()=>signUp()}>
+                            {is_login?'Log in':'Sign Up'}
+                    </button>
+                    
                     </LinkContainer>
                 </form>
             </div>

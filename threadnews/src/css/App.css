@@ -17,6 +17,13 @@ body, html, .App, #root, .outer {
   height: 100%;
 }
 
+.ThreadInfo{
+  border-radius: 30px;
+  background-color: #e3e6e9;
+  color:#222831;
+  width: 100%;
+
+}
 
 
 .App-logo {

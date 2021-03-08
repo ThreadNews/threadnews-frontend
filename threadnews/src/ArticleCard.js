@@ -77,6 +77,13 @@ export function ArticleCard(props) {
                 >
                   Not for me
                 </Button>{" "}
+                <Button
+                  style={{ float: "right", marginRight: 15 }}
+                  variant="warning"
+                  onClick={()=>props.set_thread(props.i)}
+                >
+                  Set Thread
+                </Button>
               </Col>
             </Row>
             <div align="right">
@@ -86,7 +93,7 @@ export function ArticleCard(props) {
                 float="right"
                 padding="0"
                 alt=""
-                onClick={() => props.likeArticle(props.articleId)}
+                onClick={()=>props.likeArticle(article.id)}
               />
             </div>
           </Container>

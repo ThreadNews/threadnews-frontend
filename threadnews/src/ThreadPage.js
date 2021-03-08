@@ -5,8 +5,11 @@ import axios from "axios";
 import { Container, Row, Col, Toast, CardColumns } from "react-bootstrap";
 import { useState, useEffect, useRef } from "react";
 import { ArticleCard } from "./ArticleCard";
-import { sentimentCard } from "./SentimentCard.js";
+import { SentimentCard, sentimentCard } from "./SentimentCard.js";
+import {ThreadInfo} from "./ThreadInfo.js"
 export function ThreadPage(props) {
+  const [index, setIndex] = useState(0);
+
   const sampleSize = ([...arr], n = 1) => {
     let m = arr.length;
     while (m) {
@@ -19,20 +22,19 @@ export function ThreadPage(props) {
     const [articles, setArticles] = useState([]);
     
     useEffect(()=> {
-        axios.get('http://127.0.0.1:5000/threads/Health/t').then( result => {
+      let email = sessionStorage.getItem('user')
+      let pass_hash = sessionStorage.getItem('pass_hash')
+
+      axios.post('http://127.0.0.1:5000/threads/Health/t',{email:email,pass_hash:pass_hash}).then( result => {
       if (result){
             console.log("ART:",result.data.articles[0].source)
             
             setArticles(sampleSize(result.data.articles.slice(),20));
-
-  useEffect(() => {
-    axios.get("http://127.0.0.1:5000/threads/Health/t").then((result) => {
-      if (result) {
-        console.log("ART:", result.data.articles[0].source);
-        setArticles(sampleSize(result.data.articles.slice(), 20));
-      }
-    });
+        }
+      });
   }, []);
+
+
 
   function remove_article(id) {
     console.log("removing with id");
@@ -49,27 +51,52 @@ export function ThreadPage(props) {
     // props.user.user_id()
   }
 
+  function select_article(i){
+    if (i>=0){
+      setIndex(i)
+      console.log("Selected Article",i)
+    }
+  }
+
   const cards = articles.slice(0, 20).map((data, i) => {
+    
     return (
       <ArticleCard
         {...data}
         key={i}
+        i = {i}
         removeArticle={remove_article}
         likeArticle={like_article}
+        set_thread = {select_article}
+
       />
     );
   });
+  const sentCards = articles.slice(0, 20).map((data, i) => {
+    return (
+      <Row>
+      <SentimentCard
+        {...data}
+        key={i}
+        set_thread = {()=>this.select_article()}
+      />
+      
+      </Row>
+    );
+  });
+
+
 
   return (
     <div>
       <div>
         <Navbar></Navbar>
       </div>
-      <div className="thread-page-content">
-        <Container>
+      <div className="ThreadPage">
+        <Container fluid>
           <Row>
-            <Col sm={9}>{cards}</Col>
-            <Col sm={3}>{cards}</Col>
+            <Col sm={8}>{cards}</Col>
+            <Col sm={3}><ThreadInfo {...articles[index]}/></Col>
           </Row>
         </Container>
       </div>
@@ -77,20 +104,21 @@ export function ThreadPage(props) {
   );
 }
 
-ThreadPage.defaultProps = {
-  user: {
-    user_id: "5ecc439c-6ed0-11eb-a6f4-acde48001122",
-    username: "test username",
-    first_name: "first_name",
-    last_name: "last_name",
-    email: "testuser@gmail.com",
-    interests: [
-      "Economics",
-      "Sports",
-      "Pop Culture",
-      "Beauty",
-      "Fitness",
-      "Architcture",
-    ],
-  },
-};
+// ThreadPage.defaultProps = {
+//   user: {
+//     user_id: "5ecc439c-6ed0-11eb-a6f4-acde48001122",
+//     username: "test username",
+//     first_name: "first_name",
+//     last_name: "last_name",
+//     email: "testuser@gmail.com",
+//     interests: [
+//       "Economics",
+//       "Sports",
+//       "Pop Culture",
+//       "Beauty",
+//       "Fitness",
+//       "Architcture",
+//     ],
+//   },
+// }
+

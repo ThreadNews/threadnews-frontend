@@ -1,10 +1,5 @@
 export const topic_data=[
-{topic:'Archite',
-subTopics:[
-    "Celebrity Fashion",
-    "Fashion blogs",
-    "NYFW (editoral)",
-]},
+
 {topic:'Architcture',
 subTopics:[
     "Remodeling",
@@ -17,7 +12,7 @@ subTopics:[
 subTopics:[
     "Music News",
     "Actors",
-    "Tik Tok news",
+    "Tik Tok",
     "K Pop",
 ]},
 
@@ -67,6 +62,29 @@ subTopics:[
     "Big Tech",
     "Programming",
     "Graphic Design"
-]}
+]},
+{topic:"Startups"},
+{topic:"Big Tech"},
+{topic:"Programming"},
+{topic:"Graphic Design"},
+{topic:"Sports"},
+{topic:"Stocks"},
+{topic:"Surfing"},
+{topic:"Weather"},
+{topic:"Skincare"},
+{topic:"Cleansing"},
+{topic:"Crypto"},
+{topic:"Healthy Living"},
+{topic:"Healthy Living"},
+{topic:"DIY"},
+{topic:"Freelancing"},
+{topic:"Blogging"},
+{topic:"K Pop"},
+{topic:"Math"},
+{topic:"Cannabis"},
+
+{topic:"Golf"},
+
+
 
 ]
