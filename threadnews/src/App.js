@@ -10,11 +10,7 @@ import {useState, useEffect,useRef} from 'react'
 import Sidebar from './Sidebar';
 import {Container, Row, Col,} from 'react-bootstrap';
 import { render } from 'react-dom';
-
-
-// const test_data = [{"name":"policy","backgroundColor":"#EE1B2D","textColor": "white"}]
-
-
+import {Redirect} from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -24,7 +20,6 @@ class App extends React.Component {
     this.state = {interests:[],num:0,topics:[],bub:[]}
     this.add_interest = this.add_interest.bind(this);
     this.remove_interest = this.remove_interest.bind(this);
-   
   }
 
   
@@ -37,6 +32,11 @@ class App extends React.Component {
     console.log('num:', this.state.num);
     
   }
+
+  toThreads = () =>{
+    return <Redirect to="/threads"/>
+  }
+
 
 
   remove_interest(old_interest){
@@ -83,6 +83,7 @@ class App extends React.Component {
             </Col>
           </Row>
         </Container>
+        
       </div>
     );
   }
