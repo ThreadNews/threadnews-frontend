@@ -19,19 +19,33 @@ function view_threads(){
   )
 }
 
+//direct user to thread-page after sign-in
 function login(){
-  view_threads()
+  console.log("login was called")
+  ReactDOM.render(
+    <React.StrictMode>
+      // go to threads 
+      <ThreadPage/>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
 }
+
 
 function signup(){  
   console.log("was called")
   ReactDOM.render(
     <React.StrictMode>
+      // go to bubbles 
       <App onFinish={view_threads}/>
+           // path defined below 
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
+
+// bubbles
+// go to threads 
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -42,6 +56,7 @@ function signup(){
 // )
 
 let login1 = (<Login onLogin={login} onSignup={signup}/>)
+console.log(login)
 
 let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
 "username":"doge2moon",
@@ -56,6 +71,7 @@ let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
  localStorage.setItem('user',user)
 
 console.log("was called")
+// if __name__ = '__main__' 
 ReactDOM.render(
   <React.StrictMode>
     <Router>

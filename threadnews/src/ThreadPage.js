@@ -17,7 +17,14 @@ export function ThreadPage(props) {
     return arr.slice(0, n);
   };
 
-  const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState([]);
+    
+    useEffect(()=> {
+        axios.get('http://127.0.0.1:5000/threads/Health/t').then( result => {
+      if (result){
+            console.log("ART:",result.data.articles[0].source)
+            
+            setArticles(sampleSize(result.data.articles.slice(),20));
 
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/threads/Health/t").then((result) => {
