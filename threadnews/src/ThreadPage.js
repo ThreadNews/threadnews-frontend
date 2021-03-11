@@ -5,7 +5,7 @@ import axios from "axios";
 import { Container, Row, Col, Toast, CardColumns } from "react-bootstrap";
 import { useState, useEffect, useRef } from "react";
 import { ArticleCard } from "./ArticleCard";
-import { sentimentCard } from "./SentimentCard.js";
+import { SentimentCard } from "./SentimentCard.js";
 import "./css/ThreadPage.css";
 export function ThreadPage(props) {
   const sampleSize = ([...arr], n = 1) => {
@@ -17,14 +17,7 @@ export function ThreadPage(props) {
     return arr.slice(0, n);
   };
 
-    const [articles, setArticles] = useState([]);
-    
-    useEffect(()=> {
-        axios.get('http://127.0.0.1:5000/threads/Health/t').then( result => {
-      if (result){
-            console.log("ART:",result.data.articles[0].source)
-            
-            setArticles(sampleSize(result.data.articles.slice(),20));
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/threads/Health/t").then((result) => {
@@ -61,19 +54,26 @@ export function ThreadPage(props) {
     );
   });
 
+  const sentiments = articles.slice(0, 20).map((data, i) => {
+    return (
+      <SentimentCard
+        
+      />
+    );
+  });
+
   return (
-    <div>
-      <div>
-        <Navbar></Navbar>
-      </div>
-      <div className="thread-page-content">
-        <div className="articles">
-          {cards}
-        </div>
-        <div className="sentiment">
-          {cards}
-        </div>
-      </div>
+    <div><div>
+    <Navbar></Navbar>
+  </div>
+  <div className="thread-page-content">
+    <div className="articles">
+      {cards}
+    </div>
+    <div className="sentiment">
+      {sentiments}
+    </div>
+  </div>
     </div>
   );
 }
