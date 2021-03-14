@@ -22,6 +22,7 @@ export default function Top_nav(props){
             <LinkContainer to ='/login'>
                 <Nav.Link  style={{float: 'right',}} href="/login" >Sign Up</Nav.Link>
             </LinkContainer>
+            
             <LinkContainer to='/login'>
                 <Nav.Link >Login</Nav.Link>
             </LinkContainer>
@@ -29,9 +30,8 @@ export default function Top_nav(props){
         </Nav>
 
     return (
-
-        <Navbar variant="light" bg='primary'>
-        <Navbar.Brand>Thread-News</Navbar.Brand>
+        <Navbar variant="light" fixed='top'  bg='info'>
+        <Navbar.Brand>Thread News</Navbar.Brand>
             {nav_items}
         </Navbar>
 

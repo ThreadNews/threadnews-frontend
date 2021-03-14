@@ -7,6 +7,7 @@ import {ThreadPage} from './ThreadPage'
 import Login from './Login'
 import Profile from './Profile'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Top_nav from "./Nav";
 
 
 
@@ -58,7 +59,10 @@ let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
 console.log("was called")
 ReactDOM.render(
   <React.StrictMode>
+    
     <Router>
+    <Top_nav/>
+
       <Switch>
         <Route exact path="/"><App onFinish={login}/></Route>
         <Route path = '/threads' component={ThreadPage}/>

@@ -8,11 +8,13 @@ export default function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
+    
     function signUp(){
         console.log("starting sign up...")
         console.log("EMAIL:",email, " Password:",password)
         //this must be changed
-        axios.post(`http://127.0.0.1:5000/newUser/${username}/${email}/${password}`).then( result => {
+        // axios.post(`http://127.0.0.1:5000/newUser/${username}/${email}/${password}`).then( result => {
+        axios.post('http://127.0.0.1:5000/newUser', {username:username,email:email,password:password}).then( result => {
       if (result){
             console.log("finished adding user",result)
             localStorage.setItem('user',result.data)
@@ -27,7 +29,6 @@ export default function Login(props) {
 
     return (
         <div className="outer">
-            <Top_nav></Top_nav>
             <div className='inner'>
                 <form>
                     <h3 fontfamily='TimesNewRoman'>{props.login?'Log in':'Register'}</h3>
