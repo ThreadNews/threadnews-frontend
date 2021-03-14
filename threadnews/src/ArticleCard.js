@@ -22,19 +22,24 @@ export function ArticleCard(props) {
       <Container className="article-container">
         <Row float="left" className="">
           <Col xs={3} className="">
-            <img
-              className="newsImg"
-              src={article === "undefined" ? null : article.urlToImage}
-              alt=""
-            />
+            <a href={article.url}>
+              <img
+                className="newsImg"
+                src={article === "undefined" ? null : article.urlToImage}
+                alt=""
+              />
+            </a>
           </Col>
+
           <Col xs={9} className="article-content">
-            <Row
-              className="article-title"
-              style={{ fontSize: 22, fontWeight: "bold" }}
-            >
-              <p>{article.title}</p>
-            </Row>
+            <a href={article.url}>
+              <Row
+                className="article-title"
+                style={{ fontSize: 22, fontWeight: "bold" }}
+              >
+                <p>{article.title}</p>
+              </Row>
+            </a>
             <Row className="text-muted article-author-date">
               <Col xs={6}>
                 <p>
@@ -46,29 +51,29 @@ export function ArticleCard(props) {
               </Col>
             </Row>
             <Row
-              className="article-desc bordered"
+              className="article-desc "
               style={{ fontSize: 18, fontFamily: "TimesNewRoman" }}
             >
               <p>{article.description}</p>
             </Row>
-            <Row className="bordered">
-              <Col xs={{span:1,offset:9}}>
-            <img
-              className="icon"
-              src={"./assets/article_card_icons/heart_empty.png"}
-              />
+            <Row className="">
+              <Col xs={{ span: 1, offset: 9 }}>
+                <img
+                  className="icon"
+                  src={"./assets/article_card_icons/heart_empty.png"}
+                />
               </Col>
               <Col xs={1}>
-            <img
-              className="icon"
-              src={"./assets/article_card_icons/bookmark_empty.png"}
-              />
+                <img
+                  className="icon"
+                  src={"./assets/article_card_icons/bookmark_empty.png"}
+                />
               </Col>
               <Col xs={1}>
-            <img
-              className="icon"
-              src={"./assets/article_card_icons/share.png"} 
-              />
+                <img
+                  className="icon"
+                  src={"./assets/article_card_icons/share.png"}
+                />
               </Col>
             </Row>
           </Col>
