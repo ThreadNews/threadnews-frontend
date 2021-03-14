@@ -67,12 +67,14 @@ export function ThreadPage(props) {
     <Navbar></Navbar>
   </div>
   <div className="thread-page-content">
-    <div className="articles">
+   <Row >
+     <Col xs={9}>
       {cards}
-    </div>
-    <div className="sentiment">
+     </Col>
+     <Col xs={3}>
       {sentiments}
-    </div>
+     </Col>
+   </Row>
   </div>
     </div>
   );

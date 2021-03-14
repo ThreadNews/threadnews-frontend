@@ -2,13 +2,13 @@
 }
 .articles{
    display: inline-block;
-   width: 62%;
+   /* width: 62%; */
    position: relative;
    top:0px;
 }
 .sentiment{
    display: inline-block;
-   width: 37%;
+   /*width: 37%;*/
    position: relative;
    left:0;
 }

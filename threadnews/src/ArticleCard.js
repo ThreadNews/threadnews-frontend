@@ -19,76 +19,61 @@ export function ArticleCard(props) {
   // console.log(article)
   return (
     <div className="article-card">
-      <Card
-        className="mb-auto"
-        border=""
-        style={{ /*borderRadius: "25px",*/ opacity: 1 }}
-      >
-        <Card.Body className="text-left">
-          <Card.Subtitle
-            style={{ float: "left", marginLeft: 15, fontSize:22, fontWeight:'bold',fontFamily: "TimesNewRoman" }}
-            className="mb-2"
-          >
-            {article.title}
-          </Card.Subtitle>
-          <Card.Subtitle
-            style={{ float: "left", marginLeft: 15 }}
-            className="mb-2 text-muted"
-          >
-            {article.author}
-          </Card.Subtitle>
-          <Container style={{ float: "left" }}>
-            <Row style={{ float: "left" }}>
-
-              <Col style={{ float: "left" }}>
-                <Row>
-                  <img
-                    className="newsImg"
-                    src={article === "undefined" ? null : article.urlToImage}
-                    float="left"
-                    alt=""
-                  />
-                </Row>
-                <Likes
-                  likeArticle={props.likeArticle}
-                  articleId={props.id}
-                  sentiment={article.sentiment}
-                />
-              </Col>
-              <Col sm={8}>
-                <blockquote className="blockquote mb-0">
-                  <p> {article.description} </p>
-                </blockquote>
-                
-              </Col>
-              <Button
-                  style={{ float: "right" }}
-                  variant="info"
-                  href={article.url}
-                >
-                  Visit
-                </Button>{" "}
-                <Button
-                  style={{ marginRight: 15 }}
-                  variant="outline-danger"
-                  onClick={() => props.removeArticle(article.id)}
-                >
-                  Not for me
-                </Button>{" "}
+      <Container className="article-container">
+        <Row float="left" className="">
+          <Col xs={3} className="">
+            <img
+              className="newsImg"
+              src={article === "undefined" ? null : article.urlToImage}
+              alt=""
+            />
+          </Col>
+          <Col xs={9} className="article-content">
+            <Row
+              className="article-title"
+              style={{ fontSize: 22, fontWeight: "bold" }}
+            >
+              <p>{article.title}</p>
             </Row>
-            {/* <div align="right">
-              <img
-                className="saveButton"
-                src={"./assets/heart_icons/heart_empty.svg"}
-                float="right"
-                padding="0"
-                alt=""
-                onClick={() => props.likeArticle(props.articleId)}
+            <Row className="text-muted article-author-date">
+              <Col xs={6}>
+                <p>
+                  {article.author === "" ? article.source.name : article.author}
+                </p>
+              </Col>
+              <Col xs={6} className="article-date">
+                <p>{article.publishedAt.substring(0, 10)}</p>
+              </Col>
+            </Row>
+            <Row
+              className="article-desc bordered"
+              style={{ fontSize: 18, fontFamily: "TimesNewRoman" }}
+            >
+              <p>{article.description}</p>
+            </Row>
+            <Row className="bordered">
+              <Col xs={{span:1,offset:9}}>
+            <img
+              className="icon"
+              src={"./assets/article_card_icons/heart_empty.png"}
               />
-            </div> */}
-          </Container>
-        </Card.Body>
-      </Card>
+              </Col>
+              <Col xs={1}>
+            <img
+              className="icon"
+              src={"./assets/article_card_icons/bookmark_empty.png"}
+              />
+              </Col>
+              <Col xs={1}>
+            <img
+              className="icon"
+              src={"./assets/article_card_icons/share.png"} 
+              />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
