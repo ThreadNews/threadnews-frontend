@@ -3,6 +3,27 @@
 }
 
 
+body {
+  min-height: 100vh;
+  font-weight: 400;
+  font-family: TimesNewRoman;
+  color:#eeeeee;
+  background: #222831
+  
+}
+
+body, html, .App, #root, .outer {
+  width: 100%;
+  height: 100%;
+}
+
+.ThreadInfo{
+  border-radius: 30px;
+  background-color: #e3e6e9;
+  color:#222831;
+  width: 100%;
+
+}
 
 
 .App-logo {
@@ -17,7 +38,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #835b3b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

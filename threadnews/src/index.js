@@ -10,7 +10,6 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Top_nav from "./Nav";
 
 
-
 function view_threads(){
   ReactDOM.render(
     <React.StrictMode>
@@ -20,19 +19,22 @@ function view_threads(){
   )
 }
 
-function login(){
-  view_threads()
-}
+
 
 function signup(){  
   console.log("was called")
   ReactDOM.render(
     <React.StrictMode>
+      // go to bubbles 
       <App onFinish={view_threads}/>
+           // path defined below 
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
+
+// bubbles
+// go to threads 
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -42,7 +44,8 @@ function signup(){
 // document.getElementById('root')
 // )
 
-let login1 = (<Login onLogin={login} onSignup={signup}/>)
+// let login1 = (<Login onLogin={login} onSignup={signup}/>)
+// console.log(login)
 
 let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
 "username":"doge2moon",
@@ -57,6 +60,7 @@ let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
  localStorage.setItem('user',user)
 
 console.log("was called")
+// if __name__ = '__main__' 
 ReactDOM.render(
   <React.StrictMode>
     
@@ -64,10 +68,10 @@ ReactDOM.render(
     <Top_nav/>
 
       <Switch>
-        <Route exact path="/"><App onFinish={login}/></Route>
-        <Route path = '/threads' component={ThreadPage}/>
-        <Route path = '/login'><Login onLogin={login} onSignup={signup}/></Route>
-        <Route path ='/profile'><Profile {...user}/></Route>
+        <Route exact path="/"><App /></Route>
+        <Route path = '/threads/' component={ThreadPage}/>
+        <Route path = '/login/'><Login onSignup={signup}/></Route>
+        <Route path ='/profile/'><Profile {...user}/></Route>
       </Switch>
     </Router>
 </React.StrictMode>,

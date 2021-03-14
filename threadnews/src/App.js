@@ -15,6 +15,7 @@ import { render } from 'react-dom';
 // const test_data = [{"name":"policy","backgroundColor":"#EE1B2D","textColor": "white"}]
 
 
+import {Redirect} from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -60,9 +61,9 @@ class App extends React.Component {
           <hr style={{width:'40%'}}></hr>
           <h4>Please select some topics to get started</h4>
         </div>
-        <Container >
-          <Row>
-            <Col sm ={9}> 
+        <Container>
+          <Row >
+            <Col xs={"10"}style={{float:"center"}} > 
               
                 <CategoryBubbleSet
                   add_interest={this.add_interest}
@@ -71,12 +72,11 @@ class App extends React.Component {
                 />
             </Col>
             
-            <Col sm={2}>
+            <Col xs={"2"}>
               <Sidebar 
                 num = {this.state.num}
                 interests = {this.state.interests}
                 remove_interest = {this.remove_interest}
-                onClick={this.props.onFinish}
                 >
                   
                 </Sidebar >
