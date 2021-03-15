@@ -4,8 +4,6 @@ import {LinkContainer} from 'react-router-bootstrap'
 export default function Top_nav(props){
 
 
-
-
     let nav_items = localStorage.getItem('user') ? (
         <Nav className='ml-auto' bg="primary" variant="light" >
             <LinkContainer to='/threads'>

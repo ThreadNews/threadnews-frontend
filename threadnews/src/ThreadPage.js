@@ -22,7 +22,7 @@ export function ThreadPage(props) {
     const [articles, setArticles] = useState([]);
     
     useEffect(()=> {
-        axios.get('http://127.0.0.1:5000/headlines').then( result => {
+        axios.post('http://127.0.0.1:5000/threads/a/a').then( result => {
       if (result){
             setArticles(sampleSize(result.data.articles.slice(),20));
       }

@@ -28,8 +28,8 @@ export function SentimentCard(props){
             <Doughnut
             data={{labels:pieLabels,datasets:sentData}}
             options={defaults.doughnut}
-            // width={250}
-            // height={250}
+            width={250}
+            height={250}
             />
             
         </div>
