@@ -61,7 +61,7 @@ export function ArticleCard(props) {
               <p>{article.description}</p>
             </Row>
             <Row className="">
-              <Col xs={9}>
+              <Col xs={6}>
                 <Button
                   variant="outline-danger"
                   onClick={() => props.removeArticle(article.id)}
@@ -69,23 +69,49 @@ export function ArticleCard(props) {
                   Not for me
                 </Button>{" "}
               </Col>
-              <Col xs={1}>
-                <img
-                  className="icon"
-                  src={"./assets/article_card_icons/heart_empty.png"}
-                />
+              <Col
+                xs={3}
+                className="like-num"
+                style={{
+                  fontSize: 22,
+                  fontFamily: "TimesNewROman",
+                  color: "#eee",
+                }}
+              >
+                {article.like == null ? 0 : article.like}
               </Col>
               <Col xs={1}>
-                <img
-                  className="icon"
-                  src={"./assets/article_card_icons/bookmark_empty.png"}
-                />
+                <Button
+                  variant="outline"
+                  onClick={() => props.likeArticle(article.id)}
+                >
+                  <img
+                    className="icon"
+                    src={"./assets/article_card_icons/heart_empty.png"}
+                  />
+                </Button>
               </Col>
               <Col xs={1}>
-                <img
-                  className="icon"
-                  src={"./assets/article_card_icons/share.png"}
-                />
+                <Button
+                  variant="outline"
+                  onClick={() => props.saveArticle(article.id)}
+                >
+                  <img
+                    className="icon"
+                    src={"./assets/article_card_icons/bookmark_empty.png"}
+                  />
+                </Button>
+              </Col>
+              <Col xs={1}>
+                <Button
+                  variant="outline"
+                  onClick={() => props.shareArticle(article.id)}
+                >
+                  <img
+                    className="icon"
+                    src={"./assets/article_card_icons/share.png"}
+                  />
+                </Button>
               </Col>
             </Row>
           </Col>

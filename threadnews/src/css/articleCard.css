@@ -44,3 +44,6 @@
 .article-container{
   padding-right: 10px;
 }
+.like-num{
+  text-align: right;
+}

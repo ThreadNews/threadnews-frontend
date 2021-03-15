@@ -6755,27 +6755,27 @@
  a.bg-primary:hover, a.bg-primary:focus,
  button.bg-primary:hover,
  button.bg-primary:focus {
-   background-color: #1a252f !important;
+   background-color: #393e46 !important;
  }
  
  .bg-secondary {
-   background-color: #222831 !important;
+   background-color: #393e46 !important;
  }
  
  a.bg-secondary:hover, a.bg-secondary:focus,
  button.bg-secondary:hover,
  button.bg-secondary:focus {
-   background-color: #798d8f !important;
+   background-color: #393e46 !important;
  }
  
  .bg-success {
-   background-color: #18bc9c !important;
+   background-color: #393e46 !important;
  }
  
  a.bg-success:hover, a.bg-success:focus,
  button.bg-success:hover,
  button.bg-success:focus {
-   background-color: #128f76 !important;
+   background-color: #393e46 !important;
  }
  
  .bg-info {
@@ -6785,17 +6785,17 @@
  a.bg-info:hover, a.bg-info:focus,
  button.bg-info:hover,
  button.bg-info:focus {
-   background-color: #217dbb !important;
+   background-color: #393e46 !important;
  }
  
  .bg-warning {
-   background-color: #f39c12 !important;
+   background-color: #393e46 !important;
  }
  
  a.bg-warning:hover, a.bg-warning:focus,
  button.bg-warning:hover,
  button.bg-warning:focus {
-   background-color: #c87f0a !important;
+   background-color: #393e46 !important;
  }
  
  .bg-danger {

@@ -43,6 +43,14 @@ export function ThreadPage(props) {
     // props.user.user_id()
   }
 
+  function save_article(articleID){
+    
+  }
+
+  function share_article(articleID){
+    
+  }
+
   const cards = articles.slice(0, 20).map((data, i) => {
     return (
       <Container>
@@ -53,6 +61,8 @@ export function ThreadPage(props) {
         key={i}
         removeArticle={remove_article}
         likeArticle={like_article}
+        saveArticle={save_article}
+        shareArticle={share_article}
       />
       </Col>
       <Col xs={3}>
