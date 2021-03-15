@@ -20,6 +20,7 @@ class App extends React.Component {
     this.state = {interests:[],num:0,topics:[],bub:[]}
     this.add_interest = this.add_interest.bind(this);
     this.remove_interest = this.remove_interest.bind(this);
+   
   }
 
   
@@ -32,11 +33,6 @@ class App extends React.Component {
     console.log('num:', this.state.num);
     
   }
-
-  toThreads = () =>{
-    return <Redirect to="/threads"/>
-  }
-
 
 
   remove_interest(old_interest){
@@ -61,29 +57,29 @@ class App extends React.Component {
           <h4>Please select some topics to get started</h4>
         </div>
         <Container >
-          <Row>
-            <Col sm ={9}> 
-              
+          <Row >
+            <Col xs={{span:7,offset:3}} className=""> 
+              <div className="bubbles">
                 <CategoryBubbleSet
                   add_interest={this.add_interest}
                   interests={this.state.interests}
                   topics = {this.state.topics}
+                  className="bubbles"
                 />
+                </div>
             </Col>
             
-            <Col sm={2}>
+            <Col xs={"2"}>
               <Sidebar 
                 num = {this.state.num}
                 interests = {this.state.interests}
                 remove_interest = {this.remove_interest}
-                onClick={this.props.onFinish}
                 >
                   
                 </Sidebar >
             </Col>
           </Row>
         </Container>
-        
       </div>
     );
   }

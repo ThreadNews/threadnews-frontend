@@ -8,7 +8,7 @@ body {
   font-weight: 400;
   font-family: TimesNewRoman;
   color:#eeeeee;
-  background: #222831
+  background: #b3bcc9
   
 }
 
@@ -31,7 +31,7 @@ body, html, .App, #root, .outer {
 }
 
 .App-header {
-  background-color: #835b3b;
+  background-color: #000266;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -42,6 +42,6 @@ body, html, .App, #root, .outer {
 }
 
 .App-link {
-  color: #61dafb;
+  color: #00FFFF;
 }
 

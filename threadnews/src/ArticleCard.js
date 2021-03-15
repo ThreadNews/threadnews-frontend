@@ -73,12 +73,12 @@ export function ArticleCard(props) {
                 xs={3}
                 className="like-num"
                 style={{
-                  fontSize: 22,
+                  fontSize: 30,
                   fontFamily: "TimesNewROman",
                   color: "#eee",
                 }}
               >
-                {article.like == null ? 0 : article.like}
+                {article.likes == null ? 0 : article.likes}
               </Col>
               <Col xs={1}>
                 <Button

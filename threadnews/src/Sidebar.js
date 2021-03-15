@@ -30,7 +30,7 @@ export function Sidebar(props){
             <Card.Body>
                 
                 <hr></hr>
-                <Card.Subtitle>please select {5 - props.num} more</Card.Subtitle>
+                <Card.Subtitle>please select {5-props.num<0?0:5-props.num} more</Card.Subtitle>
                 <ProgressBar 
                     progress={props.num/5 * 100}
                     radius={100}
@@ -49,9 +49,9 @@ export function Sidebar(props){
                 <ListGroup variant="flush">
                     {
                     props.interests.map(interest => (
-                         <ListGroup.Item>
+                         <ListGroup.Item variant="light">
                              {interest}
-                             <Button size="sm" style={{float: 'right'}} onClick = {()=>props.remove_interest(interest)}>Remove</Button>
+                             <Button size="sm" style={{float: 'right'}} onClick = {()=>props.remove_interest(interest)}>x</Button>
                         </ListGroup.Item>))}
                 </ListGroup>
             </Card.Body>

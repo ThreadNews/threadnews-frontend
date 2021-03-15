@@ -1,6 +1,7 @@
 .sidebarHeader {
   text-align: center;
   color: "white";
+
   font-size: 30px;
   /* marginBottom: 10px; */
   /* fontWeight: 1000, */
@@ -10,15 +11,15 @@
 .sidebarListItem{
   font-weight: 400;
   font-family: TimesNewRoman;
-  color:#eeeeee;
+  color:#00008B;
   background: #222831;
   font-size: 20px;
   float: center;
 }
 
 .sidebarListButton{
-  color:#eeeeee;
-  background: #ec4843;
+  color:#222831;
+  background: #122ab1;
   font-size: 12px;
   border-radius: 10px;
   max-height: 30px;
