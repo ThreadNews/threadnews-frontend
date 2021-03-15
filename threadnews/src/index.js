@@ -65,7 +65,7 @@ let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
 "email":"testuser@gmail.com",
   "interests":["Economics","Sports","Pop Culture","Beauty","Fitness","Architcture"],
   'profile_img':'./assets/daddy.png',
-  'bio': 'Everybody around here has slides in their lobbies. I’m actually wondering about putting in a roller coaster — like a functional roller coaster at the factory in Fremont. You’d get in, and it would take you around [the] factory but also up and down. Who else has a roller coaster? … It would probably be really expensive, but I like the idea of i'
+  'bio': 'Everybody around here has slides in their lobbies. I’m actually wondering about putting in a roller coaster — like a functional roller coaster at the factory in Fremont. You’d get in, and it would take you around [the] factory but also up and down. Who else has a roller coaster? … It would probably be really expensive, but I like the idea of it.'
 }
 
  localStorage.setItem('user',user)
