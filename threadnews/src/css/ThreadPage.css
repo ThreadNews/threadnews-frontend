@@ -1,9 +1,25 @@
 .thread-page-content{
+   height:100vh;
+   overflow-y: auto;
+   /* overflow: hidden; */
 }
+.thread-page-content::-webkit-scrollbar {
+   display: none;
+ }
+ 
+ /* Hide scrollbar for IE, Edge and Firefox */
+ .thread-page-content {
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+ }
+
+
 .articles{
    display: inline-block;
    /* width: 62%; */
    position: relative;
+   max-height: 200;
+   height: 100%;
    top:0px;
 }
 .sentiment{

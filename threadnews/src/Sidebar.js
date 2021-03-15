@@ -41,14 +41,6 @@ export function Sidebar(props){
                     </div>
                 </ProgressBar>
                 
-                <ListGroup className = "sidebarList" variant="flush">
-                    {
-                    props.interests.map(interest => (
-                         <ListGroup.Item className='sidebarListItem'>
-                             {interest}
-                             <Button size="sm" className="sidebarListButton"color="warning" style={{float: 'right'}} onClick = {()=>props.remove_interest(interest)}>-</Button>
-                        </ListGroup.Item>))}
-                </ListGroup>
                 <Button variant={props.num<5 ? "outline-warning": "outline-success" } 
                     disabled={props.num<5?true:false}
                     onClick={update_user_interests}
@@ -57,12 +49,12 @@ export function Sidebar(props){
                     size ="lg" >
                     Continue
                 </Button>
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" style={{borderRadius:'20px'}}>
                     {
                     props.interests.map(interest => (
-                         <ListGroup.Item variant="light">
+                         <ListGroup.Item variant="light" >
                              {interest}
-                             <Button size="sm" style={{float: 'right'}} onClick = {()=>props.remove_interest(interest)}>x</Button>
+                             <Button size="sm" style={{float: 'right',borderRadius:'70px'}} variant='danger' onClick = {()=>props.remove_interest(interest)}>x</Button>
                         </ListGroup.Item>))}
                 </ListGroup>
             </Card.Body>

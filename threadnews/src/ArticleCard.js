@@ -16,7 +16,14 @@ export function ArticleCard(props) {
   let article = props;
   let sent = article.sentiment;
   console.log("sent: ", sent);
+  const [liked, toggleLiked] = useState(false);
   // console.log(article)
+
+  function update_like(article_id){
+    toggleLiked(!liked);
+    props.likeArticle(article.id)
+  }
+
   return (
     <div className="article-card">
       <Container className="article-container">
@@ -85,16 +92,16 @@ export function ArticleCard(props) {
                   color: "#eee",
                 }}
               >
-                {article.likes == null ? 0 : article.likes}
+                {article.likes == null ? liked?1:0 : liked?article.likes+1:article.likes}
               </Col>
               <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={() => props.likeArticle(article.id)}
+                  onClick={() => update_like(article.id)}
                 >
                   <img
                     className="icon"
-                    src={"./assets/article_card_icons/heart_empty.png"}
+                    src={liked ? "./assets/article_card_icons/heart_full.png":"./assets/article_card_icons/heart_empty.png"}
                   />
                 </Button>
               </Col>

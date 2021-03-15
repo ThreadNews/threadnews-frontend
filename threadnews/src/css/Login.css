@@ -16,17 +16,12 @@
     font-family: TimesNewRoman;
     margin: auto;
     opacity: 0.9;
-    background: #090086;
-    padding: 40px 55px 45px 55px;
+    background: #3397da;
+    padding: 40px;
     border-radius: 15px;
     transition: all .3s;
   }
   
-
-.form-control:focus {
-    
-    box-shadow: none;
-  }
   
   .outer h3 {
     text-align: center;

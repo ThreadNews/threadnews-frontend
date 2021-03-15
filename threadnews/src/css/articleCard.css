@@ -20,6 +20,9 @@
   background-color: #393e46;
   margin-top: 20px;
   margin-left: 20px;
+  width: 80%;
+  position:left;
+  float: left;
 }
 
 .bordered {

@@ -8,6 +8,7 @@ import { ArticleCard } from "./ArticleCard";
 import {ThreadInfo} from "./ThreadInfo.js"
 import { SentimentCard } from "./SentimentCard.js";
 import "./css/ThreadPage.css";
+import { CommentCol } from "./CommentCol";
 export function ThreadPage(props) {
   const [index, setIndex] = useState(0);
 
@@ -39,16 +40,13 @@ export function ThreadPage(props) {
     //update on db
   }
 
-  function like_article(articleId) {
-    let result = axios.post(
-      `http://127.0.0.1:5000/liked_article/${props.user.user_id}/${articleId}`
-    );
-    // props.user.user_id()
-  }
 
     function like_article(articleId){
-        let result = axios.post(`http://127.0.0.1:5000/like/${props.user.user_id}/${articleId}`)
-        // props.user.user_id()
+      let token = localStorage.getItem('access_token')
+      let data = {action:'add',article_id:articleId}
+      let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+      let result = axios.post('http://127.0.0.1:5000/like',data,head)
+      // props.user.user_id()
     }
   function select_article(i){
     if (i>=0){
@@ -69,8 +67,8 @@ export function ThreadPage(props) {
     return (
       <Container>
       <Row>
-        <Col xs={9}>
-      <ArticleCard
+        <Col xs={12} >
+      <ArticleCard 
         {...data}
         key={i}
         i = {i}
@@ -80,24 +78,20 @@ export function ThreadPage(props) {
         saveArticle={save_article}
         shareArticle={share_article}
       />
-      </Col>
-      <Col xs={3}>
       <SentimentCard
-        
+      {...data}
+      key={i}
+      style={{position:'left',}}
+      set_thread = {()=>this.select_article()}
       />
       </Col>
+      
       </Row>
       </Container>
     );
   });
 
-  const sentiments = articles.slice(0, 20).map((data, i) => {
-    return (
-      <SentimentCard
-        
-      />
-    );
-  });
+  
   const sentCards = articles.slice(0, 20).map((data, i) => {
     return (
       <Row>
@@ -115,41 +109,25 @@ export function ThreadPage(props) {
 
   return (
     <div>
-      {/* <div>
+      <div>
         <Navbar></Navbar>
       </div>
-      <div className="ThreadPage">
+      <div >
         <Container fluid>
           <Row>
-            <Col sm={8}>{cards}</Col>
-            <Col sm={3}><ThreadInfo {...articles[index]}/></Col>
+            <Col sm={10}><h4 align='right' style={{paddingRight:'120px'}}> Sentiment</h4></Col>
+            <Col sm={2}><h4 align='right' style={{paddingRight:'120px'}}> Comments</h4></Col>
+          </Row>
+          <Row>
+            <Col sm={10} className="thread-page-content">
+              {cards}</Col>
+            <Col sm={2}><CommentCol {...articles[index]}/></Col>
           </Row>
         </Container>
-      </div> */}
-    <div><div>
-    <Navbar></Navbar>
-  </div>
-  <div className="thread-page-content">
-    {cards}
-  </div>
-    </div></div>
+      </div>
+      </div>
+
   );
 }
 
-// ThreadPage.defaultProps = {
-//   user: {
-//     user_id: "5ecc439c-6ed0-11eb-a6f4-acde48001122",
-//     username: "test username",
-//     first_name: "first_name",
-//     last_name: "last_name",
-//     email: "testuser@gmail.com",
-//     interests: [
-//       "Economics",
-//       "Sports",
-//       "Pop Culture",
-//       "Beauty",
-//       "Fitness",
-//       "Architcture",
-//     ],
-//   },
-// }
+

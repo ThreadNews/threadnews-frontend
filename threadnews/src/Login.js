@@ -60,7 +60,7 @@ export default function Login(props) {
     function login(){
         // int login_count = 0;
         console.log("starting login...")
-        axios.post(`http://127.0.0.1:5000/login`,{email:email,password:password}).then( result => {
+        axios.post(`http://127.0.0.1:5000/login`,{email:email,password:password},).then( result => {
             console.log("status",result.status)
             if (result){
                 
@@ -71,7 +71,7 @@ export default function Login(props) {
                 }
                 if(result.status==200){
                     console.log(result)
-                    sessionStorage.setItem('access_token',result.data['access_token'])
+                    localStorage.setItem('access_token',result.data['access_token'])
                     // history.push('/threads/')
                     redirect_thread()
                 }

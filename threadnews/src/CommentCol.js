@@ -13,15 +13,25 @@ export function CommentCol(props){
         }
       })
     }
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    console.log(arr);
+    return arr
+    }
+    
 
     function comment_toast(data){
       return  (
-        <Toast align='left' style={{backgroundColor:'#DC8E8F'}}>
-        <Toast.Header style={{backgroundColor:'#DC8E8F'}}>  
+        <Toast align='left'>
+        <Toast.Header>  
           <strong className="mr-auto">{data.user}</strong>
           <small>11 mins ago</small>
         </Toast.Header>
-        <Toast.Body>{data.comment}</Toast.Body>
+        <Toast.Body style={{color:'gray'}}>{data.comment}</Toast.Body>
+        <h4 >{data.comment}</h4>
         </Toast>
       );
     }
@@ -29,10 +39,16 @@ export function CommentCol(props){
     function handleChange(t){ setComment(t.target.value) }
 
     function post_comment(){
-      axios.post(`http://127.0.0.1:5000/new_comment/${props.id}`,{comment:new_comment}).then( result => {
+      let data= {action:'add',comment:new_comment,article_id:props.id}
+      let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+      console.log(head)
+      axios.post('http://127.0.0.1:5000/comment',data,head).then( result => {
       if (result){
             let new_toast = comment_toast({user:localStorage.getItem('user'),comment:new_comment})
-            comments.append(new_toast)
+            let temp = comments;
+            temp[comments.length]=new_toast;
+            setComments(shuffleArray(temp));
+            setComment('');
         }
       });
     }
@@ -40,24 +56,29 @@ export function CommentCol(props){
     let comment_toasts = props.comments.map((data, i) => {
         return (comment_toast(data));
       });
-    comment_toasts.append=((
-      <Toast align='left' style={{backgroundColor:'#DC8E8F'}}>
+    comment_toasts = shuffleArray(comment_toasts)
+    comment_toasts[comment_toasts.length]=((
+      <Toast style={{paddingBottom:'17px'}}>
             <Toast.Body align='right'>
-              <h4 align='left'>New Comment</h4>
-
+              <Row>
+              <h5 position='left'  style={{color:'gray',float:'right',paddingRight:'80px',}} >New Comment</h5>
+              </Row>
               <Form>
               <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Control as="textarea" rows={3} onChange={handleChange} />
+                  <Form.Control as="textarea" rows={2} onChange={handleChange} defaultValue='Say something nice, or not :/'/>
                 </Form.Group>
               </Form>
-              <Button onClick={post_comment}>Post</Button>
+            <Button  style={{float:'right'}} onClick={post_comment}>Post</Button>
+
             </Toast.Body>
+
           </Toast>
     ))
-
+    comment_toasts.reverse();
+    
     return (
-        <div className="comments" align="center" style={{paddingTop:'10px', paddingBottom:'10px'}}>
-          <h4>Comments</h4>
+        <div className="comments" style={{paddingTop:'10px', float:'right', paddingBottom:'10px',paddingRight:'20px'}}>
+          {/* <h4>Comments</h4> */}
           <Col>{comment_toasts}</Col>
         </div>
     )

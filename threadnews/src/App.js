@@ -50,15 +50,14 @@ class App extends React.Component {
     
     return (
       <div className="App" width='100%'>
-        <Top_nav/>
-        <div style = {{paddingTop:'20px',borderRadius:'30px',alignItems:'center'}}>
+        <div style = {{paddingTop:'40px',borderRadius:'30px',alignItems:'center'}}>
           <h2>Welcome to Thread-News</h2>
           <hr style={{width:'40%'}}></hr>
           <h4>Please select some topics to get started</h4>
         </div>
         <Container >
           <Row >
-            <Col xs={{span:7,offset:3}} className=""> 
+            <Col xs={{span:6,offset:3}} className=""> 
               <div className="bubbles">
                 <CategoryBubbleSet
                   add_interest={this.add_interest}
@@ -75,7 +74,6 @@ class App extends React.Component {
                 interests = {this.state.interests}
                 remove_interest = {this.remove_interest}
                 >
-                  
                 </Sidebar >
             </Col>
           </Row>
