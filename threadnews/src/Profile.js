@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Container, Nav, Tab,Tabs} from 'react-bootstrap';
+import { Card, Row, Col, Container, Nav, Tab,Tabs,CardDeck} from 'react-bootstrap';
 import Navbar from './Nav';
 import './css/profile.css'
 export default function Profile(props){
