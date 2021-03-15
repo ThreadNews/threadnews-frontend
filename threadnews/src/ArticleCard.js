@@ -19,9 +19,9 @@ export function ArticleCard(props) {
   const [liked, toggleLiked] = useState(false);
   // console.log(article)
 
-  function update_like(article_id){
+  function update_like(article_id) {
     toggleLiked(!liked);
-    props.likeArticle(article.id)
+    props.likeArticle(article.id);
   }
 
   return (
@@ -67,22 +67,27 @@ export function ArticleCard(props) {
             >
               <p>{article.description}</p>
             </Row>
+
             <Row className="">
-              <Col xs={6}>
+              <Col xs={2}>
                 <Button
+                  style={{ float: "left"}}
+                  variant="warning"
+                  onClick={() => props.set_thread(props.i)}
+                >
+                  View Comments
+                </Button>
+              </Col>
+              <Col xs={2}>
+                <Button
+                  style={{ float: "left"}}
                   variant="outline-danger"
                   onClick={() => props.removeArticle(article.id)}
                 >
                   Not for me
                 </Button>{" "}
-                <Button
-                  style={{ float: "right", marginRight: 15 }}
-                  variant="warning"
-                  onClick={()=>props.set_thread(props.i)}
-                >
-                  Set Thread
-                </Button>
               </Col>
+              <Col xs={2}></Col>
               <Col
                 xs={3}
                 className="like-num"
@@ -92,7 +97,13 @@ export function ArticleCard(props) {
                   color: "#eee",
                 }}
               >
-                {article.likes == null ? liked?1:0 : liked?article.likes+1:article.likes}
+                {article.likes == null
+                  ? liked
+                    ? 1
+                    : 0
+                  : liked
+                  ? article.likes + 1
+                  : article.likes}
               </Col>
               <Col xs={1}>
                 <Button
@@ -101,7 +112,11 @@ export function ArticleCard(props) {
                 >
                   <img
                     className="icon"
-                    src={liked ? "./assets/article_card_icons/heart_full.png":"./assets/article_card_icons/heart_empty.png"}
+                    src={
+                      liked
+                        ? "./assets/article_card_icons/heart_full.png"
+                        : "./assets/article_card_icons/heart_empty.png"
+                    }
                   />
                 </Button>
               </Col>
