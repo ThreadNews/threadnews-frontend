@@ -1,9 +1,36 @@
 .sidebarHeader {
   text-align: center;
   color: "white";
-  fontSize: 50px;
-  marginBottom: 10px;
+
+  font-size: 30px;
+  /* marginBottom: 10px; */
   /* fontWeight: 1000, */
-  maxWidth: 150;
-  textAlign: "center";
+  text-align:justify;
+}
+
+.sidebarListItem{
+  font-weight: 400;
+  font-family: TimesNewRoman;
+  color:#00008B;
+  background: #222831;
+  font-size: 20px;
+  float: center;
+}
+
+.sidebarListButton{
+  color:#222831;
+  background: #122ab1;
+  font-size: 12px;
+  border-radius: 10px;
+  max-height: 30px;
+  max-width: 30px;
+  text-align: justify;
+  vertical-align: top;
+}
+
+.sidebarList{
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 }

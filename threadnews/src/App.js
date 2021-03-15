@@ -10,11 +10,6 @@ import {useState, useEffect,useRef} from 'react'
 import Sidebar from './Sidebar';
 import {Container, Row, Col,} from 'react-bootstrap';
 import { render } from 'react-dom';
-
-
-// const test_data = [{"name":"policy","backgroundColor":"#EE1B2D","textColor": "white"}]
-
-
 import {Redirect} from 'react-router-dom';
 
 
@@ -61,15 +56,17 @@ class App extends React.Component {
           <hr style={{width:'40%'}}></hr>
           <h4>Please select some topics to get started</h4>
         </div>
-        <Container>
+        <Container >
           <Row >
-            <Col xs={"10"}style={{float:"center"}} > 
-              
+            <Col xs={{span:7,offset:3}} className=""> 
+              <div className="bubbles">
                 <CategoryBubbleSet
                   add_interest={this.add_interest}
                   interests={this.state.interests}
                   topics = {this.state.topics}
+                  className="bubbles"
                 />
+                </div>
             </Col>
             
             <Col xs={"2"}>
