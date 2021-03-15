@@ -45,12 +45,23 @@ export function ThreadPage(props) {
 
   const cards = articles.slice(0, 20).map((data, i) => {
     return (
+      <Container>
+      <Row>
+        <Col xs={9}>
       <ArticleCard
         {...data}
         key={i}
         removeArticle={remove_article}
         likeArticle={like_article}
       />
+      </Col>
+      <Col xs={3}>
+      <SentimentCard
+        
+      />
+      </Col>
+      </Row>
+      </Container>
     );
   });
 
@@ -67,14 +78,7 @@ export function ThreadPage(props) {
     <Navbar></Navbar>
   </div>
   <div className="thread-page-content">
-   <Row >
-     <Col xs={9}>
-      {cards}
-     </Col>
-     <Col xs={3}>
-      {sentiments}
-     </Col>
-   </Row>
+    {cards}
   </div>
     </div>
   );

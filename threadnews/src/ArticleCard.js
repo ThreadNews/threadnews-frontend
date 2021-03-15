@@ -35,7 +35,11 @@ export function ArticleCard(props) {
             <a href={article.url}>
               <Row
                 className="article-title"
-                style={{ fontSize: 22, fontWeight: "bold" }}
+                style={{
+                  fontSize: 22,
+                  fontFamily: "TimesNewROman",
+                  color: "#eee",
+                }}
               >
                 <p>{article.title}</p>
               </Row>
@@ -57,7 +61,15 @@ export function ArticleCard(props) {
               <p>{article.description}</p>
             </Row>
             <Row className="">
-              <Col xs={{ span: 1, offset: 9 }}>
+              <Col xs={9}>
+                <Button
+                  variant="outline-danger"
+                  onClick={() => props.removeArticle(article.id)}
+                >
+                  Not for me
+                </Button>{" "}
+              </Col>
+              <Col xs={1}>
                 <img
                   className="icon"
                   src={"./assets/article_card_icons/heart_empty.png"}

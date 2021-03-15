@@ -1,8 +1,12 @@
 .newsImg {
   display: block;
-  max-width:95%;
+  max-width:90%;
   width: flex;
   height: flex;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .icon{
@@ -35,4 +39,8 @@
 
 .article-date {
   text-align: right;
+}
+
+.article-container{
+  padding-right: 10px;
 }
