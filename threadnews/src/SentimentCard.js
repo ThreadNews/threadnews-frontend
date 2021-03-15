@@ -1,7 +1,16 @@
 import React, {useState, useEffect } from "react";
 import {Doughnut} from 'react-chartjs-2'
 import { defaults } from 'react-chartjs-2'
-import {Card} from 'react-bootstrap';
+import "./css/sentimentCard.css";
+import {
+  Toast,
+  Card,
+  Col,
+  Row,
+  Container,
+  Button,
+  Badge,
+} from "react-bootstrap";
 export function SentimentCard(props){
     let article = props
     // let data = props.sentiment.values()

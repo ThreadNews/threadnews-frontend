@@ -19,59 +19,50 @@ export function ArticleCard(props) {
   // console.log(article)
   return (
     <div className="article-card">
-      <Card
-        className="mb-auto"
-        border=""
-        style={{ /*borderRadius: "25px",*/ opacity: 1 }}
-      >
-        <Card.Body className="text-left">
-          <h2
-            fontSize="18px"
-            style={{ fontFamily: "TimesNewRoman", fontSize: 22 }}
-          >
-            {article.title}
-          </h2>
+      <Container className="article-container">
+        <Row float="left" className="">
+          <Col xs={3} className="">
+            <a href={article.url}>
+              <img
+                className="newsImg"
+                src={article === "undefined" ? null : article.urlToImage}
+                alt=""
+              />
+            </a>
+          </Col>
 
-          <Card.Subtitle
-            style={{ float: "left", marginLeft: 15 }}
-            className="mb-2 text-muted"
-          >
-            {article.author}
-          </Card.Subtitle>
-          <Container style={{ float: "left" }}>
-            <Row style={{ float: "left" }}>
-              <Col style={{ float: "left" }}>
-                <Row>
-                  <img
-                    className="newsImg"
-                    src={article === "undefined" ? null : article.urlToImage}
-                    float="left"
-                    padding="0"
-                    alt=""
-                  />
-                </Row>
-                {/* <Likes
-                  likeArticle={props.likeArticle}
-                  articleId={props.id}
-                  sentiment={article.sentiment}
-                /> */}
+          <Col xs={9} className="article-content">
+            <a href={article.url}>
+              <Row
+                className="article-title"
+                style={{
+                  fontSize: 22,
+                  fontFamily: "TimesNewROman",
+                  color: "#eee",
+                }}
+              >
+                <p>{article.title}</p>
+              </Row>
+            </a>
+            <Row className="text-muted article-author-date">
+              <Col xs={6}>
+                <p>
+                  {article.author === "" ? article.source.name : article.author}
+                </p>
               </Col>
-              <Col sm={8}>
-                <blockquote className="blockquote mb-0">
-                  <p> {article.description} </p>
-                  <footer className="blockquote-footer">
-                    <cite title="Source Title">{article.source.name}</cite>
-                  </footer>
-                </blockquote>
+              <Col xs={6} className="article-date">
+                <p>{article.publishedAt.substring(0, 10)}</p>
+              </Col>
+            </Row>
+            <Row
+              className="article-desc "
+              style={{ fontSize: 18, fontFamily: "TimesNewRoman" }}
+            >
+              <p>{article.description}</p>
+            </Row>
+            <Row className="">
+              <Col xs={6}>
                 <Button
-                  style={{ float: "right" }}
-                  variant="info"
-                  href={article.url}
-                >
-                  vist
-                </Button>{" "}
-                <Button
-                  style={{ float: "right", marginRight: 15 }}
                   variant="outline-danger"
                   onClick={() => props.removeArticle(article.id)}
                 >
@@ -85,20 +76,54 @@ export function ArticleCard(props) {
                   Set Thread
                 </Button>
               </Col>
+              <Col
+                xs={3}
+                className="like-num"
+                style={{
+                  fontSize: 30,
+                  fontFamily: "TimesNewROman",
+                  color: "#eee",
+                }}
+              >
+                {article.likes == null ? 0 : article.likes}
+              </Col>
+              <Col xs={1}>
+                <Button
+                  variant="outline"
+                  onClick={() => props.likeArticle(article.id)}
+                >
+                  <img
+                    className="icon"
+                    src={"./assets/article_card_icons/heart_empty.png"}
+                  />
+                </Button>
+              </Col>
+              <Col xs={1}>
+                <Button
+                  variant="outline"
+                  onClick={() => props.saveArticle(article.id)}
+                >
+                  <img
+                    className="icon"
+                    src={"./assets/article_card_icons/bookmark_empty.png"}
+                  />
+                </Button>
+              </Col>
+              <Col xs={1}>
+                <Button
+                  variant="outline"
+                  onClick={() => props.shareArticle(article.id)}
+                >
+                  <img
+                    className="icon"
+                    src={"./assets/article_card_icons/share.png"}
+                  />
+                </Button>
+              </Col>
             </Row>
-            <div align="right">
-              <img
-                className="saveButton"
-                src={"./assets/heart_icons/heart_empty.svg"}
-                float="right"
-                padding="0"
-                alt=""
-                onClick={()=>props.likeArticle(article.id)}
-              />
-            </div>
-          </Container>
-        </Card.Body>
-      </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

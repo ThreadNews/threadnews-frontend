@@ -66,9 +66,9 @@
    font-size: 0.9375rem;
    font-weight: 400;
    line-height: 1.5;
-   color: #212529;
+   color:  #212529;
    text-align: left;
-   background-color: #fff;
+   background-color:  #fff;
  }
  
  [tabindex="-1"]:focus:not(:focus-visible) {
@@ -554,12 +554,10 @@
  .container-lg,
  .container-xl {
    width: 100%;
-   padding-right: 15px;
-   padding-left: 15px;
    margin-right: auto;
    margin-left: auto;
  }
- 
+ /*
  @media (min-width: 576px) {
    .container, .container-sm {
      max-width: 540px;
@@ -583,14 +581,12 @@
      max-width: 1140px;
    }
  }
- 
+ */
  .row {
    display: -ms-flexbox;
    display: flex;
    -ms-flex-wrap: wrap;
    flex-wrap: wrap;
-   margin-right: -15px;
-   margin-left: -15px;
  }
  
  .no-gutters {
@@ -612,8 +608,6 @@
  .col-xl-auto {
    position: relative;
    width: 100%;
-   padding-right: 15px;
-   padding-left: 15px;
  }
  
  .col {
@@ -3113,12 +3107,12 @@
  
  .btn-link {
    font-weight: 400;
-   color: #18bc9c;
+   color: #eee;
    text-decoration: none;
  }
  
  .btn-link:hover {
-   color: #0f7864;
+   color: #eee;
    text-decoration: underline;
  }
  
@@ -4275,7 +4269,7 @@
  }
  
  .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-   border-color: #ecf0f1 #ecf0f1 #ecf0f1;
+   border-color: #eee #eee #eee;
  }
  
  .nav-tabs .nav-link.disabled {
@@ -4766,7 +4760,7 @@
    word-wrap: break-word;
    background-color: #393e46;
    background-clip: border-box;
-   border: 0px solid #fff;
+   border: 1 px solid #fff;
    border-radius: 0;
  }
  
@@ -5051,7 +5045,7 @@
    margin-left: 0;
    line-height: 1.25;
    color: #fff;
-   background-color: #18bc9c;
+   background-color: #eee;
    border: 0 solid transparent;
  }
  
@@ -5083,7 +5077,7 @@
  .page-item.active .page-link {
    z-index: 3;
    color: #fff;
-   background-color: #0f7864;
+   background-color: #eee;
    border-color: transparent;
  }
  
@@ -6761,27 +6755,27 @@
  a.bg-primary:hover, a.bg-primary:focus,
  button.bg-primary:hover,
  button.bg-primary:focus {
-   background-color: #1a252f !important;
+   background-color: #393e46 !important;
  }
  
  .bg-secondary {
-   background-color: #222831 !important;
+   background-color: #393e46 !important;
  }
  
  a.bg-secondary:hover, a.bg-secondary:focus,
  button.bg-secondary:hover,
  button.bg-secondary:focus {
-   background-color: #798d8f !important;
+   background-color: #393e46 !important;
  }
  
  .bg-success {
-   background-color: #18bc9c !important;
+   background-color: #393e46 !important;
  }
  
  a.bg-success:hover, a.bg-success:focus,
  button.bg-success:hover,
  button.bg-success:focus {
-   background-color: #128f76 !important;
+   background-color: #393e46 !important;
  }
  
  .bg-info {
@@ -6791,17 +6785,17 @@
  a.bg-info:hover, a.bg-info:focus,
  button.bg-info:hover,
  button.bg-info:focus {
-   background-color: #217dbb !important;
+   background-color: #393e46 !important;
  }
  
  .bg-warning {
-   background-color: #f39c12 !important;
+   background-color: #393e46 !important;
  }
  
  a.bg-warning:hover, a.bg-warning:focus,
  button.bg-warning:hover,
  button.bg-warning:focus {
-   background-color: #c87f0a !important;
+   background-color: #393e46 !important;
  }
  
  .bg-danger {
@@ -10305,13 +10299,13 @@
  }
  
  .bg-primary .navbar-nav .active > .nav-link {
-   color: #18bc9c !important;
+   color: #eee !important;
  }
  
  .bg-dark.navbar-dark .navbar-nav .nav-link:focus,
  .bg-dark.navbar-dark .navbar-nav .nav-link:hover,
  .bg-dark.navbar-dark .navbar-nav .active > .nav-link {
-   color: #2c3e50 !important;
+   color: #eee !important;
  }
  
  .btn-secondary, .btn-secondary:hover, .btn-warning, .btn-warning:hover {
@@ -10436,7 +10430,7 @@
  .nav-tabs .nav-item.open .nav-link,
  .nav-tabs .nav-item.open .nav-link:focus,
  .nav-tabs .nav-item.open .nav-link:hover {
-   color: #2c3e50;
+   color: #eee;
  }
  
  .pagination a:hover {

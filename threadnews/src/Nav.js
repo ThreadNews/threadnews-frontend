@@ -12,6 +12,9 @@ export default function Top_nav(props){
             <LinkContainer to='/login'>
                 <Nav.Link >Login</Nav.Link>
             </LinkContainer>
+            <LinkContainer to='/profile'>
+                <Nav.Link >Profile</Nav.Link>
+            </LinkContainer>
         </Nav>):
         <Nav className='ml-auto'>
             <LinkContainer to='/threads'>
@@ -23,6 +26,9 @@ export default function Top_nav(props){
             
             <LinkContainer to='/login'>
                 <Nav.Link >Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to='/profile'>
+                <Nav.Link  style={{float: 'right',}} href="/profile" >Profile</Nav.Link>
             </LinkContainer>
             
         </Nav>

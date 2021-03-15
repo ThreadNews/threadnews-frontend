@@ -5,8 +5,9 @@ import axios from "axios";
 import { Container, Row, Col, Toast, CardColumns } from "react-bootstrap";
 import { useState, useEffect, useRef } from "react";
 import { ArticleCard } from "./ArticleCard";
-import { SentimentCard, sentimentCard } from "./SentimentCard.js";
 import {ThreadInfo} from "./ThreadInfo.js"
+import { SentimentCard } from "./SentimentCard.js";
+import "./css/ThreadPage.css";
 export function ThreadPage(props) {
   const [index, setIndex] = useState(0);
 
@@ -55,11 +56,20 @@ export function ThreadPage(props) {
       console.log("Selected Article",i)
     }
   }
-  
+  function save_article(articleID){
+    
+  }
+
+  function share_article(articleID){
+    
+  }
 
   const cards = articles.slice(0, 20).map((data, i) => {
     
     return (
+      <Container>
+      <Row>
+        <Col xs={9}>
       <ArticleCard
         {...data}
         key={i}
@@ -67,7 +77,24 @@ export function ThreadPage(props) {
         removeArticle={remove_article}
         likeArticle={like_article}
         set_thread = {select_article}
+        saveArticle={save_article}
+        shareArticle={share_article}
+      />
+      </Col>
+      <Col xs={3}>
+      <SentimentCard
+        
+      />
+      </Col>
+      </Row>
+      </Container>
+    );
+  });
 
+  const sentiments = articles.slice(0, 20).map((data, i) => {
+    return (
+      <SentimentCard
+        
       />
     );
   });
@@ -88,7 +115,7 @@ export function ThreadPage(props) {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <Navbar></Navbar>
       </div>
       <div className="ThreadPage">
@@ -98,8 +125,14 @@ export function ThreadPage(props) {
             <Col sm={3}><ThreadInfo {...articles[index]}/></Col>
           </Row>
         </Container>
-      </div>
-    </div>
+      </div> */}
+    <div><div>
+    <Navbar></Navbar>
+  </div>
+  <div className="thread-page-content">
+    {cards}
+  </div>
+    </div></div>
   );
 }
 
