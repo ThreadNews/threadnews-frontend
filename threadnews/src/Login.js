@@ -29,7 +29,7 @@ export default function Login(props) {
     const [errMsg, setErrMsg] = useState('');
 
     const [login_count, setLoginCount, ] = useState(0);
-    const is_login = true;
+    const is_login = false;
    
 
     function signUp(){
@@ -79,7 +79,7 @@ export default function Login(props) {
         }).catch(function(error) {
             setLoginCount(login_count + 1)
             // history.push("/login")
-            console.log("error,",error.response.data.msg)
+            // console.log("error,",error.response.data.msg)
             setErrMsg(error.response.data.msg)
         })
     }

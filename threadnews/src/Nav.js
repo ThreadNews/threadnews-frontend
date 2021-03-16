@@ -30,9 +30,9 @@ export default function Top_nav(props){
             <LinkContainer to='/login'>
                 <Nav.Link >Login</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/profile'>
+            {/* <LinkContainer to='/profile'>
                 <Nav.Link  style={{float: 'right',}} href="/profile" >Profile</Nav.Link>
-            </LinkContainer>
+            </LinkContainer> */}
             
         </Nav>
 
