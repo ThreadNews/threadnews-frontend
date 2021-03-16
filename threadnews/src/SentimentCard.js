@@ -28,6 +28,7 @@ export function SentimentCard(props){
         ]
     }
     
+    
     let opts = defaults.doughnut
     opts.legend.display=false
     console.log("sentdata",sentData)
