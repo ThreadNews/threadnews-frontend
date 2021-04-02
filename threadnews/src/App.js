@@ -10,11 +10,7 @@ import {useState, useEffect,useRef} from 'react'
 import Sidebar from './Sidebar';
 import {Container, Row, Col,} from 'react-bootstrap';
 import { render } from 'react-dom';
-
-
-// const test_data = [{"name":"policy","backgroundColor":"#EE1B2D","textColor": "white"}]
-
-
+import {Redirect} from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -54,31 +50,30 @@ class App extends React.Component {
     
     return (
       <div className="App" width='100%'>
-        <Top_nav/>
-        <div style = {{paddingTop:'20px',borderRadius:'30px',alignItems:'center'}}>
+        <div style = {{paddingTop:'40px',borderRadius:'30px',alignItems:'center'}}>
           <h2>Welcome to Thread-News</h2>
           <hr style={{width:'40%'}}></hr>
           <h4>Please select some topics to get started</h4>
         </div>
         <Container >
-          <Row>
-            <Col sm ={9}> 
-              
+          <Row >
+            <Col xs={{span:6,offset:3}} className=""> 
+              <div className="bubbles">
                 <CategoryBubbleSet
                   add_interest={this.add_interest}
                   interests={this.state.interests}
                   topics = {this.state.topics}
+                  className="bubbles"
                 />
+                </div>
             </Col>
             
-            <Col sm={2}>
+            <Col xs={"2"}>
               <Sidebar 
                 num = {this.state.num}
                 interests = {this.state.interests}
                 remove_interest = {this.remove_interest}
-                onClick={this.props.onFinish}
                 >
-                  
                 </Sidebar >
             </Col>
           </Row>

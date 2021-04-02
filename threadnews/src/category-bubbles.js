@@ -13,10 +13,10 @@ export default function CategoryBubbleSet(props){
 
     const options = {
 		size: 180,
-		minSize: 60,
-		gutter: 20,
+		minSize: 100,
+		gutter: 30,
 		provideProps: false,
-		numCols: 3,
+		numCols: 4,
 		fringeWidth: 120,
 		yRadius: 150,
 		xRadius: 600,
