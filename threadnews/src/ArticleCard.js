@@ -11,18 +11,46 @@ import {
 import axios from "axios";
 import "./css/articleCard.css";
 import { Likes } from "./Likes";
+import {CommentCard} from "./CommentCard"
 
 export function ArticleCard(props) {
   let article = props;
   let sent = article.sentiment;
   console.log("sent: ", sent);
   const [liked, toggleLiked] = useState(false);
+  const [showComments, toggleComments] = useState(false);
   // console.log(article)
 
   function update_like(article_id) {
     toggleLiked(!liked);
     props.likeArticle(article.id);
   }
+
+  function update_comments(){
+    toggleComments(!showComments);
+  }
+
+const commentList =  [
+    {user:'jon doe',comment:'This article was great! I have read it twenty times!'},
+    {user:'jon doe',comment:'This writter is trash.  '},
+    {user:'jon doe',comment:'The sentiment was 100% accurate '},
+    {user:'jon doe',comment:'I completely disagree with the article '},
+    {user:'jon doe',comment:'WOW. THIS IS THE BEST ARTICLE EVER!!! '},
+    {user:'jon doe',comment:'I saw this on the news'},
+    {user:'jon doe',comment:'The world is falling apart'},
+    {user:'jon doe',comment:'I feel so hopeful!'},
+    {user:'jon doe',comment:'I completely agree. The legal system and even all of government is so broken in this society and the only way that that is every going to change is if we band together and fight for the rights of the common people! Even more, the rights of those on the bottom of the social ladder! I want this country\'s least fortunate soul to still be better off than the top one percent in other countries! I have this vision for our country and I hope that you will all share it with me!'},
+  
+]
+
+  const comments = commentList.map((data, i) => {
+    
+    return (
+      <div>
+        <CommentCard {...data}/>
+      </div>
+    );
+  });
 
   return (
     <div className="article-card">
@@ -58,7 +86,7 @@ export function ArticleCard(props) {
                 </p>
               </Col>
               <Col xs={6} className="article-date">
-                <p>{article.publishedAt.substring(0, 10)}</p>
+                <p>{article.publishedAt ? article.publishedAt.substring(0, 10) : ""}</p>
               </Col>
             </Row>
             <Row
@@ -73,9 +101,9 @@ export function ArticleCard(props) {
                 <Button
                   style={{ float: "left"}}
                   variant="warning"
-                  onClick={() => props.set_thread(props.i)}
+                  onClick={() => update_comments()}
                 >
-                  View Comments
+                  Comments
                 </Button>
               </Col>
               <Col xs={2}>
@@ -146,6 +174,14 @@ export function ArticleCard(props) {
           </Col>
         </Row>
       </Container>
-    </div>
+      {
+        showComments ? 
+      <div className="commentsBox">
+      {comments}
+      </div>
+      :
+      <div></div>
+      }
+   </div>
   );
 }
