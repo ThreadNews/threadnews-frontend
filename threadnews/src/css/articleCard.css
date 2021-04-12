@@ -17,12 +17,6 @@
 }
 
 .article-card {
-  background-color: #393e46;
-  margin-top: 20px;
-  margin-left: 20px;
-  width: 80%;
-  position:left;
-  float: left;
 }
 
 .bordered {
@@ -46,7 +40,23 @@
 
 .article-container{
   padding-right: 10px;
+  background-color: #393e46;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 80%;
+  position:left;
+  float: left;
 }
 .like-num{
   text-align: right;
+}
+
+.commentsBox{
+  width: 80%;
+  max-height: 250px;
+  overflow-y: auto;
+  display: inline-block;
+  border-style: solid;
+  margin-left: 20px;
+  padding: 10px;
 }
