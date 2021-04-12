@@ -42,9 +42,9 @@ export function ThreadPage(props) {
 
 
     function like_article(articleId){
-      let token = localStorage.getItem('access_token')
+      let token = sessionStorage.getItem('access_token')
       let data = {action:'add',article_id:articleId}
-      let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+      let head = {headers:{Authorization:"Bearer "+ token}}
       let result = axios.post('http://127.0.0.1:5000/like',data,head)
       // props.user.user_id()
     }
@@ -54,20 +54,13 @@ export function ThreadPage(props) {
       console.log("Selected Article",i)
     }
   }
-  function save_article(articleID){
-    
-  }
-
-  function share_article(articleID){
-    
-  }
 
   const cards = articles.slice(0, 20).map((data, i) => {
     
     return (
       <Container>
       <Row>
-        <Col xs={12} >
+m        <Col xs={12} >
       <ArticleCard 
         {...data}
         key={i}
@@ -75,8 +68,6 @@ export function ThreadPage(props) {
         removeArticle={remove_article}
         likeArticle={like_article}
         set_thread = {select_article}
-        saveArticle={save_article}
-        shareArticle={share_article}
       />
       <SentimentCard
       {...data}
