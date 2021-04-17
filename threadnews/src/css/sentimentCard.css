@@ -1,9 +1,9 @@
 
 .sentiment-card{
-   background-color: #393e46;
-   max-height:30%;
-   min-height:30%;
+   background-color: transparent;
+   height:160px;
+   width: 160px;
    margin-top: 20px;
-   margin-left: 20px;
+   margin-left: 30px;
    margin-right: 20px;
 }

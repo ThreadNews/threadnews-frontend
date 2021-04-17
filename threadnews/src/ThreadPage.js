@@ -67,7 +67,7 @@ export function ThreadPage(props) {
     return (
       <Container>
       <Row>
-        <Col xs={12} >
+        <Col xs={10} >
       <ArticleCard 
         {...data}
         key={i}
@@ -78,10 +78,12 @@ export function ThreadPage(props) {
         saveArticle={save_article}
         shareArticle={share_article}
       />
+      </Col>
+      
+      <Col xs = {2}>
       <SentimentCard
       {...data}
       key={i}
-      style={{position:'left',}}
       set_thread = {()=>this.select_article()}
       />
       </Col>
@@ -113,7 +115,7 @@ export function ThreadPage(props) {
         <Navbar></Navbar>
       </div>
       <div >
-        <Container fluid>
+        {cards/* <Container fluid>
           <Row>
             <Col sm={10}><h4 align='right' style={{paddingRight:'120px'}}> Sentiment</h4></Col>
             <Col sm={2}><h4 align='right' style={{paddingRight:'120px'}}> Comments</h4></Col>
@@ -123,7 +125,7 @@ export function ThreadPage(props) {
               {cards}</Col>
             <Col sm={2}><CommentCol {...articles[index]}/></Col>
           </Row>
-        </Container>
+        </Container> */}
       </div>
       </div>
 

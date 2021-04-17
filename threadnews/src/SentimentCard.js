@@ -33,7 +33,7 @@ export function SentimentCard(props){
     opts.legend.display=false
     console.log("sentdata",sentData)
     return(
-        <div style={{paddingTop:'36px',float:'left',verticalAlign:'middle',width:'160px',height:'160px', marginLeft:'4%'}}>
+        <div className="sentiment-card">
             {/* <h4 align='center' pad='10px'>Article Sentiment</h4> */}
             <Doughnut
             data={{labels:pieLabels,datasets:sentData}}

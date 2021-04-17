@@ -7,11 +7,12 @@ import {
   Container,
   Button,
   Badge,
+  Form
 } from "react-bootstrap";
 import axios from "axios";
 import "./css/articleCard.css";
 import { Likes } from "./Likes";
-import {CommentCard} from "./CommentCard"
+import { CommentCard } from "./CommentCard";
 
 export function ArticleCard(props) {
   let article = props;
@@ -19,6 +20,7 @@ export function ArticleCard(props) {
   console.log("sent: ", sent);
   const [liked, toggleLiked] = useState(false);
   const [showComments, toggleComments] = useState(false);
+  const [new_comment, setComment] = useState("");
   // console.log(article)
 
   function update_like(article_id) {
@@ -26,28 +28,48 @@ export function ArticleCard(props) {
     props.likeArticle(article.id);
   }
 
-  function update_comments(){
+  function update_comments() {
     toggleComments(!showComments);
   }
 
-const commentList =  [
-    {user:'jon doe',comment:'This article was great! I have read it twenty times!'},
-    {user:'jon doe',comment:'This writter is trash.  '},
-    {user:'jon doe',comment:'The sentiment was 100% accurate '},
-    {user:'jon doe',comment:'I completely disagree with the article '},
-    {user:'jon doe',comment:'WOW. THIS IS THE BEST ARTICLE EVER!!! '},
-    {user:'jon doe',comment:'I saw this on the news'},
-    {user:'jon doe',comment:'The world is falling apart'},
-    {user:'jon doe',comment:'I feel so hopeful!'},
-    {user:'jon doe',comment:'I completely agree. The legal system and even all of government is so broken in this society and the only way that that is every going to change is if we band together and fight for the rights of the common people! Even more, the rights of those on the bottom of the social ladder! I want this country\'s least fortunate soul to still be better off than the top one percent in other countries! I have this vision for our country and I hope that you will all share it with me!'},
-  
-]
+
+  function handleChange(t){ setComment(t.target.value) }
+
+  function post_comment(){
+    let data= {action:'add',comment:new_comment,article_id:props.id}
+    let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+    console.log(head)
+    axios.post('http://127.0.0.1:5000/comment',data,head).then( result => {
+    if (result){
+          setComment('');
+      }
+    });
+  }
+
+
+  const commentList = [
+    {
+      user: "jon doe",
+      comment: "This article was great! I have read it twenty times!",
+    },
+    { user: "jon doe", comment: "This writter is trash.  " },
+    { user: "jon doe", comment: "The sentiment was 100% accurate " },
+    { user: "jon doe", comment: "I completely disagree with the article " },
+    { user: "jon doe", comment: "WOW. THIS IS THE BEST ARTICLE EVER!!! " },
+    { user: "jon doe", comment: "I saw this on the news" },
+    { user: "jon doe", comment: "The world is falling apart" },
+    { user: "jon doe", comment: "I feel so hopeful!" },
+    {
+      user: "jon doe",
+      comment:
+        "I completely agree. The legal system and even all of government is so broken in this society and the only way that that is every going to change is if we band together and fight for the rights of the common people! Even more, the rights of those on the bottom of the social ladder! I want this country's least fortunate soul to still be better off than the top one percent in other countries! I have this vision for our country and I hope that you will all share it with me!",
+    },
+  ];
 
   const comments = commentList.map((data, i) => {
-    
     return (
       <div>
-        <CommentCard {...data}/>
+        <CommentCard {...data} />
       </div>
     );
   });
@@ -86,7 +108,11 @@ const commentList =  [
                 </p>
               </Col>
               <Col xs={6} className="article-date">
-                <p>{article.publishedAt ? article.publishedAt.substring(0, 10) : ""}</p>
+                <p>
+                  {article.publishedAt
+                    ? article.publishedAt.substring(0, 10)
+                    : ""}
+                </p>
               </Col>
             </Row>
             <Row
@@ -99,16 +125,16 @@ const commentList =  [
             <Row className="">
               <Col xs={2}>
                 <Button
-                  style={{ float: "left"}}
+                  style={{ float: "left" }}
                   variant="warning"
                   onClick={() => update_comments()}
                 >
-                  Comments
+                  {showComments ? "Hide" : "Comments"}
                 </Button>
               </Col>
               <Col xs={2}>
                 <Button
-                  style={{ float: "left"}}
+                  style={{ float: "left" }}
                   variant="outline-danger"
                   onClick={() => props.removeArticle(article.id)}
                 >
@@ -174,14 +200,26 @@ const commentList =  [
           </Col>
         </Row>
       </Container>
-      {
-        showComments ? 
-      <div className="commentsBox">
-      {comments}
-      </div>
-      :
-      <div></div>
-      }
-   </div>
+      {showComments ? (
+        <Container className="commentsSection"><Row>
+          <Col xs={3}>
+          <div className="postComment">
+              <Form>
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                  <Form.Control as="textarea" rows={6} onChange={handleChange} defaultValue='Tell us your thoughts'/>
+                </Form.Group>
+              </Form>
+            <Button  onClick={post_comment}>Post</Button>
+          </div>
+          </Col>
+          <Col xs={9}>
+          <div className="commentsBox">{comments}</div>
+          </Col>
+          </Row>
+          </Container>
+      ) : (
+        <div></div>
+      )}
+    </div>
   );
 }
