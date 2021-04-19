@@ -57,7 +57,6 @@
   overflow-y: auto;
   display: inline-block;
   margin-left: 20px;
-  border-style:solid;
 }
 
 .commentsSection{
@@ -65,8 +64,9 @@
   max-height: 250px;
   display: inline-block;
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 .postComment{
-  margin-top: 20px;
+  padding: 10px;
 }

@@ -206,7 +206,7 @@ export function ArticleCard(props) {
           <div className="postComment">
               <Form>
               <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Control as="textarea" rows={6} onChange={handleChange} defaultValue='Tell us your thoughts'/>
+                  <Form.Control as="textarea" rows={7} onChange={handleChange} placeHolder='Tell us your thoughts'/>
                 </Form.Group>
               </Form>
             <Button  onClick={post_comment}>Post</Button>
