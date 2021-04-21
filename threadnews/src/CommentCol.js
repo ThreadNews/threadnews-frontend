@@ -18,8 +18,8 @@ export function CommentCol(props){
         const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-    console.log(arr);
-    return arr
+      console.log(arr);
+      return arr
     }
     
 
@@ -40,11 +40,11 @@ export function CommentCol(props){
 
     function post_comment(){
       let data= {action:'add',comment:new_comment,article_id:props.id}
-      let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+      let head = {headers:{Authorization:"Bearer "+ sessionStorage.getItem('access_token')}}
       console.log(head)
       axios.post('http://127.0.0.1:5000/comment',data,head).then( result => {
       if (result){
-            let new_toast = comment_toast({user:localStorage.getItem('user'),comment:new_comment})
+            let new_toast = comment_toast({user:sessionStorage.getItem('user'),comment:new_comment})
             let temp = comments;
             temp[comments.length]=new_toast;
             setComments(shuffleArray(temp));

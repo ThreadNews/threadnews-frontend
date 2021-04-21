@@ -1,34 +1,144 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {
-  Toast,
   Card,
   Col,
   Row,
   Container,
   Button,
   Badge,
-  Form
+  Form,
+  Modal,
 } from "react-bootstrap";
 import axios from "axios";
 import "./css/articleCard.css";
 import { Likes } from "./Likes";
 import { CommentCard } from "./CommentCard";
 
+import {FacebookShareButton, FacebookIcon, TwitterShareButton,RedditShareButton,RedditIcon,TwitterIcon,LinkedinShareButton,LinkedinIcon
+} from "react-share";
+       
+
+
+
 export function ArticleCard(props) {
   let article = props;
   let sent = article.sentiment;
   console.log("sent: ", sent);
   const [liked, toggleLiked] = useState(false);
+  const [saved, toggleSaved] = useState(false);
+  const [share, setShare] = useState(false);
+  const target = useRef(null);
   const [showComments, toggleComments] = useState(false);
   const [new_comment, setComment] = useState("");
   // console.log(article)
+  function SocialMediaButtons(props) {
+    return (
+      <div align="center" padLeft={'10px'}>
+        <FacebookShareButton 
+          url={article.url}
+          quote={article.title}
+          hashtag="#threadNews"
+          // className={classes.socialMediaButton}
+          >
+            <FacebookIcon size={36} round={true}/>
+        </FacebookShareButton>
+
+        <TwitterShareButton
+          url={article.url}
+          via={"ThreadNews"}
+          hashtags={['threadNews']}
+          title={article.title}>
+          <TwitterIcon size={36}  round={true}/>
+        </TwitterShareButton>
+        
+        <RedditShareButton
+          url={article.url}
+          title={article.title}
+        >
+          <RedditIcon size={36}  round={true}/>
+        </RedditShareButton>
+        <LinkedinShareButton
+          url={article.url}
+          description={article.description}
+          title={article.title}
+          source = {article.url}
+          >
+            <LinkedinIcon size = {36} round={true}/>
+          </LinkedinShareButton>
+        </div>
+  );
+  }
+
+  function copy_link_button(){
+    return (
+      <div align={'center'}>
+          <Button variant='info'  onClick={() => {navigator.clipboard.writeText(article.url)}}>
+            Copy to Clipboard
+          </Button>
+          <h5>Or</h5>
+      </div>
+    )
+  }
 
   function update_like(article_id) {
     toggleLiked(!liked);
     props.likeArticle(article.id);
   }
 
-  function update_comments() {
+
+  function toggle_save_article(){
+    console.log("SAVE ARTICLE CLICKED");
+    let token = sessionStorage.getItem('access_token')
+    let data = {action:'add',article_id:article.articleId}
+    if (saved){
+      data.action='delete'
+    }
+    toggleSaved(!saved)
+    let head = {headers:{Authorization:"Bearer "+ token}}
+    let result = axios.post('http://127.0.0.1:5000/save',data,head)
+    // props.user.user_id()
+  }
+
+
+  function share_article(){
+    console.log("SHARE ARTICLE CLICKED");
+    setShare(true)
+
+  }
+
+
+  function create_share_modal(){
+    return (
+      <Modal show={share} onHide={()=>setShare(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Share This Article</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            {copy_link_button()}
+            <SocialMediaButtons/>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+        
+          <Button variant="warning" onClick={()=>setShare(false)}>
+            Close
+          </Button>
+          
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+
+  
+  function user_viewed(){
+    console.log("ar");
+    let token = sessionStorage.getItem('access_token')
+    let data = {action:'add',article_id:article.id}
+    let head = {headers:{Authorization:"Bearer "+ token}}
+    axios.post('http://127.0.0.1:5000/view',data,head)    
+  }
+  function update_comments(){
     toggleComments(!showComments);
   }
 
@@ -88,6 +198,7 @@ export function ArticleCard(props) {
                 className="newsImg"
                 src={article === "undefined" ? null : article.urlToImage}
                 alt=""
+                onClick={user_viewed}
               />
             </a>
           </Col>
@@ -135,6 +246,13 @@ export function ArticleCard(props) {
                 >
                   {showComments ? "Hide" : "Comments"}
                 </Button>
+
+                <Button
+                  variant="secondary"
+                  onClick={() => setShare(!share)}
+                  >
+                  Share
+                </Button>
               </Col>
               <Col xs={2}>
                 <Button
@@ -181,7 +299,7 @@ export function ArticleCard(props) {
               <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={() => props.saveArticle(article.id)}
+                  onClick={toggle_save_article}
                 >
                   <img
                     className="icon"
@@ -192,11 +310,12 @@ export function ArticleCard(props) {
               <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={() => props.shareArticle(article.id)}
+                  onClick={() => setShare(!share)}
                 >
                   <img
                     className="icon"
                     src={"./assets/article_card_icons/share.png"}
+                    
                   />
                 </Button>
               </Col>
@@ -224,6 +343,16 @@ export function ArticleCard(props) {
       ) : (
         <div></div>
       )}
-    </div>
+    {/* </div>
+      {create_share_modal()}
+      {
+        showComments ? 
+      <div className="commentsBox">
+      {comments}
+      </div>
+      :
+      <div></div>
+      } */}
+   </div>
   );
 }
