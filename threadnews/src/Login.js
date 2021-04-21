@@ -40,7 +40,7 @@ export default function Login(props) {
 
     function login(){
         console.log("starting login...")
-        axios.post(`http://127.0.0.1:5000/login`,{email:email,password:password},).then( result => {
+        axios.post('http://127.0.0.1:5000/login',{email:email,password:password},).then( result => {
             console.log("status",result.status)
             if (result){
                 if(result.status==404){
@@ -48,10 +48,10 @@ export default function Login(props) {
                    console.log("Incorrect login")
                 }
                 if(result.status==200){
-                    console.log(result)
-                    localStorage.setItem('access_token',result.data['access_token'])
-                    // history.push('/threads/')
-                    redirect_thread()
+                    console.log("result",result)
+                    sessionStorage.setItem('access_token',result.data['access_token'])
+                    history.push('/threads/')
+                    //redirect_thread()
                 }
             }
         }).catch(function(error) {
@@ -88,7 +88,7 @@ export default function Login(props) {
                     <button type="submit" 
                         className="btn btn-dark btn-lg btn-block"
                         // href={is_login?'/threads/':'/'}
-                        onClick={is_login? ()=>login():()=>signUp()}>
+                        onClick={is_login?login:()=>signUp()}>
                             {is_login?'Log in':'Sign Up'}
                     </button>
                     

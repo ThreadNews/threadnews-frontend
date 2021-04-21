@@ -25,7 +25,7 @@ export function ArticleCard(props) {
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
   const [share, setShare] = useState(false);
-  const target= useRef(null);
+  const target = useRef(null);
   const [showComments, toggleComments] = useState(false);
   // console.log(article)
   function SocialMediaButtons(props) {
@@ -99,6 +99,7 @@ export function ArticleCard(props) {
 
   function share_article(){
     console.log("SHARE ARTICLE CLICKED");
+    setShare(true)
 
   }
 

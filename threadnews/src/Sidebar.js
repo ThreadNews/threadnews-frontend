@@ -16,7 +16,7 @@ import {Redirect} from 'react-router-dom';
 export function Sidebar(props){
 
     function update_user_interests(){
-        axios.post('http://127.0.0.1:5000/update_interests',{user_id:"test user id", new_interests:props.interests})
+        axios.post('http://127.0.0.1:5000/update_interests',{add:props.interests, remove:[]})
         console.log("updated user interests")
         // props.onClick()
     }
