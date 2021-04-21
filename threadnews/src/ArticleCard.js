@@ -147,7 +147,7 @@ export function ArticleCard(props) {
 
   function post_comment(){
     let data= {action:'add',comment:new_comment,article_id:props.id}
-    let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+    let head = {headers:{Authorization:"Bearer "+ sessionStorage.getItem('access_token')}}
     console.log(head)
     axios.post('http://127.0.0.1:5000/comment',data,head).then( result => {
     if (result){
@@ -155,6 +155,7 @@ export function ArticleCard(props) {
       }
     });
   }
+
 
 
   const commentList = [

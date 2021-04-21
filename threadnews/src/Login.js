@@ -67,11 +67,11 @@ export default function Login(props) {
         <div className="outer">
             <div className='inner'>
                 <form>
-                    <h3 className="loginText" fontfamily='TimesNewRoman' color="black" >{is_login?'Log in':'Register'}</h3>
+                    <h3 className="loginText" fontFamily='TimesNewRoman' color="black" >{is_login?'Log in':'Register'}</h3>
                     {is_login?null:
                         (<div className="form-group">
                             <label >Username</label>
-                            <input onChange = {v=>setUsername(v.target.value)}type="email" className="form-control" placeholder="Enter email" />
+                            <input onChange = {v=>setUsername(v.target.value)} className="form-control" placeholder="Enter username" />
                         </div>)
                     }
                     <div className="form-group">

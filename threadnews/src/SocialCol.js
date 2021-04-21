@@ -6,14 +6,14 @@ import { Container, Row, Col,ListGroup,Button } from "react-bootstrap";
 export function SocialCol(props){
     const [users, setUsers] = useState([]);
 
-    let token = sessionStorage.getItem('access_token');
-    let data = {N:10,following:''};
-    let head = {headers:{Authorization:"Bearer "+ token}}
-    axios.post("http://127.0.0.1:5000/reccomended_follows",data,head).then( result => {
-      if (result){
-            setUsers(result['result']);
-      }
-    });
+    // let token = sessionStorage.getItem('access_token');
+    // let data = {N:10,following:''};
+    // let head = {headers:{Authorization:"Bearer "+ token}}
+    // axios.post("http://127.0.0.1:5000/reccomended_follows",data,head).then( result => {
+    //   if (result){
+    //         setUsers(result['result']);
+    //   }
+    // });
 
     return(
     <div>
