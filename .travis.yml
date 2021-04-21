@@ -3,6 +3,7 @@ node_js:
   - 14
 before_install:
   - cd threadnews
+  - rm package-lock.json
  
 install:
   - npm install
