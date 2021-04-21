@@ -1,6 +1,12 @@
 language: node_js
 node_js:
   - 7
-before_script:
-  - cd threadnews
+before_install:
+  - cd threadsnews
+ 
+install:
   - npm install
+  
+script:
+  - npm run build
+#   - npm test
