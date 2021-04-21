@@ -15,7 +15,7 @@ import { Likes } from "./Likes";
 export function CommentCard(props) {
    return(
       <div className="comment-card">
-            <div className="comment-author">{props.user}</div>
+            <div className="comment-author">{props.user_name}</div>
             <hr className="line"></hr>
             <div className="comment-content">{props.comment}</div>
       </div>
