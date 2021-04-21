@@ -16,8 +16,9 @@ export default function Top_nav(props){
                 <Nav.Link >Profile</Nav.Link>
             </LinkContainer>
             <LinkContainer to='/login' onClick={logout}>
-                <Nav.Link>Log Out</Nav.Link>
+                <Nav.Link>{localStorage.getItem('user_name')}</Nav.Link>
             </LinkContainer>
+            
         </Nav>):
         <Nav className='ml-auto'>
             <LinkContainer to='/threads'>
