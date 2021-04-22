@@ -11,16 +11,11 @@ export default function Top_nav(props){
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>
-            
             <LinkContainer to='/profile'>
-                <Nav.Link >Profile</Nav.Link>
-            </LinkContainer>
-
-            <LinkContainer to='/profile'>
-                <Nav.Link >{sessionStorage.getItem('user_name')}</Nav.Link>
+                <Nav.Link >{sessionStorage.getItem('email')}</Nav.Link>
             </LinkContainer>
             <LinkContainer to='/login' onClick={logout}>
-                <Nav.Link>{localStorage.getItem('user_name')}</Nav.Link>
+                <Nav.Link>Log out</Nav.Link>
             </LinkContainer>
             
         </Nav>):
