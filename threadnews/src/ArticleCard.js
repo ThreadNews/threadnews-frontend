@@ -1,17 +1,15 @@
 import React, { useState, useEffect,useRef } from "react";
 import {
-  Card,
   Col,
   Row,
   Container,
   Button,
-  Badge,
   Form,
   Modal,
 } from "react-bootstrap";
 import axios from "axios";
 import "./css/articleCard.css";
-import { Likes } from "./Likes";
+// import { Likes } from "./Likes";
 import { CommentCard } from "./CommentCard";
 
 import {FacebookShareButton, FacebookIcon, TwitterShareButton,RedditShareButton,RedditIcon,TwitterIcon,LinkedinShareButton,LinkedinIcon
@@ -23,11 +21,11 @@ import {FacebookShareButton, FacebookIcon, TwitterShareButton,RedditShareButton,
 export function ArticleCard(props) {
   let article = props;
   let sent = article.sentiment;
-  console.log("sent: ", sent);
+  
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
   const [share, setShare] = useState(false);
-  const target = useRef(null);
+  
   const [showComments, toggleComments] = useState(false);
   const [new_comment, setComment] = useState("");
   // console.log(article)
@@ -38,7 +36,7 @@ export function ArticleCard(props) {
           url={article.url}
           quote={article.title}
           hashtag="#threadNews"
-          // className={classes.socialMediaButton}
+          onClick={() => share_article()}
           >
             <FacebookIcon size={36} round={true}/>
         </FacebookShareButton>
