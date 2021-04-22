@@ -14,7 +14,12 @@ export default function Login(props) {
 
     const [login_count, setLoginCount, ] = useState(0);
     const is_login = props.is_login;
-   
+
+    function signOut(){
+        sessionStorage.removeItem('access_token');
+         sessionStorage.removeItem('user_name');
+    }
+
 
     function signUp(){
        axios.post('http://127.0.0.1:5000/newUser', {username:username,email:email,password:password}).then( result => {
@@ -23,6 +28,7 @@ export default function Login(props) {
             if (result.status == 200){
                sessionStorage.setItem('access_token',result.data['access_token'])
                 sessionStorage.setItem('user_name', username)
+                
                 history.push('/')
             }
             else{
@@ -50,6 +56,7 @@ export default function Login(props) {
                 if(result.status==200){
                     console.log("result",result)
                     sessionStorage.setItem('access_token',result.data['access_token'])
+                    sessionStorage.setItem('email', email)
                     history.push('/threads/')
                     //redirect_thread()
                 }
@@ -84,7 +91,7 @@ export default function Login(props) {
                         <input type="password" onChange = {v=>setPassword(v.target.value)} className="form-control" placeholder="Enter password" />
                     </div>
                     {errMsg==''?null:<Alert variant="danger">{errMsg}</Alert>}                    
-                    {/* <LinkContainer to='/threads'> */}
+                    <LinkContainer to='/threads'>
                     <button type="submit" 
                         className="btn btn-dark btn-lg btn-block"
                         // href={is_login?'/threads/':'/'}
@@ -92,7 +99,7 @@ export default function Login(props) {
                             {is_login?'Log in':'Sign Up'}
                     </button>
                     
-                    {/* </LinkContainer> */}
+                    </LinkContainer>
                 </form>
             </div>
         </div>

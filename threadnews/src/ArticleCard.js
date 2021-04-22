@@ -158,7 +158,7 @@ export function ArticleCard(props) {
 
 
 
-  const commentList = [
+  let commentList = [
     {
       user_name: "jon doe",
       comment: "This article was great! I have read it twenty times!",
@@ -178,6 +178,7 @@ export function ArticleCard(props) {
   ];
 
   if(article.comments != null){
+    console.log('ree', article.comments)
     commentList = article.comments.concat(commentList);
   }
 

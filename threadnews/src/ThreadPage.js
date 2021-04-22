@@ -20,7 +20,7 @@ export function ThreadPage(props) {
       const i = Math.floor(Math.random() * m--);
       [arr[m], arr[i]] = [arr[i], arr[m]];
     }
-    return arr.slice(0, n);
+    return m.slice(0, n);
   };
 
     const [articles, setArticles] = useState([]);
@@ -28,7 +28,7 @@ export function ThreadPage(props) {
     useEffect(()=> {
         axios.post('http://127.0.0.1:5000/threads/a/a').then( result => {
       if (result){
-            setArticles(sampleSize(result.data.articles.slice(),20));
+            setArticles(result.data.articles.slice(0, 20));
       }
     })
     }, [] )

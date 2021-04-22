@@ -54,7 +54,8 @@
 .commentsBox{
   width: auto;
   max-height: 250px;
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow: hidden;
   display: inline-block;
   margin-left: 20px;
 }
