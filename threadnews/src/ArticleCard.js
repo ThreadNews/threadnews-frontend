@@ -17,7 +17,6 @@ import {FacebookShareButton, FacebookIcon, TwitterShareButton,RedditShareButton,
        
 
 
-
 export function ArticleCard(props) {
   let article = props;
   let sent = article.sentiment;
