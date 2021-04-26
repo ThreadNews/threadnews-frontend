@@ -1,5 +1,6 @@
 import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
 import './css/bootstrap_theme.css'
+import './css/Nav.css'
 import {LinkContainer} from 'react-router-bootstrap'
 export default function Top_nav(props){
     function logout(){
@@ -8,6 +9,7 @@ export default function Top_nav(props){
 
     let nav_items = sessionStorage.getItem('access_token') ? (
         <Nav className='ml-auto' bg="primary" variant="light" >
+            
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>
@@ -20,6 +22,7 @@ export default function Top_nav(props){
             
         </Nav>):
         <Nav className='ml-auto'>
+            <input class='searchBar' type="text" placeholder="Search.."></input>
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>

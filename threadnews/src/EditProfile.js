@@ -2,11 +2,8 @@ import React from "react";
 
 import axios from "axios";
 import { Container, Row, Col,Form,CardColumns,Badge,Button,div, FormGroup } from "react-bootstrap";
-import { useState, useEffect, useRef } from "react";
-import { ArticleCard } from "./ArticleCard";
 
 import "./css/ThreadPage.css";
-import { CommentCol } from "./CommentCol";
 export function EditProfile(props) {
 
   return (
