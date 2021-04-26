@@ -100,6 +100,8 @@ export function ThreadPage(props) {
     }
   }
 
+  // const reccomended = <SocialCol/>
+
   const cards = articles.slice(0, 20).map((data, i) => {
     
     return (

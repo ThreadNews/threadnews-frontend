@@ -1,7 +1,4 @@
-import { extend } from "jquery";
-import App from './App';
 import React from 'react';
-import {useState, useEffect,useRef} from 'react'
 import ProgressBar from 'react-customizable-progressbar';
 import './css/bootstrap_theme.css';
 import './css/sidebar.css';
