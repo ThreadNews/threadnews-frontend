@@ -6,10 +6,42 @@ import { useState, useEffect, useRef } from "react";
 import { ArticleCard } from "./ArticleCard";
 
 import "./css/ThreadPage.css";
+import './css/edit_profile.css'
 import { CommentCol } from "./CommentCol";
-export function EditProfile(props) {
 
-  return (
+
+export default function EditProfile(props) {
+
+    const [first_name, setFirstname] = useState('');
+    const [last_name, setLastname = useState('');
+    const [profile_pic, setProfilepic] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+
+  function update_user_data(){
+
+    axios.post('http://127.0.0.1:5000/edit_profile', {bio:bio,first_name:first_name,last_name:last_name, profile_pic:profile_pic, password:password, email:email}).then( result => {
+      if (result){
+            console.log("finished updating user",result)
+            if (result.status == 200){
+               sessionStorage.setItem('first_name', first_name)
+               sessionStorage.setItem('last_name', last_name)
+               sessionStorage.setItem('profile_pic', profile_pic)
+               sessionStorage.setItem('password', password)
+               sessionStorage.setItem('email', email)             
+               history.push('/')
+            }
+            else{
+                setErrMsg(result.data['msg'])
+            }
+      }
+    }).catch(function(error) {
+        console.log("error,",error.response.data.msg)
+        setErrMsg(error.response.data.msg)})}
+
+
+return (
     <div class="container profile profile-view" id="profile">
     <Form>
         <div class="form-row profile-row">
@@ -25,7 +57,7 @@ export function EditProfile(props) {
                     
                 <div class="form-row">
                     <Col sm={12} md={6}>
-                        <div class="form-group"><label>Firstname </label><input class="form-control" type="text" name="firstname"/></div>
+                      <div class="form-group"><label>Firstname </label><input onChange = {v=>setFirstname(v.target.value)}  class="form-control" type="text" name="firstname"/></div>
                     </Col>
                     <Col sm={12} md={6}>
                         <FormGroup class="form-group"><label>Lastname </label><input class="form-control" type="text" name="lastname"/></FormGroup>
@@ -53,7 +85,7 @@ export function EditProfile(props) {
         </div>
     </Form>
     </div>
-  );
+  )
 }
 
 

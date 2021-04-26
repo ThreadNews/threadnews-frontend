@@ -8,6 +8,7 @@ import Login from "./Login";
 import Profile from "./Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Top_nav from "./Nav";
+import EditProfile from './EditProfile'
 
 function view_threads() {
   ReactDOM.render(
@@ -70,6 +71,10 @@ ReactDOM.render(
         </Route>
         <Route path="/profile/">
           <Profile {...user} />
+        </Route>
+        <Route path="/editprofile/">
+          <EditProfile {...user} />
+          {/* <div>hey:)</div> */}
         </Route>
       </Switch>
     </Router>
