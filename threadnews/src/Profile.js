@@ -143,8 +143,6 @@ export default function Profile(props){
                        
         </Container>
         </Container>
-
-
         </div>
     )
 

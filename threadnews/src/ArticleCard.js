@@ -234,11 +234,7 @@ export function ArticleCard(props) {
                 </p>
               </Col>
               <Col xs={6} className="article-date">
-                <p>
-                  {article.publishedAt
-                    ? article.publishedAt.substring(0, 10)
-                    : ""}
-                </p>
+                <p>{article.publishedAt? article.publishedAt.substring(0, 10): ""}</p>
               </Col>
             </Row>
             <Row

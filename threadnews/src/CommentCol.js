@@ -87,7 +87,7 @@ export function CommentCol(props){
 CommentCol.defaultProps = {
     comments :[
         {user:'jon doe',comment:'This article was great! '},
-        {user:'jon doe',comment:'This writter is trash.  '},
+        {user:'jon doe',comment:'This writer is trash.  '},
         {user:'jon doe',comment:'The sentiment was 100% accurate '},
         {user:'jon doe',comment:'I completely disagree with the article '},
         {user:'jon doe',comment:'WOW. THIS IS THE BEST ARTICLE EVER!!! '}
