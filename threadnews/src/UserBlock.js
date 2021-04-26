@@ -1,36 +1,11 @@
-import {React,useState,useEffect} from 'react';
-import {Row, Col, Container,Tab,Tabs,Button} from 'react-bootstrap';
+import React, { useEffect } from "react";
 import axios from "axios";
-import Navbar from './Nav';
-import './css/profile.css'
+// import { useState, useEffect, useRef } from "react";
+import { Container, Row, Col,ListGroup,Button } from "react-bootstrap";
+import './css/SocialCol.css';
+import {follow} from './Social.js'
 
-
-import ListGroup from 'react-bootstrap/ListGroup'
-import {LinkContainer} from 'react-router-bootstrap'
-import {ArticleCard} from './ArticleCard'
-export default function Profile(props){
-    // remember to implement later for now passing user as prop
-    // let user = localStorage.getItem('user')
-
-    const [key, setKey] = useState('home');
-    const [articles, setArticles] = useState([]);
-    const [articleCards,setArticleCards] = useState(null);
-
-    function create_article_cards(){
-        let articleCards_temp = articles.map((article, i) => {
-            return (
-                <div>
-                    <ArticleCard {...article}/>
-                </div>
-            );
-            
-          }
-          );
-          console.log("Artice",articles)
-          setArticleCards(articleCards_temp);
-    }
-    
-    let loggedIn = true;
+export function UserBlock(props){
     let user ={
         user_id: "complex",
         username: "elon-the-musker",
@@ -42,110 +17,33 @@ export default function Profile(props){
         bio: "i like trains no wait cars, yes i like cars",
         follower_count:10,
         following_count:20,
+        repost_count:10,
         reposted_articles:['54bc318b-71f1-4d68-81d6-d75d6dc7b34e','811f6a6e-244d-4f02-837e-ec80fd94f95d','0455a9fe-6864-48d4-9f60-2613c8780c62']
     }
 
-    
-    useEffect(()=> {
-        let token = sessionStorage.getItem('access_token');
-        // let data = {user_id:user_id,action:'follow'};
-        let head = {headers:{Authorization:"Bearer "+ token}}
-        axios.post('http://127.0.0.1:5000/articles',{article_ids:user.reposted_articles},head).then( result => {
-      if (result){
-            setArticles(result.data.result.slice(0, 10));
-            create_article_cards()
-      }
-    })
-    }, [] )
 
-    const interest_list = user.interests.map((interest, i) => {
-        return (
-            <div>
-                <ListGroup.Item variant="light" >
-                             {interest}
-                             <Button size="sm" style={{float: 'right',borderRadius:'70px'}} variant='info' >View</Button>
-                </ListGroup.Item>
+
+    return(
+    <div>
+        <div class="container mt-5 d-flex justify-content-center">
+            <div class="card p-3">
+                <div className="d-flex align-items-center">
+                    <div className="image"> <img src={user.profile_img} alt="" className="rounded" width="150"/></div>
+                    <div class="ml-3 w-100">
+                        <h4 class="mb-0 mt-0">{user.first_name} {user.last_name}</h4>
+                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                            <div class="d-flex flex-column"> <span class="articles"># Reposted </span> <span class="number1">{user.repost_count}</span> </div>
+                            <div class="d-flex flex-column"> <span class="followers">Followers</span> <span class="number2">{user.follower_count}</span> </div>
+                            <div class="d-flex flex-column"> <span class="rating">Following</span> <span class="number3">{user.following_count}</span> </div>
+                        </div>
+                        <div class="button mt-2 d-flex flex-row align-items-center">
+                            <button class="btn btn-sm btn-outline-primary w-100">View Profile</button> 
+                            <button class="btn btn-sm btn-primary w-100 ml-2" onClick={follow}>Follow</button> 
+                        </div>
+                    </div>
+                </div>
             </div>
-        );
-      });
-
-    return (
-        <div>
-            <Navbar></Navbar>
-            <Container className="profile-container">
-            <Container className="profile">
-            <form method="post">
-                <Row>
-                    <Col md={3} >
-                        <div className="profile-img">
-                            <div className ="profile-img-wrapper">
-                                <img src={user.profile_img} alt=""/>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={6}>
-                        <div className="profile-head">
-                                    <h3>
-                                        {user.first_name} {user.last_name}
-                                    </h3>
-                                    <h6>
-                                        {user.bio}
-                                    </h6>
-                                    <p className="proile-rating">RANKINGS : <span>8/10</span></p>
-                            {/* <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li>
-                            </ul> */}
-                        </div>
-                    </Col>
-                    <Col md={2}>
-                        <LinkContainer to='/editprofile/'>
-                        <input type="submit" class="profile-edit-btn" href='/editprofile' name="btnAddMore" value="Edit Profile"/>
-                        </LinkContainer>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={4}>
-                        <div class="profile-work">
-                            <br></br>
-                            <h4>Interests</h4>
-                            <ListGroup>
-                                {interest_list}
-                            </ListGroup>
-                        </div>
-                    </Col>
-                    <Col md={8}>
-                        <Tabs
-                            id="controlled-tab-example"
-                            activeKey={key}
-                            onSelect={(k) => setKey(k)}
-                            >
-                            <Tab eventKey="Reposted" title="Reposted Articles">
-                                {articleCards}
-
-                            </Tab>
-                            <Tab eventKey="Social" title="Social">
-                                ddsf
-                            </Tab>
-                            
-                        </Tabs>
-                                
-                                
-                       
-                        
-                    </Col>
-                </Row>
-            </form>
-                       
-        </Container>
-        </Container>
-
-
         </div>
-    )
-
+        
+        </div>)
 }

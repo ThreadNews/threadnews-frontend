@@ -6,7 +6,7 @@ import {useState, useEffect,useRef} from 'react'
 // import './css/bootstrap_theme.css';
 
 import Card from 'react-bootstrap/Card';
-import {primary_color, secondary_color} from './Colors'
+// import {primary_color, secondary_color} from './Colors'
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup'

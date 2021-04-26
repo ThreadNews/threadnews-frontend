@@ -17,17 +17,18 @@ export default function Login(props) {
 
     function signOut(){
         sessionStorage.removeItem('access_token');
-         sessionStorage.removeItem('user_name');
+        sessionStorage.removeItem('user_name');
     }
 
 
     function signUp(){
-       axios.post('http://127.0.0.1:5000/newUser', {username:username,email:email,password:password}).then( result => {
+    axios.post('http://127.0.0.1:5000/newUser', {username:username,email:email,password:password}).then( result => {
       if (result){
             console.log("finished adding user",result)
             if (result.status == 200){
                sessionStorage.setItem('access_token',result.data['access_token'])
                 sessionStorage.setItem('user_name', username)
+                
                 
                 history.push('/')
             }
@@ -42,6 +43,9 @@ export default function Login(props) {
         setErrMsg(error.response.data.msg)
     })
     }
+
+
+    
     const redirect_thread = useCallback(()=> history.push('/threads'),[history])
 
     function login(){
