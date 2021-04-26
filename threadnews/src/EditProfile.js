@@ -2,8 +2,6 @@ import React from "react";
 
 import axios from "axios";
 import { Container, Row, Col,Form,CardColumns,Badge,Button,div, FormGroup } from "react-bootstrap";
-import { useState, useEffect, useRef } from "react";
-import { ArticleCard } from "./ArticleCard";
 
 import "./css/ThreadPage.css";
 import './css/edit_profile.css'
@@ -13,7 +11,7 @@ import { CommentCol } from "./CommentCol";
 export default function EditProfile(props) {
 
     const [first_name, setFirstname] = useState('');
-    const [last_name, setLastname = useState('');
+    const [last_name, setLastname = useState('')
     const [profile_pic, setProfilepic] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

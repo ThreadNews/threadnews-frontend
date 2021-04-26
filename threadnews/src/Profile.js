@@ -6,7 +6,6 @@ import {LinkContainer} from 'react-router-bootstrap'
 export default function Profile(props){
     // remember to implement later for now passing user as prop
     // let user = localStorage.getItem('user')
-
     let user ={
         user_id: "complex",
         username: "elon-the-musker",
@@ -52,11 +51,10 @@ export default function Profile(props){
                         </div>
                     </Col>
                     <Col md={2}>
-                        {/* <a href={'/editprofile'}/> */}
+                        
                         <LinkContainer to='/editprofile'>
                             <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" href={'/editprofile'}/>
                         </LinkContainer>
-            
                     </Col>
                 </Row>
                 <Row>
