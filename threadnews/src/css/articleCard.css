@@ -39,6 +39,8 @@
 }
 
 .article-container{
+  font-family: "Times New Roman";
+  color: #dedede;
   padding-right: 10px;
   background-color: #393e46;
   margin-top: 20px;

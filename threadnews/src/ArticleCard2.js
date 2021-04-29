@@ -160,7 +160,7 @@ export function ArticleCard(props) {
       user_name: "jon doe",
       comment: "This article was great! I have read it twenty times!",
     },
-    { user_name: "jon doe", comment: "This writter is trash.  " },
+    { user_name: "jon doe",id:"0e7bf4b8-7c28-11eb-95d3-acde48001122", comment: "This writter is trash.  " },
     { user_name: "jon doe", comment: "The sentiment was 100% accurate " },
     { user_name: "jon doe", comment: "I completely disagree with the article " },
     { user_name: "jon doe", comment: "WOW. THIS IS THE BEST ARTICLE EVER!!! " },

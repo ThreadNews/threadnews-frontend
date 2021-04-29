@@ -1,6 +1,9 @@
 
 .comment-card{
    background-color: #393e46;
+   font-family: "Times New Roman";
+   font-size: 14px;
+   color: #dedede;
    margin-top: 10px;
    margin-left: 5px;
    margin-right: 5px;
@@ -12,6 +15,13 @@
    padding-right: 10px;
    margin-bottom: 10px;
  }
+
+.friend-card{
+   background-color: deeppink;
+}
+
+
+
 
  .comment-author{
     font-weight: bold;

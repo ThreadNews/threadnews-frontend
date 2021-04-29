@@ -10,6 +10,11 @@ import { SentimentCard } from "./SentimentCard.js";
 import "./css/ThreadPage.css";
 import { CommentCol } from "./CommentCol";
 import {SocialCol} from './SocialCol';
+import { LinkContainer } from "react-router-bootstrap";
+import {get_user} from "./LocalStorageHelper";
+import {UserBlockList} from "./UserBlock"
+
+
 export function ThreadPage(props) {
   const [index, setIndex] = useState(0);
   const [interests, setInterests] = useState(0);
@@ -22,11 +27,17 @@ export function ThreadPage(props) {
     }
     return m.slice(0, n);
   };
-
+  
     const [articles, setArticles] = useState([]);
     
     useEffect(()=> {
-        axios.post('http://127.0.0.1:5000/threads/a/a').then( result => {
+        let token = sessionStorage.getItem('access_token');
+        // let data = {user_id:user_id,action:'follow'};
+        let head = {headers:{Authorization:"Bearer "+ token}}
+        let topic = window.location.href==="http://127.0.0.1:5000/threads"? '' : window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+        console.log(window.location.href)
+        let data = {topic:topic, n:10}
+        axios.post('http://127.0.0.1:5000/threads',data,head).then( result => {
       if (result){
             setArticles(result.data.articles.slice(0, 20));
       }
@@ -50,19 +61,20 @@ export function ThreadPage(props) {
     //update on db
   }
 
-  const interest_ls = ["DIY","Science","Investing","Startups"]
+  const interest_ls = ["DIY","Sports","Investing","Crypto"]
   const varients = ['primary','secondary','warning','info']
   const pills = interest_ls.map((data, i) => {
     return (
       // <div>
-
+      <LinkContainer to={`/threads/${data}`}>
         <Badge style={{paddingLeft:'10px'}}
           pill variant={varients[i]}
-          onClick={console.log("hh")}
+          
           >
           {data}
         </Badge>
-      // </div>
+        </LinkContainer>
+      
     );
   });
 
@@ -86,13 +98,7 @@ export function ThreadPage(props) {
   }
 
 
-    function like_article(articleId){
-      let token = sessionStorage.getItem('access_token')
-      let data = {action:'add',article_id:articleId}
-      let head = {headers:{Authorization:"Bearer "+ token}}
-      let result = axios.post('http://127.0.0.1:5000/like',data,head)
-      // props.user.user_id()
-    }
+    
   function select_article(i){
     if (i>=0){
       setIndex(i)
@@ -101,7 +107,6 @@ export function ThreadPage(props) {
   }
 
   // const reccomended = <SocialCol/>
-
   const cards = articles.slice(0, 20).map((data, i) => {
     
     return (
@@ -113,7 +118,7 @@ export function ThreadPage(props) {
         key={i}
         i = {i}
         removeArticle={remove_article}
-        likeArticle={like_article}
+
         set_thread = {select_article}
       />
       </Col>
@@ -146,7 +151,7 @@ export function ThreadPage(props) {
   });
 
 
-
+  let user = get_user()
   return (
     <div>
       <div>
@@ -166,7 +171,7 @@ export function ThreadPage(props) {
             <Col sm={10} className="thread-page-content">
               {cards}</Col>
             {/* <Col sm={2}><CommentCol {...articles[index]}/></Col> */}
-            <Col sm={2}><SocialCol/></Col>
+            <Col sm={2}><UserBlockList {...user.following}/></Col>
           </Row>
         </Container> 
       </div>

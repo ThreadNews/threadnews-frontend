@@ -4,6 +4,8 @@ import axios from 'axios';
 import {Alert} from 'react-bootstrap'
 import {LinkContainer,} from 'react-router-bootstrap'
 import {useHistory} from 'react-router-dom';
+import {store_user } from './LocalStorageHelper'
+
 
 export default function Login(props) {
     const [email, setEmail] = useState('');
@@ -16,8 +18,7 @@ export default function Login(props) {
     const is_login = props.is_login;
 
     function signOut(){
-        sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('user_name');
+        sessionStorage.clear()
     }
 
 
@@ -26,9 +27,8 @@ export default function Login(props) {
       if (result){
             console.log("finished adding user",result)
             if (result.status == 200){
-               sessionStorage.setItem('access_token',result.data['access_token'])
-                sessionStorage.setItem('user_name', username)
-                
+                sessionStorage.setItem('access_token',result.data['access_token']) 
+                store_user(result.data.user)
                 
                 history.push('/')
             }
@@ -38,8 +38,7 @@ export default function Login(props) {
       }
     }).catch(function(error) {
         setLoginCount(login_count + 1)
-        
-        console.log("error,",error.response.data.msg)
+        console.log("error,",error.response.data)
         setErrMsg(error.response.data.msg)
     })
     }
@@ -59,10 +58,11 @@ export default function Login(props) {
                 }
                 if(result.status==200){
                     console.log("result",result)
-                    sessionStorage.setItem('access_token',result.data['access_token'])
-                    sessionStorage.setItem('email', email)
+                    sessionStorage.setItem('access_token',result.data['access_token']) 
+                    let user = result.data.user;
+                    store_user(user);
                     history.push('/threads/')
-                    //redirect_thread()
+                    
                 }
             }
         }).catch(function(error) {
@@ -81,7 +81,7 @@ export default function Login(props) {
                     <h3 className="loginText" fontFamily='TimesNewRoman' color="black" >{is_login?'Log in':'Register'}</h3>
                     {is_login?null:
                         (<div className="form-group">
-                            <label >Username</label>
+                            <label>Username</label>
                             <input onChange = {v=>setUsername(v.target.value)} className="form-control" placeholder="Enter username" />
                         </div>)
                     }

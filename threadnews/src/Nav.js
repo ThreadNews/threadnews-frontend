@@ -9,12 +9,12 @@ export default function Top_nav(props){
 
     let nav_items = sessionStorage.getItem('access_token') ? (
         <Nav className='ml-auto' bg="primary" variant="light" >
-            
+            {/* <input class='searchBar' type="text" placeholder="Search.."></input> */}
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>
             <LinkContainer to='/profile'>
-                <Nav.Link >{sessionStorage.getItem('email')}</Nav.Link>
+                <Nav.Link >{sessionStorage.getItem('first_name')}  {sessionStorage.getItem('last_name')}</Nav.Link>
             </LinkContainer>
             <LinkContainer to='/login' onClick={logout}>
                 <Nav.Link>Log out</Nav.Link>
@@ -22,7 +22,6 @@ export default function Top_nav(props){
             
         </Nav>):
         <Nav className='ml-auto'>
-            <input class='searchBar' type="text" placeholder="Search.."></input>
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>

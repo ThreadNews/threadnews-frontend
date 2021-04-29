@@ -22,10 +22,21 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
 } from "react-share";
-       
+
+
+
 
 
 export function ArticleCard(props) {
+
+
+  function like_article(articleId){
+    let token = sessionStorage.getItem('access_token')
+    let data = {action:'add',article_id:articleId}
+    let head = {headers:{Authorization:"Bearer "+ token}}
+    let result = axios.post('http://127.0.0.1:5000/like',data,head)
+    // props.user.user_id()
+  }
   let article = props;
   let sent = article.sentiment;
   
@@ -92,7 +103,7 @@ export function ArticleCard(props) {
     if (sessionStorage.getItem("access_token") == null) return;
 
     toggleLiked(!liked);
-    props.likeArticle(article.id);
+    like_article(article.id);
   }
 
   function toggle_save_article() {
@@ -187,7 +198,6 @@ export function ArticleCard(props) {
   ];
 
   if (article.comments != null) {
-    console.log("ree", article.comments);
     commentList = article.comments.concat(commentList);
   }
 
@@ -304,7 +314,10 @@ export function ArticleCard(props) {
                 <Button variant="outline" onClick={toggle_save_article}>
                   <img
                     className="icon"
-                    src={"./assets/article_card_icons/bookmark_empty.png"}
+                    src={
+                      saved 
+                      ? "./assets/article_card_icons/bookmark_empty.png"
+                      : "./assets/article_card_icons/bookmark_empt.png" }
                   />
                 </Button>
               </Col>

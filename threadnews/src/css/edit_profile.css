@@ -1,5 +1,6 @@
 div.container.profile {
     padding: 10px 20px;
+    width: 80%;
   }
   
   .center {
@@ -24,9 +25,6 @@ div.container.profile {
     transform: translate(-50%, 0%);
   }
   
-  div.alert {
-    width: 40%;
-  }
   
   .alert-col > .alert {
     padding: 10px;
