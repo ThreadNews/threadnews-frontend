@@ -9,6 +9,9 @@ import {ThreadInfo} from "./ThreadInfo.js"
 import { SentimentCard } from "./SentimentCard.js";
 import "./css/ThreadPage.css";
 import { CommentCol } from "./CommentCol";
+
+require('dotenv').config()
+
 export function ThreadPage(props) {
   const [index, setIndex] = useState(0);
 
@@ -24,7 +27,7 @@ export function ThreadPage(props) {
     const [articles, setArticles] = useState([]);
     
     useEffect(()=> {
-        axios.post('http://127.0.0.1:5000/threads/a/a').then( result => {
+        axios.post(process.env.REACT_APP_BACKEND_URL + '/threads/a/a').then( result => {
       if (result){
             setArticles(sampleSize(result.data.articles.slice(),20));
       }
@@ -45,7 +48,7 @@ export function ThreadPage(props) {
       let token = localStorage.getItem('access_token')
       let data = {action:'add',article_id:articleId}
       let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
-      let result = axios.post('http://127.0.0.1:5000/like',data,head)
+      let result = axios.post(process.env.REACT_APP_BACKEND_URL + 'like',data,head)
       // props.user.user_id()
     }
   function select_article(i){

@@ -12,11 +12,12 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup'
 import {Redirect} from 'react-router-dom';
 
+require('dotenv').config()
 
 export function Sidebar(props){
 
     function update_user_interests(){
-        axios.post('http://127.0.0.1:5000/update_interests',{user_id:"test user id", new_interests:props.interests})
+        axios.post(process.env.REACT_APP_BACKEND_URL + '/update_interests',{user_id:"test user id", new_interests:props.interests})
         console.log("updated user interests")
         // props.onClick()
     }
