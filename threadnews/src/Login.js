@@ -43,10 +43,6 @@ export default function Login(props) {
     })
     }
 
-
-    
-    const redirect_thread = useCallback(()=> history.push('/threads'),[history])
-
     function login(){
         console.log("starting login...")
         axios.post('http://127.0.0.1:5000/login',{email:email,password:password},).then( result => {
@@ -67,12 +63,9 @@ export default function Login(props) {
             }
         }).catch(function(error) {
             setLoginCount(login_count + 1)
-            // history.push("/login")
-            // console.log("error,",error.response.data.msg)
-            setErrMsg(error.response.data.msg)
+           setErrMsg(error.response.data.msg)
         })
     }
-
 
     return (
         <div className="outer">

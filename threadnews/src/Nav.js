@@ -1,4 +1,4 @@
-import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
+import { Navbar,Nav,NavDropdown,Form,FormControl,Button,InputGroup } from 'react-bootstrap'
 import './css/bootstrap_theme.css'
 import './css/Nav.css'
 import {LinkContainer} from 'react-router-bootstrap'
@@ -25,8 +25,9 @@ export default function Top_nav(props){
             <LinkContainer to='/threads'>
                 <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
             </LinkContainer>
-            <LinkContainer to ='/signup'>
-                <Nav.Link  style={{float: 'right',}} href="/signup" >Sign Up</Nav.Link>
+        
+            <LinkContainer to ='/login'>
+                <Nav.Link  style={{float: 'right',}} href="/login" >Sign Up</Nav.Link>
             </LinkContainer>
             
             <LinkContainer to='/login'>

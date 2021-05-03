@@ -7,7 +7,6 @@ import {
   Form,
   Modal,
 } from "react-bootstrap";
-import axios from "axios";
 import "./css/articleCard.css";
 // import { Likes } from "./Likes";
 import { CommentCard } from "./CommentCard";
