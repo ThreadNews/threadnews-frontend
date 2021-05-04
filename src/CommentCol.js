@@ -2,12 +2,15 @@ import {Card,Toast,Row,Col,Container,Button,Form} from 'react-bootstrap';
 // import { Container, Row, Col, Toast, CardColumns } from "react-bootstrap";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+
+require('dotenv').config()
+
 export function CommentCol(props){
 
     const [new_comment, setComment] = useState("");
     const [comments,setComments] = useState([])
     function load_comments(props){
-      axios.get(`http://127.0.0.1:5000/get_comments/${props.article_id}`,).then( result=> {
+      axios.get(process.env.REACT_APP_BACKEND_URL + `/get_comments/${props.article_id}`,).then( result=> {
         if (result){
           setComments(result.data.comments)
         }
@@ -42,7 +45,7 @@ export function CommentCol(props){
       let data= {action:'add',comment:new_comment,article_id:props.id}
       let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
       console.log(head)
-      axios.post('http://127.0.0.1:5000/comment',data,head).then( result => {
+      axios.post(process.env.REACT_APP_BACKEND_URL + '/comment',data,head).then( result => {
       if (result){
             let new_toast = comment_toast({user:localStorage.getItem('user'),comment:new_comment})
             let temp = comments;

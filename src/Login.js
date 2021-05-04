@@ -15,11 +15,11 @@ import {useHistory} from 'react-router-dom';
 //     "pass_hash":"1473a11dc0f3745bf1769c1251da96b002b1b1af6fff7da812f4daf41425ee473ec630a3af87eef90c5e6c4dc53730c16b06ce369202ba01843962cb7b17b727"}
 
 
-
-
-
-
 import Top_nav from './Nav'
+
+require('dotenv').config()
+console.log()
+
 export default function Login(props) {
     const [email, setEmail] = useState('');
     const history = useHistory();
@@ -36,7 +36,7 @@ export default function Login(props) {
         // console.log("starting sign up...")
         // console.log("username:",username, "EMAIL:",email, " Password:",password)
         //this must be changed
-       axios.post('http://127.0.0.1:5000/newUser', {username:username,email:email,password:password}).then( result => {
+       axios.post(process.env.REACT_APP_BACKEND_URL + '/newUser', {username:username,email:email,password:password}).then( result => {
       if (result){
             console.log("finished adding user",result)
             if (result.status == 200){
@@ -60,7 +60,7 @@ export default function Login(props) {
     function login(){
         // int login_count = 0;
         console.log("starting login...")
-        axios.post(`http://127.0.0.1:5000/login`,{email:email,password:password},).then( result => {
+        axios.post(process.env.REACT_APP_BACKEND_URL + `/login`,{email:email,password:password},).then( result => {
             console.log("status",result.status)
             if (result){
                 

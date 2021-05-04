@@ -9,7 +9,6 @@ import Profile from './Profile'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Top_nav from "./Nav";
 
-
 function view_threads(){
   ReactDOM.render(
     <React.StrictMode>
@@ -60,6 +59,7 @@ let user = {"user_id":"5ecc439c-6ed0-11eb-a6f4-acde48001122",
  localStorage.setItem('user',user)
 
 console.log("was called")
+
 // if __name__ = '__main__' 
 ReactDOM.render(
   <React.StrictMode>
