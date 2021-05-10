@@ -17,12 +17,6 @@
 }
 
 .article-card {
-  background-color: #393e46;
-  margin-top: 20px;
-  margin-left: 20px;
-  width: 80%;
-  position:left;
-  float: left;
 }
 
 .bordered {
@@ -45,8 +39,36 @@
 }
 
 .article-container{
+  font-family: "Times New Roman";
+  color: #dedede;
   padding-right: 10px;
+  background-color: #393e46;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 100%;
+  position:left;
+  float: left;
 }
 .like-num{
   text-align: right;
+}
+
+.commentsBox{
+  width: auto;
+  max-height: 250px;
+  overflow-y: scroll;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.commentsSection{
+  width: 100%;
+  max-height: 250px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.postComment{
+  padding: 10px;
 }

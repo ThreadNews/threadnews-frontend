@@ -82,7 +82,6 @@ export const topic_data=[
     {topic:"K Pop"},
     {topic:"Math"},
     {topic:"Cannabis"},
-    
     {topic:"Golf"},
     
     

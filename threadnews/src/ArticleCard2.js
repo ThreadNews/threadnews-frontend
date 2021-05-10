@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {
   Col,
   Row,
@@ -7,35 +7,17 @@ import {
   Form,
   Modal,
 } from "react-bootstrap";
+import axios from "axios";
 import "./css/articleCard.css";
 // import { Likes } from "./Likes";
 import { CommentCard } from "./CommentCard";
 
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  RedditShareButton,
-  RedditIcon,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
+import {FacebookShareButton, FacebookIcon, TwitterShareButton,RedditShareButton,RedditIcon,TwitterIcon,LinkedinShareButton,LinkedinIcon
 } from "react-share";
-
-
-
+       
 
 
 export function ArticleCard(props) {
-
-
-  function like_article(articleId){
-    let token = sessionStorage.getItem('access_token')
-    let data = {action:'add',article_id:articleId}
-    let head = {headers:{Authorization:"Bearer "+ token}}
-    let result = axios.post('http://127.0.0.1:5000/like',data,head)
-    // props.user.user_id()
-  }
   let article = props;
   let sent = article.sentiment;
   
@@ -48,143 +30,139 @@ export function ArticleCard(props) {
   // console.log(article)
   function SocialMediaButtons(props) {
     return (
-      <div align="center" padLeft={"10px"}>
-        <FacebookShareButton
+      <div align="center" padLeft={'10px'}>
+        <FacebookShareButton 
           url={article.url}
           quote={article.title}
           hashtag="#threadNews"
-          // className={classes.socialMediaButton}
-        >
-          <FacebookIcon size={36} round={true} />
+          onClick={() => share_article()}
+          >
+            <FacebookIcon size={36} round={true}/>
         </FacebookShareButton>
 
         <TwitterShareButton
           url={article.url}
           via={"ThreadNews"}
-          hashtags={["threadNews"]}
+          hashtags={['threadNews']}
+          title={article.title}>
+          <TwitterIcon size={36}  round={true}/>
+        </TwitterShareButton>
+        
+        <RedditShareButton
+          url={article.url}
           title={article.title}
         >
-          <TwitterIcon size={36} round={true} />
-        </TwitterShareButton>
-
-        <RedditShareButton url={article.url} title={article.title}>
-          <RedditIcon size={36} round={true} />
+          <RedditIcon size={36}  round={true}/>
         </RedditShareButton>
         <LinkedinShareButton
           url={article.url}
           description={article.description}
           title={article.title}
-          source={article.url}
-        >
-          <LinkedinIcon size={36} round={true} />
-        </LinkedinShareButton>
-      </div>
-    );
+          source = {article.url}
+          >
+            <LinkedinIcon size = {36} round={true}/>
+          </LinkedinShareButton>
+        </div>
+  );
   }
 
-  function copy_link_button() {
+  function copy_link_button(){
     return (
-      <div align={"center"}>
-        <Button
-          variant="info"
-          onClick={() => {
-            navigator.clipboard.writeText(article.url);
-          }}
-        >
-          Copy to Clipboard
-        </Button>
-        <h5>Or</h5>
+      <div align={'center'}>
+          <Button variant='info'  onClick={() => {navigator.clipboard.writeText(article.url)}}>
+            Copy to Clipboard
+          </Button>
+          <h5>Or</h5>
       </div>
-    );
+    )
   }
 
   function update_like(article_id) {
-    if (sessionStorage.getItem("access_token") == null) return;
-
     toggleLiked(!liked);
-    like_article(article.id);
+    props.likeArticle(article.id);
   }
 
-  function toggle_save_article() {
+
+  function toggle_save_article(){
     console.log("SAVE ARTICLE CLICKED");
-    let token = sessionStorage.getItem("access_token");
-    let data = { action: "add", article_id: article.articleId };
-    if (saved) {
-      data.action = "delete";
+    let token = sessionStorage.getItem('access_token')
+    let data = {action:'add',article_id:article.articleId}
+    if (saved){
+      data.action='delete'
     }
-    toggleSaved(!saved);
-    let head = { headers: { Authorization: "Bearer " + token } };
-    let result = axios.post("http://127.0.0.1:5000/save", data, head);
+    toggleSaved(!saved)
+    let head = {headers:{Authorization:"Bearer "+ token}}
+    let result = axios.post('http://127.0.0.1:5000/save',data,head)
     // props.user.user_id()
   }
 
-  function share_article() {
+
+  function share_article(){
     console.log("SHARE ARTICLE CLICKED");
-    setShare(true);
+    setShare(true)
+
   }
 
-  function create_share_modal() {
+
+  function create_share_modal(){
     return (
-      <Modal show={share} onHide={() => setShare(false)}>
+      <Modal show={share} onHide={()=>setShare(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Share This Article</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             {copy_link_button()}
-            <SocialMediaButtons />
+            <SocialMediaButtons/>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning" onClick={() => setShare(false)}>
+        
+          <Button variant="warning" onClick={()=>setShare(false)}>
             Close
           </Button>
+          
         </Modal.Footer>
       </Modal>
-    );
+    )
   }
 
-  function user_viewed() {
+  
+  function user_viewed(){
     console.log("ar");
-    let token = sessionStorage.getItem("access_token");
-    let data = { action: "add", article_id: article.id };
-    let head = { headers: { Authorization: "Bearer " + token } };
-    axios.post("http://127.0.0.1:5000/view", data, head);
+    let token = sessionStorage.getItem('access_token')
+    let data = {action:'add',article_id:article.id}
+    let head = {headers:{Authorization:"Bearer "+ token}}
+    axios.post('http://127.0.0.1:5000/view',data,head)    
   }
-  function update_comments() {
+  function update_comments(){
     toggleComments(!showComments);
   }
 
-  function handleChange(t) {
-    setComment(t.target.value);
-  }
 
-  function post_comment() {
-    let data = { action: "add", comment: new_comment, article_id: props.id };
-    let head = {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("access_token"),
-      },
-    };
-    console.log(head);
-    axios.post("http://127.0.0.1:5000/comment", data, head).then((result) => {
-      if (result) {
-        setComment("");
+  function handleChange(t){ setComment(t.target.value) }
+
+  function post_comment(){
+    let data= {action:'add',comment:new_comment,article_id:props.id}
+    let head = {headers:{Authorization:"Bearer "+ sessionStorage.getItem('access_token')}}
+    console.log(head)
+    axios.post('http://127.0.0.1:5000/comment',data,head).then( result => {
+    if (result){
+          setComment('');
       }
     });
   }
+
+
 
   let commentList = [
     {
       user_name: "jon doe",
       comment: "This article was great! I have read it twenty times!",
     },
-    { user_name: "jon doe", comment: "This writter is trash.  " },
+    { user_name: "jon doe",id:"0e7bf4b8-7c28-11eb-95d3-acde48001122", comment: "This writter is trash.  " },
     { user_name: "jon doe", comment: "The sentiment was 100% accurate " },
-    {
-      user_name: "jon doe",
-      comment: "I completely disagree with the article ",
-    },
+    { user_name: "jon doe", comment: "I completely disagree with the article " },
     { user_name: "jon doe", comment: "WOW. THIS IS THE BEST ARTICLE EVER!!! " },
     { user_name: "jon doe", comment: "I saw this on the news" },
     { user_name: "jon doe", comment: "The world is falling apart" },
@@ -196,7 +174,8 @@ export function ArticleCard(props) {
     },
   ];
 
-  if (article.comments != null) {
+  if(article.comments != null){
+    console.log('ree', article.comments)
     commentList = article.comments.concat(commentList);
   }
 
@@ -243,7 +222,11 @@ export function ArticleCard(props) {
                 </p>
               </Col>
               <Col xs={6} className="article-date">
-                <p>{article.publishedAt? article.publishedAt.substring(0, 10): ""}</p>
+                <p>
+                  {article.publishedAt
+                    ? article.publishedAt.substring(0, 10)
+                    : ""}
+                </p>
               </Col>
             </Row>
             <Row
@@ -263,7 +246,10 @@ export function ArticleCard(props) {
                   {showComments ? "Hide" : "Comments"}
                 </Button>
 
-                <Button variant="secondary" onClick={() => setShare(!share)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShare(!share)}
+                  >
                   Share
                 </Button>
               </Col>
@@ -310,21 +296,25 @@ export function ArticleCard(props) {
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={toggle_save_article}>
+                <Button
+                  variant="outline"
+                  onClick={toggle_save_article}
+                >
                   <img
                     className="icon"
-                    src={
-                      saved 
-                      ? "./assets/article_card_icons/bookmark_empty.png"
-                      : "./assets/article_card_icons/bookmark_empt.png" }
+                    src={"./assets/article_card_icons/bookmark_empty.png"}
                   />
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={() => setShare(!share)}>
+                <Button
+                  variant="outline"
+                  onClick={() => setShare(!share)}
+                >
                   <img
                     className="icon"
                     src={"./assets/article_card_icons/share.png"}
+                    
                   />
                 </Button>
               </Col>
@@ -333,36 +323,26 @@ export function ArticleCard(props) {
         </Row>
       </Container>
       {showComments ? (
-        <Container className="commentsSection">
-          <Row>
-            {sessionStorage.getItem("access_token") ? (
-              <Col xs={3}>
-                <div className="postComment">
-                  <Form>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Control
-                        as="textarea"
-                        rows={7}
-                        onChange={handleChange}
-                        placeHolder="Tell us your thoughts"
-                      />
-                    </Form.Group>
-                  </Form>
-                  <Button onClick={post_comment}>Post</Button>
-                </div>
-              </Col>
-            ) : (
-              <div></div>
-            )}
-            <Col>
-              <div className="commentsBox">{comments}</div>
-            </Col>
+        <Container className="commentsSection"><Row>
+          <Col xs={3}>
+          <div className="postComment">
+              <Form>
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                  <Form.Control as="textarea" rows={7} onChange={handleChange} placeHolder='Tell us your thoughts'/>
+                </Form.Group>
+              </Form>
+            <Button  onClick={post_comment}>Post</Button>
+          </div>
+          </Col>
+          <Col xs={9}>
+          <div className="commentsBox">{comments}</div>
+          </Col>
           </Row>
-        </Container>
+          </Container>
       ) : (
         <div></div>
       )}
-      {/* </div>
+    {/* </div>
       {create_share_modal()}
       {
         showComments ? 
@@ -372,6 +352,6 @@ export function ArticleCard(props) {
       :
       <div></div>
       } */}
-    </div>
+   </div>
   );
 }
