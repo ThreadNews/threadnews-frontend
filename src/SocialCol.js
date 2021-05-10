@@ -1,19 +1,22 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col,ListGroup,Button } from "react-bootstrap";
+import { useState, useEffect} from "react";
+import { Container} from "react-bootstrap";
 import './css/SocialCol.css';
-import {UserBlock} from '../threadnews/src/UserBlock'
+import {UserBlockList} from './UserBlock'
 export function SocialCol(props){
-
 
     let token = sessionStorage.getItem('access_token');
     let data = {N:10,following:''};
     let head = {headers:{Authorization:"Bearer "+ token}}
-
+    let ids = JSON.parse(sessionStorage.getItem('suggested_follows'))
     const [users, setUsers] = useState([]);
     
     useEffect(()=> {
+        if (ids===undefined || ids.length===0) {
+            return null
+        }
+    
         axios.post("http://127.0.0.1:5000/reccomended_follows",data,head).then( result => {
       if (result){
 
@@ -25,19 +28,14 @@ export function SocialCol(props){
     }, [] )
 
 
-    function follow(user_id){
-        let token = sessionStorage.getItem('access_token');
-        let data = {user_id:user_id,action:'follow'};
-        let head = {headers:{Authorization:"Bearer "+ token}}
-        axios.post("http://127.0.0.1:5000/follow_user",data,head);
-    }
-
+    
+    
     return(
-        users===undefined ? <div></div> :
+        users===props.user_ids? <div></div> :
     <div>
         <Container>
-        <h3>Users to follow</h3>
-        <UserBlock/>
+        {/* <h3>Users to follow</h3> */}
+        <UserBlockList user_ids={ids} header="Suggested follows"/>
         </Container>
     </div>);
 }
