@@ -38,26 +38,27 @@ export function UserBlock(user){
 export function UserBlockList(user_ids){
     const [users, setUsers] = useState([]);
 
-    useEffect(()=> {
-        let token = sessionStorage.getItem('access_token');
-        // let data = {user_id:user_id,action:'follow'};
-        let head = {headers:{Authorization:"Bearer "+ token}}
-        let data = {user_ids:user_ids}
-        axios.post('http://127.0.0.1:5000/users',data,head).then( result => {
-        if (result){
-            console.log("getting users",result)
-            if (result.status === 200){
-                setUsers(result.data.result)
-            }
-            else{
-                console.log("user block error")
-            }
-        }
-    }).catch(function(error) {
-        console.log("error, in userBlock")
+    // useEffect(()=> {
+    //     let token = sessionStorage.getItem('access_token');
+    //     // let data = {user_id:user_id,action:'follow'};
+    //     let head = {headers:{Authorization:"Bearer "+ token}}
+    //     let data = {user_ids:user_ids}
+    //     //****
+    //     axios.post('http://127.0.0.1:5000/users',data,head).then( result => {
+    //     if (result){
+    //         console.log("getting users",result)
+    //         if (result.status === 200){
+    //             setUsers(result.data.result)
+    //         }
+    //         else{
+    //             console.log("user block error")
+    //         }
+    //     }
+    // }).catch(function(error) {
+    //     console.log("error, in userBlock")
     
-    })
-    }, [] )
+    // })
+    // }, [] )
 
     
     let blocks = users.map((user, i) => {
