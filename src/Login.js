@@ -2,74 +2,74 @@ import React, {useState, useCallback} from 'react';
 import './css/Login.css'
 import axios from 'axios';
 import {Alert} from 'react-bootstrap'
-import {LinkContainer,} from 'react-router-bootstrap'
 import {useHistory} from 'react-router-dom';
 import {store_user } from './LocalStorageHelper'
+import {LinkContainer} from 'react-router-bootstrap'
+
 
 require('dotenv').config()
 console.log()
 
 export default function Login(props) {
     const [email, setEmail] = useState('');
+    
     const history = useHistory();
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [errMsg, setErrMsg] = useState('');
-
+    
     const [login_count, setLoginCount, ] = useState(0);
     const is_login = props.is_login;
-
+    
     function signOut(){
         sessionStorage.clear()
     }
-
-
+    
+    
     function signUp(){
-        
-       axios.post(process.env.REACT_APP_BACKEND_URL + '/newUser', {username:username,email:email,password:password}).then( result => {
-      if (result){
-            console.log("finished adding user",result)
-            if (result.status == 200){
-                sessionStorage.setItem('access_token',result.data['access_token']) 
-                store_user(result.data.user)
-                
-                history.push('/')
-            }
-            else{
-                setErrMsg(result.data['msg'])
-            }
-      }
-    }).catch(function(error) {
-        setLoginCount(login_count + 1)
-        console.log("error,",error.response.data)
-        setErrMsg(error.response.data.msg)
-    })
-    }
-
-    function login(){
-        console.log("starting login...")
-        axios.post(process.env.REACT_APP_BACKEND_URL + `/login`,{email:email,password:password},).then( result => {
-            console.log("status",result.status)
-            if (result){
-                if(result.status===404){
-                   setErrMsg(result['error'])
-                   console.log("Incorrect login")
-                }
-                if(result.status===200){
-                    console.log("result",result)
+        axios.post('http://127.0.0.1:5000/newUser', {username:username,email:email,password:password}).then( result => {
+          if (result){
+                console.log("finished adding user",result)
+                if (result.status === 200){
                     sessionStorage.setItem('access_token',result.data['access_token']) 
-                    let user = result.data.user;
-                    store_user(user);
-                    history.push('/threads/')
+                    store_user(result.data.user)
                     
+                    history.push('/')
                 }
-            }
+                else{
+                    setErrMsg(result.data['msg'])
+                }
+          }
         }).catch(function(error) {
             setLoginCount(login_count + 1)
-           setErrMsg(error.response.data.msg)
+            console.log("error,",error.response.data)
+            setErrMsg(error)
         })
-    }
+        }
+    
 
+        function login(){
+            console.log("starting login...")
+            axios.post('http://127.0.0.1:5000/login',{email:email,password:password},).then( result => {
+                console.log("status",result.status)
+                if (result){
+                    if(result.status===404){
+                       setErrMsg(result['error'])
+                       console.log("Incorrect login")
+                    }
+                    if(result.status===200){
+                        sessionStorage.setItem('access_token',result.data['access_token']) 
+                        store_user(result.data.user);
+                        history.push('/threads/')
+                    }
+                }
+            }).catch(function(error) {
+                setLoginCount(login_count + 1)
+               setErrMsg(error)
+            })
+        }
+    
+    
     return (
         <div className="outer">
             <div className='inner'>
