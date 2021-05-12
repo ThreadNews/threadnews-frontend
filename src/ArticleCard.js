@@ -1,155 +1,49 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Col,
-  Row,
-  Container,
-  Button,
-  Form,
-  Modal,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { Col, Row, Container, Button, Form } from "react-bootstrap";
 import "./css/articleCard.css";
-// import { Likes } from "./Likes";
+import axios from "axios";
 import { CommentCard } from "./CommentCard";
-
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  RedditShareButton,
-  RedditIcon,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-} from "react-share";
-
-
-
-
-
+import { repost_article, like_article, save_article,post_comment } from "./Social";
+import {defaultCommentList} from './defaultData'
+import { CommentInput } from "./CommentInput";
 export function ArticleCard(props) {
-
-
-  function like_article(articleId){
-    let token = sessionStorage.getItem('access_token')
-    let data = {action:'add',article_id:articleId}
-    let head = {headers:{Authorization:"Bearer "+ token}}
-    let result = axios.post('http://127.0.0.1:5000/like',data,head)
-    // props.user.user_id()
-  }
-  let article = props;
-  let sent = article.sentiment;
-  
+  let article = props.article;
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
-  const [share, setShare] = useState(false);
-  
   const [showComments, toggleComments] = useState(false);
   const [new_comment, setComment] = useState("");
-  // console.log(article)
-  function SocialMediaButtons(props) {
-    return (
-      <div align="center" padLeft={"10px"}>
-        <FacebookShareButton
-          url={article.url}
-          quote={article.title}
-          hashtag="#threadNews"
-          // className={classes.socialMediaButton}
-        >
-          <FacebookIcon size={36} round={true} />
-        </FacebookShareButton>
 
-        <TwitterShareButton
-          url={article.url}
-          via={"ThreadNews"}
-          hashtags={["threadNews"]}
-          title={article.title}
-        >
-          <TwitterIcon size={36} round={true} />
-        </TwitterShareButton>
-
-        <RedditShareButton url={article.url} title={article.title}>
-          <RedditIcon size={36} round={true} />
-        </RedditShareButton>
-        <LinkedinShareButton
-          url={article.url}
-          description={article.description}
-          title={article.title}
-          source={article.url}
-        >
-          <LinkedinIcon size={36} round={true} />
-        </LinkedinShareButton>
-      </div>
-    );
-  }
-
-  function copy_link_button() {
-    return (
-      <div align={"center"}>
-        <Button
-          variant="info"
-          onClick={() => {
-            navigator.clipboard.writeText(article.url);
-          }}
-        >
-          Copy to Clipboard
-        </Button>
-        <h5>Or</h5>
-      </div>
-    );
-  }
 
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
-
     toggleLiked(!liked);
-    like_article(article.id);
+    like_article(article_id);
   }
 
-  function toggle_save_article() {
+  function toggle_save_article(article_id) {
     console.log("SAVE ARTICLE CLICKED");
-    let token = sessionStorage.getItem("access_token");
-    let data = { action: "add", article_id: article.articleId };
-    if (saved) {
-      data.action = "delete";
-    }
+    save_article(article_id);
     toggleSaved(!saved);
-    let head = { headers: { Authorization: "Bearer " + token } };
-    let result = axios.post("http://127.0.0.1:5000/save", data, head);
-    // props.user.user_id()
+    
   }
 
   function share_article() {
     console.log("SHARE ARTICLE CLICKED");
-    setShare(true);
-  }
-
-  function create_share_modal() {
-    return (
-      <Modal show={share} onHide={() => setShare(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Share This Article</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            {copy_link_button()}
-            <SocialMediaButtons />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="warning" onClick={() => setShare(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
+    props.setShare(true);
+    props.setShareArticle(article);
   }
 
   function user_viewed() {
-    console.log("ar");
     let token = sessionStorage.getItem("access_token");
-    let data = { action: "add", article_id: article.id };
-    let head = { headers: { Authorization: "Bearer " + token } };
-    axios.post("http://127.0.0.1:5000/view", data, head);
+    if (token.length !== 1) {
+      let data = { action: "add", article_id: article.id };
+      let head = { headers: { Authorization: "Bearer " + token } };
+      axios.post("http://127.0.0.1:5000/view", data, head);
+    }
+    //prompt user to create account or signin
+    else {
+      console.log("Prompting user to login or create account");
+    }
   }
   function update_comments() {
     toggleComments(!showComments);
@@ -160,7 +54,7 @@ export function ArticleCard(props) {
   }
 
   function post_comment() {
-    let data = { action: "add", comment: new_comment, article_id: props.id };
+    let data = { action: "add", comment: new_comment, article_id: article.id };
     let head = {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("access_token"),
@@ -169,34 +63,14 @@ export function ArticleCard(props) {
     console.log(head);
     axios.post("http://127.0.0.1:5000/comment", data, head).then((result) => {
       if (result) {
-        setComment("");
+        setComment(new_comment);
       }
     });
   }
 
-  let commentList = [
-    {
-      user_name: "jon doe",
-      comment: "This article was great! I have read it twenty times!",
-    },
-    { user_name: "jon doe", comment: "This writter is trash.  " },
-    { user_name: "jon doe", comment: "The sentiment was 100% accurate " },
-    {
-      user_name: "jon doe",
-      comment: "I completely disagree with the article ",
-    },
-    { user_name: "jon doe", comment: "WOW. THIS IS THE BEST ARTICLE EVER!!! " },
-    { user_name: "jon doe", comment: "I saw this on the news" },
-    { user_name: "jon doe", comment: "The world is falling apart" },
-    { user_name: "jon doe", comment: "I feel so hopeful!" },
-    {
-      user_name: "jon doe",
-      comment:
-        "I completely agree. The legal system and even all of government is so broken in this society and the only way that that is every going to change is if we band together and fight for the rights of the common people! Even more, the rights of those on the bottom of the social ladder! I want this country's least fortunate soul to still be better off than the top one percent in other countries! I have this vision for our country and I hope that you will all share it with me!",
-    },
-  ];
+  let commentList = defaultCommentList;
 
-  if (article.comments != null) {
+  if (article!=null && article.comments != null) {
     commentList = article.comments.concat(commentList);
   }
 
@@ -208,12 +82,17 @@ export function ArticleCard(props) {
     );
   });
 
+  if(article===undefined){
+    return(<div></div>)
+  }
   return (
     <div className="article-card">
       <Container className="article-container">
         <Row float="left" className="">
           <Col xs={3} className="">
-            <a href={article.url}>
+            <a href={article.url}
+              
+            >
               <img
                 className="newsImg"
                 src={article === "undefined" ? null : article.urlToImage}
@@ -243,7 +122,11 @@ export function ArticleCard(props) {
                 </p>
               </Col>
               <Col xs={6} className="article-date">
-                <p>{article.publishedAt? article.publishedAt.substring(0, 10): ""}</p>
+                <p>
+                  {article.publishedAt
+                    ? article.publishedAt.substring(0, 10)
+                    : ""}
+                </p>
               </Col>
             </Row>
             <Row
@@ -263,8 +146,11 @@ export function ArticleCard(props) {
                   {showComments ? "Hide" : "Comments"}
                 </Button>
 
-                <Button variant="secondary" onClick={() => setShare(!share)}>
-                  Share
+                <Button
+                  variant="secondary"
+                  onClick={() => repost_article(article.id)}
+                >
+                  Repost
                 </Button>
               </Col>
               <Col xs={2}>
@@ -303,28 +189,39 @@ export function ArticleCard(props) {
                     className="icon"
                     src={
                       liked
-                        ? "./assets/article_card_icons/heart_full.png"
-                        : "./assets/article_card_icons/heart_empty.png"
+                        ? process.env.PUBLIC_URL +
+                          "/assets/article_card_icons/heart_full.png"
+                        : process.env.PUBLIC_URL +
+                          "/assets/article_card_icons/heart_empty.png"
                     }
+                    alt=""
                   />
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={toggle_save_article}>
+                <Button variant="outline" onClick={()=>toggle_save_article(article.article_id)}>
                   <img
                     className="icon"
                     src={
-                      saved 
-                      ? "./assets/article_card_icons/bookmark_empty.png"
-                      : "./assets/article_card_icons/bookmark_empt.png" }
+                      saved
+                        ? process.env.PUBLIC_URL +
+                          "/assets/article_card_icons/bookmark_full.png"
+                        : process.env.PUBLIC_URL +
+                          "/assets/article_card_icons/bookmark_empty.png"
+                    }
+                    alt=""
                   />
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={() => setShare(!share)}>
+                <Button variant="outline" onClick={() => share_article()}>
                   <img
                     className="icon"
-                    src={"./assets/article_card_icons/share.png"}
+                    src={
+                      process.env.PUBLIC_URL +
+                      "/assets/article_card_icons/share.png"
+                    }
+                    alt=""
                   />
                 </Button>
               </Col>
@@ -337,19 +234,7 @@ export function ArticleCard(props) {
           <Row>
             {sessionStorage.getItem("access_token") ? (
               <Col xs={3}>
-                <div className="postComment">
-                  <Form>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Control
-                        as="textarea"
-                        rows={7}
-                        onChange={handleChange}
-                        placeHolder="Tell us your thoughts"
-                      />
-                    </Form.Group>
-                  </Form>
-                  <Button onClick={post_comment}>Post</Button>
-                </div>
+                <CommentInput post_comment = {post_comment} handleChange={handleChange}/>
               </Col>
             ) : (
               <div></div>
@@ -362,16 +247,7 @@ export function ArticleCard(props) {
       ) : (
         <div></div>
       )}
-      {/* </div>
-      {create_share_modal()}
-      {
-        showComments ? 
-      <div className="commentsBox">
-      {comments}
-      </div>
-      :
       <div></div>
-      } */}
     </div>
   );
 }
