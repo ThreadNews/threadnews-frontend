@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, {useState } from "react";
 // import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col,ListGroup,Card, } from "react-bootstrap";
+import { Container, Card, } from "react-bootstrap";
 import './css/UserBlock.css';
 import {follow} from './Social.js'
 import {get_user} from './LocalStorageHelper'

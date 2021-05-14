@@ -1,52 +1,56 @@
-import { Navbar,Nav,NavDropdown,Form,FormControl,Button,InputGroup } from 'react-bootstrap'
-import './css/bootstrap_theme.css'
-import './css/Nav.css'
-import {LinkContainer} from 'react-router-bootstrap'
-export default function Top_nav(props){
-    function logout(){
-        sessionStorage.clear();
-    }
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Container,
+  Button,
+  InputGroup,
+} from "react-bootstrap";
+import "./css/bootstrap_theme.css";
+import "./css/Nav.css";
+import { LinkContainer } from "react-router-bootstrap";
+import {SearchBar} from "./SearchBar"
+export default function Top_nav(props) {
+  function logout() {
+    sessionStorage.clear();
+  }
+  let logo = process.env.PUBLIC_URL + "/assets/ThreadNews.png";
 
-    let nav_items = sessionStorage.getItem('access_token') ? (
-        <Nav className='ml-auto' bg="primary" variant="light" >
-            {/* <input class='searchBar' type="text" placeholder="Search.."></input> */}
-            <LinkContainer to='/threads'>
-                <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/profile'>
-                <Nav.Link >{sessionStorage.getItem('first_name')}  {sessionStorage.getItem('last_name')}</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/login' onClick={logout}>
-                <Nav.Link>Log out</Nav.Link>
-            </LinkContainer>
-            
-        </Nav>):
-        <Nav className='ml-auto'>
-            <LinkContainer to='/threads'>
-                <Nav.Link  style={{float: 'right',}} href="/threads" >Threads</Nav.Link>
-            </LinkContainer>
-        
-            <LinkContainer to ='/login'>
-                <Nav.Link  style={{float: 'right',}} href="/login" >Sign Up</Nav.Link>
-            </LinkContainer>
-            
-            <LinkContainer to='/login'>
-                <Nav.Link >Login</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/profile'>
-                <Nav.Link  style={{float: 'right',}} href="/profile" >Profile</Nav.Link>
-            </LinkContainer>
-            
-        </Nav>
+  let nav_items = (
+    <Nav className="ml-auto" bg="primary" variant="light">
+      <Nav.Link style={{ color: "white" }} href="/threads">
+        Threads
+      </Nav.Link>
+      {sessionStorage.getItem("access_token") ? (
+        <LinkContainer to="/profile">
+          <Nav.Link style={{ color: "white" }}>
+            {sessionStorage.getItem("first_name")}{" "}
+            {sessionStorage.getItem("last_name")}
+          </Nav.Link>
+        </LinkContainer>
+      ) : null}
 
-    return (
-      <div style={{ paddingBottom: "50px" }}>
-        <Navbar variant="light" fixed="top" bg="info">
-          <Navbar.Brand>Thread News</Navbar.Brand>
-          {nav_items}
-        </Navbar>
-      </div>
-    );
+      <LinkContainer to="/login" onClick={logout}>
+        <Nav.Link style={{ color: "white" }}>
+          {sessionStorage.getItem("access_token") ? "Log out" : "Login"}
+        </Nav.Link>
+      </LinkContainer>
+    </Nav>
+  );
+
+  return (
+    <div style={{ paddingBottom: "50px" }}>
+      <Navbar fixed="top" bg="info">
+        <Container className="logo-container">
+          <Navbar.Brand>
+            <img className="logo" src={logo} alt="" />
+          </Navbar.Brand>
+        </Container>
+        <SearchBar/>
+        {nav_items}
+      </Navbar>
+    </div>
+  );
 }
 
-Top_nav.defaultProps = { signedIn:false}
+Top_nav.defaultProps = { signedIn: false };
