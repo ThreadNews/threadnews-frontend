@@ -1,0 +1,32 @@
+.logo{
+ width: 200px;   
+ height: auto;
+ float: center;
+}
+
+.logo-container{
+    width: 300px;
+    height: auto;
+    float: center;
+    align-items: center;
+}
+
+.nav-container{
+    align-items: center;
+    float:center;
+    width:flex;
+    font-family:'Times New Roman', Times, serif;
+    color: white !important;
+    
+}
+
+.nav-text{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 56;
+    color: white !important;
+    
+}
+
+nav-text:hover{
+    color: rgb(190, 50, 50)
+}
