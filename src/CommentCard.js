@@ -13,7 +13,9 @@ import "./css/commentCard.css";
 import { Likes } from "./Likes";
 
 export function CommentCard(props) {
-   console.log(props.id)
+   if (props===null || props===undefined || props.id===null){
+      return null;
+   }
    let following = sessionStorage.getItem('following')
    let color = following.includes(props.id) && sessionStorage.getItem('following')!=='undefined' ? "comment-card friend-card" : "comment-card"
    return(

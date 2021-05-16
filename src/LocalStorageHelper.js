@@ -33,3 +33,6 @@ export function get_user(){
     return user
 }
 
+export function get_interests(){
+    return JSON.parse(sessionStorage.getItem("interests"))
+}

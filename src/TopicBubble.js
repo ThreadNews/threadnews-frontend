@@ -17,7 +17,6 @@ export default function TopicBubble(props) {
             alignItems: "center",
             flexDirection: "column",
             transition: "opacity 0.1s ease",
-            // opacity: props.bubbleSize > 50 ? 1 : 0,
             pointerEvents: "none",
           }}
         >

@@ -11,6 +11,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { get_user, get_interests } from "./LocalStorageHelper";
 import ShareModal from "./ShareModal";
 import CategoryBubbleSet from "./category-bubbles";
+import BubbleRow from "./BubbleRow";
+
 export function ThreadPage(props) {
   const [interests, setInterests] = useState(0);
   const [share, setShare] = useState(false);
@@ -71,7 +73,7 @@ export function ThreadPage(props) {
     return (
       <Container>
         <Row>
-          <CategoryBubbleSet />
+          
         </Row>
         <Row>
           <Col xs={10}>
@@ -90,18 +92,6 @@ export function ThreadPage(props) {
     );
   });
 
-  const sentCards = articles.slice(0, 20).map((data, i) => {
-    return (
-      <Row>
-        <SentimentCard
-          {...data}
-          key={i}
-          set_thread={() => this.select_article()}
-        />
-      </Row>
-    );
-  });
-
   let user = get_user();
   return (
     <div>
@@ -110,8 +100,10 @@ export function ThreadPage(props) {
       </div>
       <div>
         <Container fluid>
-          <h4 align={"center"}>Your Liked Topics</h4>
-          <h3 align={"center"}>{pills}</h3>
+          <h4>Your Liked Topics</h4>
+          <Row>
+            <BubbleRow row={true} interests={interest_ls}/>
+          </Row>
           <Row>
             <Col sm={10} className="thread-page-content">
               {cards}

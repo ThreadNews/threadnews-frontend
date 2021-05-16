@@ -37,6 +37,7 @@ export default function Profile(props){
     }, [] )
 
     const interest_list = user.interests.map((interest, i) => {
+
         return (
             <div>
                 <ListGroup.Item variant="light"  key={i}>

@@ -12,13 +12,13 @@
 }
 
 .nav-container{
-    align-items: center;
+    align-items: inline-block;
     float:center;
     width:flex;
     font-family:'Times New Roman', Times, serif;
     color: white !important;
-    
 }
+
 
 .nav-text{
     font-family:'Times New Roman', Times, serif;
