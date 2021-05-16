@@ -6,31 +6,19 @@ import { CommentCard } from "./CommentCard";
 import { repost_article, like_article, save_article,post_comment } from "./Social";
 import {defaultCommentList} from './defaultData'
 import { CommentInput } from "./CommentInput";
+
 export function ArticleCard(props) {
   let article = props.article;
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
   const [showComments, toggleComments] = useState(false);
   const [new_comment, setComment] = useState("");
-
+  let debug = true;
 
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
     toggleLiked(!liked);
     like_article(article_id);
-  }
-
-  function toggle_save_article(article_id) {
-    console.log("SAVE ARTICLE CLICKED");
-    save_article(article_id);
-    toggleSaved(!saved);
-    
-  }
-
-  function share_article() {
-    console.log("SHARE ARTICLE CLICKED");
-    props.setShare(true);
-    props.setShareArticle(article);
   }
 
   function user_viewed() {
@@ -45,6 +33,19 @@ export function ArticleCard(props) {
       console.log("Prompting user to login or create account");
     }
   }
+
+  function toggle_save_article(article_id) {
+    console.log("SAVE ARTICLE CLICKED");
+    save_article(article_id);
+    toggleSaved(!saved);
+  }
+
+  function share_article() {
+    console.log("SHARE ARTICLE CLICKED");
+    props.setShare(true);
+    props.setShareArticle(article);
+  }
+  
   function update_comments() {
     toggleComments(!showComments);
   }
@@ -109,12 +110,16 @@ export function ArticleCard(props) {
                 style={{
                   fontSize: 22,
                   fontFamily: "TimesNewROman",
-                  color: "#eee",
+                  
                 }}
               >
-                <p>{article.title}</p>
+                <p>{article.title}</p> 
+                  {debug
+                  ? (<p>{article.main_topic}</p>) 
+                  : ""}
               </Row>
             </a>
+
             <Row className="text-muted article-author-date">
               <Col xs={6}>
                 <p>
@@ -136,10 +141,11 @@ export function ArticleCard(props) {
               <p>{article.description}</p>
             </Row>
 
-            <Row className="">
+            <Row>
               <Col xs={2}>
                 <Button
-                  style={{ float: "left" }}
+                  className="comment-button"
+                  style={{ float: "left",}}
                   variant="warning"
                   onClick={() => update_comments()}
                 >
@@ -147,6 +153,7 @@ export function ArticleCard(props) {
                 </Button>
 
                 <Button
+                  className = "repost-button"
                   variant="secondary"
                   onClick={() => repost_article(article.id)}
                 >
@@ -155,6 +162,7 @@ export function ArticleCard(props) {
               </Col>
               <Col xs={2}>
                 <Button
+                  className = "not-for-me-button"
                   style={{ float: "left" }}
                   variant="outline-danger"
                   onClick={() => props.removeArticle(article.id)}
