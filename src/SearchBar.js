@@ -1,7 +1,6 @@
 import { Button, Row, Col } from "react-bootstrap";
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import { Select } from 'react-select';
 import {UserBlockList} from './UserBlock'
 // import "./css/bootstrap_theme.css";
 import "./css/search.css";
