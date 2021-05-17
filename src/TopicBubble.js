@@ -4,7 +4,7 @@ export default function TopicBubble(props) {
   return (
     <div
       style={{
-        backgroundColor: '#F0FFFF' + "d0",
+        backgroundColor: '#F0FFFFd0',
       }}
        className={"TopicBubble"}
        onClick={props.onClick}

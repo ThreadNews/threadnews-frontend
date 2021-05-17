@@ -59,6 +59,8 @@
 }
 .article-title {
   max-height: 37%;
+  /* padding-top: 20px; */
+
 }
 
 .article-date {

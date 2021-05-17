@@ -1,0 +1,29 @@
+.bubbleRow{
+    width: 1200px;
+    height: 160px;
+    display: inline-block;
+    align-content:center;
+    float:center;
+    color: #ffffff
+
+}
+
+.header-text{
+    color: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 56;
+}
+
+.topicBubbleContainer{
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.topicBubble{
+    width: 20%;
+    height: 120px;
+    padding-right: 10%;
+}

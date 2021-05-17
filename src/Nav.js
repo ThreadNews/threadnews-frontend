@@ -7,6 +7,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import "./css/bootstrap_theme.css";
+
 import "./css/Nav.css";
 import { LinkContainer } from "react-router-bootstrap";
 import {SearchBar} from "./SearchBar"

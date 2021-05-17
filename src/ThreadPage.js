@@ -4,7 +4,6 @@ import axios from "axios";
 import { Container, Row, Col, Badge } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { ArticleCard } from "./ArticleCard";
-import { SentimentCard } from "./SentimentCard.js";
 import "./css/ThreadPage.css";
 import { SocialCol } from "./SocialCol";
 import { LinkContainer } from "react-router-bootstrap";
@@ -23,7 +22,7 @@ export function ThreadPage(props) {
     let token = sessionStorage.getItem("access_token");
 
     let head = { headers: { Authorization: "Bearer " + token } };
-    // let topic = "";
+    
     let topic =
       window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
         .length === 0
@@ -100,16 +99,15 @@ export function ThreadPage(props) {
       </div>
       <div>
         <Container fluid>
-          <h4>Your Liked Topics</h4>
           <Row>
-            <BubbleRow row={true} interests={interest_ls}/>
+            <BubbleRow row={true} interests={interest_ls} header="Your Topics"/>
           </Row>
           <Row>
             <Col sm={10} className="thread-page-content">
               {cards}
             </Col>
             <Col sm={2}>
-              <SocialCol></SocialCol>
+              {/* <SocialCol></SocialCol> */}
             </Col>
           </Row>
           {share ? (
