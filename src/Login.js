@@ -27,7 +27,7 @@ export default function Login(props) {
 
   function signUp() {
     axios
-      .post("http://127.0.0.1:5000/newUser", {
+      .post(process.env.REACT_APP_BACKEND_URL + "/newUser", {
         username: username,
         email: email,
         password: password,
@@ -55,7 +55,7 @@ export default function Login(props) {
   function login() {
     console.log("starting login...");
     axios
-      .post("http://127.0.0.1:5000/login", { email: email, password: password })
+      .post(process.env.REACT_APP_BACKEND_URL + "/login", { email: email, password: password })
       .then((result) => {
         console.log("status", result.status);
         if (result) {

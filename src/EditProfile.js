@@ -31,7 +31,7 @@ export function EditProfile(props) {
       email: email,
     };
     axios
-      .post("http://127.0.0.1:5000/edit_profile", data, head)
+      .post(process.env.REACT_APP_BACKEND_URL + "/edit_profile", data, head)
       .then((result) => {
         if (result) {
           console.log("finished updating user", result);

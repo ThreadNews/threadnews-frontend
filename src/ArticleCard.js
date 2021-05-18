@@ -3,8 +3,13 @@ import { Col, Row, Container, Button, Form } from "react-bootstrap";
 import "./css/articleCard.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
-import { repost_article, like_article, save_article,post_comment } from "./Social";
-import {defaultCommentList} from './defaultData'
+import {
+  repost_article,
+  like_article,
+  save_article,
+  post_comment,
+} from "./Social";
+import { defaultCommentList } from "./defaultData";
 import { CommentInput } from "./CommentInput";
 
 export function ArticleCard(props) {
@@ -26,7 +31,7 @@ export function ArticleCard(props) {
     if (token.length !== 1) {
       let data = { action: "add", article_id: article.id };
       let head = { headers: { Authorization: "Bearer " + token } };
-      axios.post("http://127.0.0.1:5000/view", data, head);
+      axios.post(process.env.REACT_APP_BACKEND_URL + "/view", data, head);
     }
     //prompt user to create account or signin
     else {
@@ -45,7 +50,7 @@ export function ArticleCard(props) {
     props.setShare(true);
     props.setShareArticle(article);
   }
-  
+
   function update_comments() {
     toggleComments(!showComments);
   }
@@ -62,7 +67,7 @@ export function ArticleCard(props) {
       },
     };
     console.log(head);
-    axios.post("http://127.0.0.1:5000/comment", data, head).then((result) => {
+    axios.post(process.env.REACT_APP_BACKEND_URL + "/comment", data, head).then((result) => {
       if (result) {
         setComment(new_comment);
       }
@@ -71,7 +76,7 @@ export function ArticleCard(props) {
 
   let commentList = defaultCommentList;
 
-  if (article!=null && article.comments != null) {
+  if (article != null && article.comments != null) {
     commentList = article.comments.concat(commentList);
   }
 
@@ -83,17 +88,15 @@ export function ArticleCard(props) {
     );
   });
 
-  if(article===undefined){
-    return(<div></div>)
+  if (article === undefined) {
+    return <div></div>;
   }
   return (
     <div className="article-card">
       <Container className="article-container">
         <Row float="left" className="">
           <Col xs={3} className="">
-            <a href={article.url}
-              
-            >
+            <a href={article.url}>
               <img
                 className="newsImg"
                 src={article === "undefined" ? null : article.urlToImage}
@@ -110,13 +113,10 @@ export function ArticleCard(props) {
                 style={{
                   fontSize: 22,
                   fontFamily: "TimesNewROman",
-                  
                 }}
               >
-                <p>{article.title}</p> 
-                  {debug
-                  ? (<p>{article.main_topic}</p>) 
-                  : ""}
+                <p>{article.title}</p>
+                {debug ? <p>{article.main_topic}</p> : ""}
               </Row>
             </a>
 
@@ -145,7 +145,7 @@ export function ArticleCard(props) {
               <Col xs={2}>
                 <Button
                   className="comment-button"
-                  style={{ float: "left",}}
+                  style={{ float: "left" }}
                   variant="warning"
                   onClick={() => update_comments()}
                 >
@@ -153,7 +153,7 @@ export function ArticleCard(props) {
                 </Button>
 
                 <Button
-                  className = "repost-button"
+                  className="repost-button"
                   variant="secondary"
                   onClick={() => repost_article(article.id)}
                 >
@@ -162,7 +162,7 @@ export function ArticleCard(props) {
               </Col>
               <Col xs={2}>
                 <Button
-                  className = "not-for-me-button"
+                  className="not-for-me-button"
                   style={{ float: "left" }}
                   variant="outline-danger"
                   onClick={() => props.removeArticle(article.id)}
@@ -207,7 +207,10 @@ export function ArticleCard(props) {
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={()=>toggle_save_article(article.article_id)}>
+                <Button
+                  variant="outline"
+                  onClick={() => toggle_save_article(article.article_id)}
+                >
                   <img
                     className="icon"
                     src={
@@ -242,7 +245,10 @@ export function ArticleCard(props) {
           <Row>
             {sessionStorage.getItem("access_token") ? (
               <Col xs={3}>
-                <CommentInput post_comment = {post_comment} handleChange={handleChange}/>
+                <CommentInput
+                  post_comment={post_comment}
+                  handleChange={handleChange}
+                />
               </Col>
             ) : (
               <div></div>

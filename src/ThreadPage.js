@@ -32,7 +32,7 @@ export function ThreadPage(props) {
           );
     console.log(window.location.href);
     let data = { topic: topic, n: 50 };
-    axios.post("http://127.0.0.1:5000/threads", data, head).then((result) => {
+    axios.post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head).then((result) => {
       if (result) {
         console.log(Array(result.data.articles));
         const shuffled = Array(result.data.articles)[0].sort(

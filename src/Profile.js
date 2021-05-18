@@ -20,7 +20,7 @@ export default function Profile(props){
         let token = sessionStorage.getItem('access_token');
         // let data = {user_id:user_id,action:'follow'};
         let head = {headers:{Authorization:"Bearer "+ token}}
-        axios.post('http://127.0.0.1:5000/articles',{article_ids:user.reposted_articles},head).then( result => {
+        axios.post(process.env.REACT_APP_BACKEND_URL+ '/articles',{article_ids:user.reposted_articles},head).then( result => {
       if (result){
             // setArticles(result.data.result.slice(0, 10));
             let articleCards_temp = result.data.result.map((article, i) => {
