@@ -5,7 +5,7 @@ export async function follow(user_id) {
   let data = { user_id: user_id, action: "follow" };
   let head = { headers: { Authorization: "Bearer " + token } };
   console.log("User follow attempt");
-  axios.post("http://127.0.0.1:5000/follow_user", data, head);
+  axios.post(process.env.PUBLIC_URL + "/follow_user", data, head);
 }
 
 export async function get_users(user_ids) {
@@ -13,7 +13,7 @@ export async function get_users(user_ids) {
   let token = sessionStorage.getItem("access_token");
   let data = { user_ids: user_ids, action: "follow" };
   let head = { headers: { Authorization: "Bearer " + token } };
-  axios.post("http://127.0.0.1:5000/users", data, head).then((result) => {
+  axios.post(process.env.REACT_APP_BACKEND_URL + "/users", data, head).then((result) => {
     if (result) {
       // setUsers(result.data.result);
       res = result.data.result;
@@ -28,7 +28,7 @@ export async function repost_article(articleId) {
   let token = sessionStorage.getItem("access_token");
   let data = { action: "add", article_id: articleId };
   let head = { headers: { Authorization: "Bearer " + token } };
-  axios.post("http://127.0.0.1:5000/repost", data, head);
+  axios.post(process.env.REACT_APP_BACKEND_URL +"/repost", data, head);
 }
 
 export function like_article(articleId) {
@@ -36,7 +36,7 @@ export function like_article(articleId) {
   let data = { action: "add", article_id: articleId,};
   console.log("data:", data);
   let head = { headers: { Authorization: "Bearer " + token } };
-  axios.post("http://127.0.0.1:5000/like", data, head);
+  axios.post(process.env.REACT_APP_BACKEND_URL + "/like", data, head);
 }
 
 export function save_article(articleId, saved) {
@@ -46,5 +46,5 @@ export function save_article(articleId, saved) {
   if (saved) {
     data.action = "delete";
   }
-  axios.post("http://127.0.0.1:5000/save", data, head);
+  axios.post(process.env.REACT_APP_BACKEND_URL +"/save", data, head);
 }

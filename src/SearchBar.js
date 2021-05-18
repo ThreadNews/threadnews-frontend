@@ -14,9 +14,10 @@ export function SearchBar(props) {
     let token = sessionStorage.getItem("access_token");
     let head = { headers: { Authorization: "Bearer " + token } };
     let data = {username: search_string};
+    //not currently implemented on backend going to fix
     axios
       .post(
-        "http://127.0.0.1:5000/search_user",
+        process.env.REACT_APP_BACKEND_URL + "/search_user",
         data,
         head
       )
