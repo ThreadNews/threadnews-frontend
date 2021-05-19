@@ -1,76 +1,130 @@
-import React from 'react';
-import { Card, Row, Col, Container, Nav, Tab,Tabs,CardDeck} from 'react-bootstrap';
+import {React,useState,useEffect} from 'react';
+import {Row, Col, Container,Tab,Tabs,Button} from 'react-bootstrap';
+import axios from "axios";
 import Navbar from './Nav';
 import './css/profile.css'
+import {UserBlockList} from './UserBlock'
+import ListGroup from 'react-bootstrap/ListGroup'
+import {LinkContainer} from 'react-router-bootstrap'
+import {ArticleCard} from './ArticleCard'
 export default function Profile(props){
-    // remember to implement later for now passing user as prop
-    // let user = localStorage.getItem('user')
-    let user = props
+    
+    let user = localStorage.getItem('user')
+
+    const [key, setKey] = useState('home');
+    // const [articles, setArticles] = useState([]);
+    const [articleCards,setArticleCards] = useState(null);
+
+    
+    useEffect(()=> {
+        let token = sessionStorage.getItem('access_token');
+        // let data = {user_id:user_id,action:'follow'};
+        let head = {headers:{Authorization:"Bearer "+ token}}
+        axios.post(process.env.REACT_APP_BACKEND_URL+ '/articles',{article_ids:user.reposted_articles},head).then( result => {
+      if (result){
+            // setArticles(result.data.result.slice(0, 10));
+            let articleCards_temp = result.data.result.map((article, i) => {
+                return (
+                    <div>
+                        <ArticleCard {...article}/>
+                    </div>
+                );
+            })
+            setArticleCards(articleCards_temp);
+            // create_article_cards()
+      }
+    })
+    }, [] )
+
+    const interest_list = user.interests.map((interest, i) => {
+
+        return (
+            <div>
+                <ListGroup.Item variant="light"  key={i}>
+                             {interest}
+                             <Button href={`/threads/${interest}`} size="sm" style={{float: 'right',borderRadius:'70px'}} variant='info' >View</Button>
+                </ListGroup.Item>
+            </div>
+        );
+      });
+
     return (
         <div>
             <Navbar></Navbar>
-            <Container  style={{padding:'20px'}}>
-            <Row >
-                <Card className='profileCard' pad='6px'>
-                    <Container>
-                        <Row>
-                        <Col sm={2}>
-                            <div className='profileImage'>
-                                <img src={user.profile_img} pad='10px'/>
+            <Container className="profile-container">
+            <Container className="profile">
+            <form method="post">
+                <Row>
+                    <Col md={3} >
+                        <div className="profile-img">
+                            <div className ="profile-img-wrapper">
+                                <img src={user.profile_img} alt=""/>
                             </div>
-                        </Col>
-                        
-                        <Col align='left'>
-                                <h3 className='profileName'>{user.first_name} {user.last_name} </h3>
-
-                                <h4 style={{paddingLeft:'30px'}} className="mb-2 text-muted">@{user.username}</h4>
-                                <hr className = "divider"></hr>
-                                <blockquote className="blockquote mb-0">
-                                    <p>
-                                        {' '}
-                                        {user.bio}{' '}
+                        </div>
+                    </Col>
+                    <Col md={6}>
+                        <div className="profile-head-text">
+                                    <h3>
+                                        {user.first_name} {user.last_name}
+                                    </h3>
+                                    <h6>
+                                        {user.bio}
+                                    </h6>
+                                    <p className="social">
+                                        Followers : <span className="counter">{user.follower_count}</span>
+                                        Following : <span className="counter">{user.following_count}</span>
+                                        Articles Shared : <span className="counter">{user.following_count}</span>
+                                        Likes : <span className="counter">{user.likes_count}</span>
                                     </p>
-                                </blockquote>
-                        </Col>
-                        </Row>
-                    </Container>
-                </Card>
-                
+                        </div>
+                    </Col>
+                    <Col md={2}>
+                        <LinkContainer to='/editprofile/'>
+                        <input type="submit" class="profile-edit-btn" href='/editprofile' name="btnAddMore" value="Edit Profile"/>
+                        </LinkContainer>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={4}>
+                        <div className="profile-work">
+                            <br></br>
+                            <h4>Interests</h4>
+                            <ListGroup>
+                                {interest_list}
+                            </ListGroup>
+                        </div>
+                    </Col>
+                    <Col md={8}>
+                        <Tabs
+                            id="controlled-tab-example"
+                            activeKey={key}
+                            onSelect={(k) => setKey(k)}
+                            >
+                            <Tab eventKey="Reposted" title="Reposted Articles">
+                                {articleCards}
 
-            </Row>
-
-            </Container>
-            <Row style={{align:'center'}}>
-                <p className='overview'>Saved Articles</p>
-                
-
-            </Row>
-
-            <Container>
-            <CardDeck>
-                <Card>
-                    <Card.Img variant="top" src="https://specials-images.forbesimg.com/imageserve/604d30c42fd16a5914334230/960x0.jpg?fit=scale" />
-                    <Card.Body>
-                        <Card.Title>As The Bitcoin Price Blasts Through $60,000, Tesla Billionaire Elon Musk Is More Concerned With ‘Joke’ Bitcoin Rival Dogecoin</Card.Title>
-                        <Card.Link href="https://www.forbes.com/sites/billybambrough/2021/03/13/as-the-bitcoin-price-blasts-through-60000-tesla-billionaire-elon-musk-is-more-concerned-with-joke-bitcoin-rival-dogecoin/?sh=18a19c63026c">View Full Article</Card.Link>
-                    </Card.Body>
-                </Card>
-                <Card>
-                    <Card.Img variant="top" src="https://www.sanluisobispo.com/latest-news/jy6j7y/picture248954979/alternates/FREE_768/Covid%20Vaccination1" />
-                    <Card.Body>
-                        <Card.Title>SLO County opens COVID vaccines to another 40,000 people. Here’s who can sign up</Card.Title>
-                        <Card.Link href="https://www.sanluisobispo.com/news/coronavirus/article249845463.html">View Full Article</Card.Link>
-                    </Card.Body>
-                </Card>
-                <Card>
-                    <Card.Img variant="top" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/DFE9/production/_117412375_techtent-chips.jpg" />
-                    <Card.Body>
-                        <Card.Title>Tech Tent: The new 'space race' for computer chips</Card.Title>
-                        <Card.Link href="https://www.bbc.com/news/technology-56294493">View Full Article</Card.Link>
-                    </Card.Body>
-                </Card>
-            </CardDeck>
-            </Container>
+                            </Tab>
+                            <Tab eventKey="Social" title="Social">
+                                <Row>
+                                    <Col>
+                                        
+                                        <UserBlockList {...user.followers} header="Followers"/>
+                                    </Col>
+                                    <Col>
+                                        {/* <h3> Following </h3> */}
+                                        <UserBlockList {...user.following} header="Following"/>
+                                    </Col>
+                                </Row>
+                            </Tab>
+                            
+                        </Tabs>
+                       
+                    </Col>
+                </Row>
+            </form>
+                       
+        </Container>
+        </Container>
         </div>
     )
 

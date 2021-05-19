@@ -7,7 +7,7 @@ body {
   min-height: 100vh;
   font-weight: 400;
   font-family: TimesNewRoman;
-  color:#eeeeee;
+  /* color:#eeeeee; */
   background: #b3bcc9
   
 }
@@ -30,12 +30,12 @@ body, html, .App, #root, .outer {
   height: 40vmin;
   pointer-events: none;
 }
-
+/* 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 .App-header {
   background-color: #000266;
@@ -48,7 +48,4 @@ body, html, .App, #root, .outer {
   color: white;
 }
 
-.App-link {
-  color: #00FFFF;
-}
 

@@ -4,7 +4,7 @@ export default function TopicBubble(props) {
   return (
     <div
       style={{
-        backgroundColor: '#F0FFFF' + "d0",
+        backgroundColor: '#F0FFFFd0',
       }}
        className={"TopicBubble"}
        onClick={props.onClick}
@@ -17,7 +17,6 @@ export default function TopicBubble(props) {
             alignItems: "center",
             flexDirection: "column",
             transition: "opacity 0.1s ease",
-            // opacity: props.bubbleSize > 50 ? 1 : 0,
             pointerEvents: "none",
           }}
         >

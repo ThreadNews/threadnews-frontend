@@ -1,4 +1,4 @@
-.thread-page-content{
+R.thread-page-content{
    height:100vh;
    overflow-y: auto;
    /* overflow: hidden; */
@@ -25,6 +25,10 @@
 .sentiment{
    display: inline-block;
    /*width: 37%;*/
-   position: relative;
-   left:0;
+}
+
+
+.bubbleRow{
+   width: 80%;
+   height: 400px;
 }

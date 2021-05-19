@@ -1,39 +1,49 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Navbar from "./Nav";
 import axios from "axios";
-import { Container, Row, Col, Toast, CardColumns } from "react-bootstrap";
-import { useState, useEffect, useRef } from "react";
+import { Container, Row, Col, Badge } from "react-bootstrap";
+import { useState, useEffect } from "react";
 import { ArticleCard } from "./ArticleCard";
-import {ThreadInfo} from "./ThreadInfo.js"
-import { SentimentCard } from "./SentimentCard.js";
 import "./css/ThreadPage.css";
-import { CommentCol } from "./CommentCol";
-
-require('dotenv').config()
+import { SocialCol } from "./SocialCol";
+import { LinkContainer } from "react-router-bootstrap";
+import { get_user, get_interests } from "./LocalStorageHelper";
+import ShareModal from "./ShareModal";
+import CategoryBubbleSet from "./category-bubbles";
+import BubbleRow from "./BubbleRow";
 
 export function ThreadPage(props) {
-  const [index, setIndex] = useState(0);
+  const [interests, setInterests] = useState(0);
+  const [share, setShare] = useState(false);
+  const [shareArticle, setShareArticle] = useState(null);
+  const [articles, setArticles] = useState([]);
 
-  const sampleSize = ([...arr], n = 1) => {
-    let m = arr.length;
-    while (m) {
-      const i = Math.floor(Math.random() * m--);
-      [arr[m], arr[i]] = [arr[i], arr[m]];
-    }
-    return arr.slice(0, n);
-  };
+  useEffect(() => {
+    let token = sessionStorage.getItem("access_token");
 
-    const [articles, setArticles] = useState([]);
+    let head = { headers: { Authorization: "Bearer " + token } };
     
-    useEffect(()=> {
-        axios.post(process.env.REACT_APP_BACKEND_URL + '/threads/a/a').then( result => {
-      if (result){
-            setArticles(sampleSize(result.data.articles.slice(),20));
+    let topic =
+      window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
+        .length === 0
+        ? ""
+        : window.location.href.substring(
+            window.location.href.lastIndexOf("/") + 1
+          );
+    console.log(window.location.href);
+    let data = { topic: topic, n: 50 };
+    axios.post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head).then((result) => {
+      if (result) {
+        console.log(Array(result.data.articles));
+        const shuffled = Array(result.data.articles)[0].sort(
+          () => 0.5 - Math.random()
+        );
+        // Get sub-array of first n elements after shuffled
+        let selected = shuffled.slice(0, 34);
+        setArticles(selected);
       }
-    })
-    }, [] )
-
+    });
+  }, []);
 
   function remove_article(id) {
     console.log("removing with id");
@@ -43,94 +53,68 @@ export function ThreadPage(props) {
     //update on db
   }
 
-
-    function like_article(articleId){
-      let token = localStorage.getItem('access_token')
-      let data = {action:'add',article_id:articleId}
-      let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
-      let result = axios.post(process.env.REACT_APP_BACKEND_URL + 'like',data,head)
-      // props.user.user_id()
-    }
-  function select_article(i){
-    if (i>=0){
-      setIndex(i)
-      console.log("Selected Article",i)
-    }
-  }
-  function save_article(articleID){
-    
-  }
-
-  function share_article(articleID){
-    
-  }
+  let default_interests = ["DIY", "Sports", "Investing", "Crypto"];
+  const interest_ls = sessionStorage.getItem("interests")
+    ? get_interests()
+    : default_interests;
+  const varients = ["primary", "secondary", "warning", "info"];
+  const pills = interest_ls.map((data, i) => {
+    return (
+      <LinkContainer to={`/threads/${data}`}>
+        <Badge style={{ paddingLeft: "10px" }} pill variant={varients[i]}>
+          {data}
+        </Badge>
+      </LinkContainer>
+    );
+  });
 
   const cards = articles.slice(0, 20).map((data, i) => {
-    
     return (
       <Container>
-      <Row>
-        <Col xs={12} >
-      <ArticleCard 
-        {...data}
-        key={i}
-        i = {i}
-        removeArticle={remove_article}
-        likeArticle={like_article}
-        set_thread = {select_article}
-        saveArticle={save_article}
-        shareArticle={share_article}
-      />
-      <SentimentCard
-      {...data}
-      key={i}
-      style={{position:'left',}}
-      set_thread = {()=>this.select_article()}
-      />
-      </Col>
-      
-      </Row>
+        <Row>
+          
+        </Row>
+        <Row>
+          <Col xs={10}>
+            <ArticleCard
+              article={data}
+              setShare={setShare}
+              setShareArticle={setShareArticle}
+              key={i}
+              i={i}
+              removeArticle={remove_article}
+            />
+          </Col>
+          <Col xs={2}></Col>
+        </Row>
       </Container>
     );
   });
 
-  
-  const sentCards = articles.slice(0, 20).map((data, i) => {
-    return (
-      <Row>
-      <SentimentCard
-        {...data}
-        key={i}
-        set_thread = {()=>this.select_article()}
-      />
-      
-      </Row>
-    );
-  });
-
-
-
+  let user = get_user();
   return (
     <div>
       <div>
         <Navbar></Navbar>
       </div>
-      <div >
+      <div>
         <Container fluid>
           <Row>
-            <Col sm={10}><h4 align='right' style={{paddingRight:'120px'}}> Sentiment</h4></Col>
-            <Col sm={2}><h4 align='right' style={{paddingRight:'120px'}}> Comments</h4></Col>
+            <BubbleRow row={true} interests={interest_ls} header="Your Topics"/>
           </Row>
           <Row>
             <Col sm={10} className="thread-page-content">
-              {cards}</Col>
-            <Col sm={2}><CommentCol {...articles[index]}/></Col>
+              {cards}
+            </Col>
+            <Col sm={2}>
+              {/* <SocialCol></SocialCol> */}
+            </Col>
           </Row>
+          {share ? (
+            <ShareModal {...shareArticle} share={true} setShare={setShare} />
+          ) : null}
         </Container>
       </div>
-      </div>
-
+    </div>
   );
 }
-
-

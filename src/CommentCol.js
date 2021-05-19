@@ -21,8 +21,8 @@ export function CommentCol(props){
         const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-    console.log(arr);
-    return arr
+      console.log(arr);
+      return arr
     }
     
 
@@ -43,11 +43,11 @@ export function CommentCol(props){
 
     function post_comment(){
       let data= {action:'add',comment:new_comment,article_id:props.id}
-      let head = {headers:{Authorization:"Bearer "+ localStorage.getItem('access_token')}}
+      let head = {headers:{Authorization:"Bearer "+ sessionStorage.getItem('access_token')}}
       console.log(head)
       axios.post(process.env.REACT_APP_BACKEND_URL + '/comment',data,head).then( result => {
       if (result){
-            let new_toast = comment_toast({user:localStorage.getItem('user'),comment:new_comment})
+            let new_toast = comment_toast({user:sessionStorage.getItem('user'),comment:new_comment})
             let temp = comments;
             temp[comments.length]=new_toast;
             setComments(shuffleArray(temp));
@@ -90,7 +90,7 @@ export function CommentCol(props){
 CommentCol.defaultProps = {
     comments :[
         {user:'jon doe',comment:'This article was great! '},
-        {user:'jon doe',comment:'This writter is trash.  '},
+        {user:'jon doe',comment:'This writer is trash.  '},
         {user:'jon doe',comment:'The sentiment was 100% accurate '},
         {user:'jon doe',comment:'I completely disagree with the article '},
         {user:'jon doe',comment:'WOW. THIS IS THE BEST ARTICLE EVER!!! '}

@@ -1,16 +1,20 @@
-* {
+/* * {
     box-sizing: border-box;
   }
-  
+   */
 
   
   .outer {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height:1000px;
     text-align: left;
+    margin-top: 10%;
   }
   
+
+
   .inner {
     width: 450px;
     font-family: TimesNewRoman;

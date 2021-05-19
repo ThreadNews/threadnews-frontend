@@ -1,0 +1,49 @@
+body,html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    }
+
+    .search{
+        /* float: left; */
+        width: 800px;
+        display:inline-block !important;
+    }
+
+    .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 36px;
+    opacity: 0.3;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+
+    }
+
+    .submit{
+        width: 25;
+        height:auto;
+        border-radius: 30px;
+        outline: none;
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 450px;
+    caret-color:blue;
+    transition: width 0.4s linear;
+    }
+
+    
