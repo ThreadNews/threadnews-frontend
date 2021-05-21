@@ -5,7 +5,7 @@ import { Row, Col, Form, FormGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "../css/ThreadPage.css";
 import "../css/edit_profile.css";
-import { get_user, store_user } from "./LocalStorageHelper";
+import { get_user, store_user } from "../functions/LocalStorageHelper";
 require("dotenv").config();
 
 export function EditProfile(props) {
