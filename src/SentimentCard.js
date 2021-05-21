@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from "react";
 import {Doughnut} from 'react-chartjs-2'
 import { defaults } from 'react-chartjs-2'
-import "./css/sentimentCard.css";
+import "../css/sentimentCard.css";
 import {
   Toast,
   Card,

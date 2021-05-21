@@ -3,9 +3,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //component imports
-import TopicBubble from "./TopicBubble";
+import TopicBubble from "../components/TopicBubble";
 //css imports
-import "./css/BubbleRow.css";
+import "../css/BubbleRow.css";
 
 export default function BubbleRow(props) {
   const bubbles = props.interests.map((topic, i) => {

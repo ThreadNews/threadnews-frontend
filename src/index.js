@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import InterestPage from "./InterestPage";
-import { ThreadPage } from "./ThreadPage";
-import Login from "./Login";
-import Profile from "./Profile";
+import InterestPage from "./pages/InterestPage";
+import { ThreadPage } from "./pages/ThreadPage";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import TopNav from "./Nav";
-import {EditProfile} from './EditProfile'
+import TopNav from "./components/Nav";
+import {EditProfile} from './pages/EditProfile'
 function view_threads() {
   ReactDOM.render(
     <React.StrictMode>

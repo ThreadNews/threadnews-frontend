@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/commentCard.css";
+import "../css/commentCard.css";
 
 export function CommentCard(props) {
   if (props === null || props === undefined || props.id === null) {

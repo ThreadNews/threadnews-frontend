@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
 
-import "./css/Login.css";
+import "../css/Login.css";
 import axios from "axios";
 import { Alert, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { store_user } from "./LocalStorageHelper";
+import { store_user } from "../functions/LocalStorageHelper";
 import { LinkContainer } from "react-router-bootstrap";
 
 require("dotenv").config();

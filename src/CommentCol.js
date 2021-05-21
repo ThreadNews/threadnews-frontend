@@ -43,8 +43,8 @@ export function CommentCol(props){
 
     function post_comment(){
       let data= {action:'add',comment:new_comment,article_id:props.id}
+      console.log(data)
       let head = {headers:{Authorization:"Bearer "+ sessionStorage.getItem('access_token')}}
-      console.log(head)
       axios.post(process.env.REACT_APP_BACKEND_URL + '/comment',data,head).then( result => {
       if (result){
             let new_toast = comment_toast({user:sessionStorage.getItem('user'),comment:new_comment})

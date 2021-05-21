@@ -1,20 +1,16 @@
-import React from "react";
-import Navbar from "./Nav";
+import { React,useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { Container, Row, Col, Badge } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { ArticleCard } from "./ArticleCard";
-import "./css/ThreadPage.css";
-import { SocialCol } from "./SocialCol";
-import { LinkContainer } from "react-router-bootstrap";
-import { get_user, get_interests } from "./LocalStorageHelper";
-import ShareModal from "./ShareModal";
-import CategoryBubbleSet from "./category-bubbles";
-import BubbleRow from "./BubbleRow";
-import { LoginModal } from "./LoginModal.js";
+import { ArticleCard } from "../components/ArticleCard";
+import { LoginModal } from "../modals/LoginModal.js";
+import Navbar from "../components/Nav";
+// import { SocialCol } from "./component/SocialCol.js";
+import ShareModal from "../modals/ShareModal";
+import BubbleRow from "../components/BubbleRow";
+import { get_user, get_interests } from "../functions/LocalStorageHelper";
+import "../css/ThreadPage.css";
 
 export function ThreadPage(props) {
-  const [interests, setInterests] = useState(0);
   const [share, setShare] = useState(false);
   const [promptLogin, setPromptLogin] = useState(false);
   const [shareArticle, setShareArticle] = useState(null);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Col, Row, Container, Button, Form } from "react-bootstrap";
-import "./css/articleCard.css";
+import "../css/articleCard.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
@@ -8,8 +8,8 @@ import {
   like_article,
   save_article,
   post_comment,
-} from "./Social";
-import { defaultCommentList } from "./defaultData";
+} from "../functions/Social";
+import { defaultCommentList } from "../data/defaultData";
 import { CommentInput } from "./CommentInput";
 
 export function ArticleCard(props) {

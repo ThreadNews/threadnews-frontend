@@ -1,9 +1,8 @@
-
-import CategoryBubbleSet from './category-bubbles'
-import './css/App.css';
-import './css/bootstrap_theme.css';
+import CategoryBubbleSet from '../components/category-bubbles'
+import '../css/App.css';
+import '../css/bootstrap_theme.css';
 import React, {useState } from "react";
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
 import {Container, Row, Col,} from 'react-bootstrap';
 
 export default function InterestPage(props){
