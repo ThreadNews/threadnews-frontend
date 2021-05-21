@@ -4,7 +4,7 @@ import axios from "axios";
 import {UserBlockList} from './UserBlock'
 // import "./css/bootstrap_theme.css";
 import "./css/search.css";
-
+require('dotenv').config()
 export function SearchBar(props) {
   const [search_string, setSearchstring] = useState("");
   const [user_ids, set_user_ids] = useState([]); 

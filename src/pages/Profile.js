@@ -7,6 +7,7 @@ import {UserBlockList} from './UserBlock'
 import ListGroup from 'react-bootstrap/ListGroup'
 import {LinkContainer} from 'react-router-bootstrap'
 import {ArticleCard} from './ArticleCard'
+require('dotenv').config()
 export default function Profile(props){
     
     let user = localStorage.getItem('user')

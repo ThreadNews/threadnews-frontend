@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./css/ThreadPage.css";
 import "./css/edit_profile.css";
 import { get_user, store_user } from "./LocalStorageHelper";
-
+require('dotenv').config()
 export function EditProfile(props) {
   const [first_name, setFirstname] = useState("");
   const [last_name, setLastname] = useState("");

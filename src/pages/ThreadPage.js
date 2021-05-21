@@ -12,7 +12,7 @@ import ShareModal from "./ShareModal";
 import CategoryBubbleSet from "./category-bubbles";
 import BubbleRow from "./BubbleRow";
 import { LoginModal } from "./LoginModal.js";
-
+require('dotenv').config()
 export function ThreadPage(props) {
   const [interests, setInterests] = useState(0);
   const [share, setShare] = useState(false);

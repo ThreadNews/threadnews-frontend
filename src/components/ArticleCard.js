@@ -11,7 +11,7 @@ import {
 } from "./Social";
 import { defaultCommentList } from "./defaultData";
 import { CommentInput } from "./CommentInput";
-
+require('dotenv').config()
 export function ArticleCard(props) {
   let article = props.article;
   const [liked, toggleLiked] = useState(false);
