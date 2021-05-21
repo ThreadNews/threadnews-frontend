@@ -1,18 +1,17 @@
 import {React,useState,useEffect} from 'react';
 import {Row, Col, Container,Tab,Tabs,Button} from 'react-bootstrap';
 import axios from "axios";
-import Navbar from './Nav';
-import './css/profile.css'
-import {UserBlockList} from './UserBlock'
+import Navbar from '../components/Nav';
+import '../css/profile.css'
+import {UserBlockList} from '../components/UserBlock'
 import ListGroup from 'react-bootstrap/ListGroup'
 import {LinkContainer} from 'react-router-bootstrap'
-import {ArticleCard} from './ArticleCard'
+import {ArticleCard} from '../components/ArticleCard'
 export default function Profile(props){
     
     let user = localStorage.getItem('user')
 
     const [key, setKey] = useState('home');
-    // const [articles, setArticles] = useState([]);
     const [articleCards,setArticleCards] = useState(null);
 
     

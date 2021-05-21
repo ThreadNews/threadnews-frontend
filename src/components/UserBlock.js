@@ -1,11 +1,10 @@
-import React, {useState } from "react";
+import React from "react";
 // import { useState, useEffect, useRef } from "react";
 import { Container, Card, } from "react-bootstrap";
-import './css/UserBlock.css';
-import {follow} from './Social.js'
-import {get_user} from './LocalStorageHelper'
+import '../css/UserBlock.css';
+import {follow} from '../functions/Social.js'
+
 export function UserBlock(user){
-    
     console.log(user);
     return(
     <div>

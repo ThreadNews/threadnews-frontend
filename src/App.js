@@ -1,9 +1,9 @@
 
 import CategoryBubbleSet from './category-bubbles'
-import './css/App.css';
+import '../css/App.css';
 import  axios from 'axios';
 import Top_nav from './Nav';
-import './css/bootstrap_theme.css';
+import '../css/bootstrap_theme.css';
 import React from "react";
 import TopicBubble from './TopicBubble'
 import {useState, useEffect,useRef} from 'react'

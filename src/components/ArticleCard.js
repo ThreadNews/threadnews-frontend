@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Col, Row, Container, Button, Form } from "react-bootstrap";
-import "./css/articleCard.css";
+import "../css/articleCard.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
@@ -8,8 +8,8 @@ import {
   like_article,
   save_article,
   post_comment,
-} from "./Social";
-import { defaultCommentList } from "./defaultData";
+} from "../functions/Social";
+import { defaultCommentList } from "../data/defaultData";
 import { CommentInput } from "./CommentInput";
 
 export function ArticleCard(props) {
@@ -19,6 +19,8 @@ export function ArticleCard(props) {
   const [showComments, toggleComments] = useState(false);
   const [new_comment, setComment] = useState("");
   let debug = true;
+  let loggedIn = sessionStorage.getItem("access_token") ? true: false;
+
 
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
@@ -225,7 +227,7 @@ export function ArticleCard(props) {
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={() => share_article()}>
+                <Button variant="outline" onClick={share_article}>
                   <img
                     className="icon"
                     src={
@@ -248,6 +250,7 @@ export function ArticleCard(props) {
                 <CommentInput
                   post_comment={post_comment}
                   handleChange={handleChange}
+                  comment={new_comment}
                 />
               </Col>
             ) : (

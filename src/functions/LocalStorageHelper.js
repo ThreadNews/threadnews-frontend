@@ -1,4 +1,4 @@
-export function store_user(user, access_token = true) {
+export function store_user(user, access_token = false) {
   if (access_token) {
     sessionStorage.setItem("access_token", user["access_token"]);
   }

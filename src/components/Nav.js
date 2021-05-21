@@ -6,9 +6,9 @@ import {
   Button,
   InputGroup,
 } from "react-bootstrap";
-import "./css/bootstrap_theme.css";
+import "../css/bootstrap_theme.css";
 
-import "./css/Nav.css";
+import "../css/Nav.css";
 import { LinkContainer } from "react-router-bootstrap";
 import {SearchBar} from "./SearchBar"
 export default function Top_nav(props) {

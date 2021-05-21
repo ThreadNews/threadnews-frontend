@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
 
-import "./css/Login.css";
+import "../css/Login.css";
 import axios from "axios";
 import { Alert, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { store_user } from "./LocalStorageHelper";
+import { store_user } from "../functions/LocalStorageHelper";
 import { LinkContainer } from "react-router-bootstrap";
 
 require("dotenv").config();
@@ -64,6 +64,7 @@ export default function Login(props) {
             console.log("Incorrect login");
           }
           if (result.status === 200) {
+            console.log("REsult",result.data);
             sessionStorage.setItem("access_token", result.data["access_token"]);
             store_user(result.data.user);
             history.push("/threads/");

@@ -1,9 +1,9 @@
 import BubbleUI from "react-bubble-ui";
 
 import "react-bubble-ui/dist/index.css";
-import "./css/bubbleSet.css";
+import "../css/bubbleSet.css";
 
-import { topic_data } from "./topic_data.js";
+import { topic_data } from "../data/topic_data.js";
 import TopicBubble from "./TopicBubble";
 
 export default function CategoryBubbleSet(props) {

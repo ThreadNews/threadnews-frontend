@@ -1,9 +1,9 @@
 import React from 'react';
 import ProgressBar from 'react-customizable-progressbar';
-import './css/bootstrap_theme.css';
-import './css/sidebar.css';
+import '../css/bootstrap_theme.css';
+import '../css/sidebar.css';
 import Card from 'react-bootstrap/Card';
-import {primary_color, secondary_color} from './Colors'
+import {primary_color,} from '../Colors'
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup'
