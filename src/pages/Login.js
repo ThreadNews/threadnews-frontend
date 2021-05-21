@@ -114,7 +114,7 @@ export default function Login(props) {
             />
           </div>
           {errMsg == "" ? null : <Alert variant="danger">{errMsg}</Alert>}
-          <LinkContainer to="/threads">
+          <LinkContainer to="/threads/">
             <button
               type="submit"
               className="btn btn-dark btn-lg btn-block"
