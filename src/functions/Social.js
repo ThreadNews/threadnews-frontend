@@ -1,5 +1,5 @@
 import axios from "axios";
-
+require('dotenv').config()
 export async function follow(user_id) {
   let token = sessionStorage.getItem("access_token");
   let data = { user_id: user_id, action: "follow" };
