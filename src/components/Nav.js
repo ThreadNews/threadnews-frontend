@@ -33,11 +33,16 @@ export default function Top_nav(props) {
           {sessionStorage.getItem("access_token") ? "Log out" : "Login"}
         </Nav.Link>
       </LinkContainer>
-      <LinkContainer to="/signup" onClick={logout}>
+
+
+      {!sessionStorage.getItem("access_token") ? (
+        <LinkContainer to="/signup" onClick={logout}>
         <Nav.Link style={{ color: "white" }}>
           signup
         </Nav.Link>
       </LinkContainer>
+      ) : null}
+      
     </Nav>
   );
 
