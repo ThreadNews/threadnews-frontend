@@ -10,11 +10,12 @@ export function CommentInput(props) {
             as="textarea"
             rows={7}
             onChange={(v)=>props.handleChange(v)}
-            placeHolder="Tell us your thoughts"
+            placeholder="Tell us your thoughts"
+            value={props.comment}
           />
         </Form.Group>
       </Form>
-      <Button onClick={()=> props.post_comment}>Post</Button>
+      <Button onClick={props.post_comment}>Post</Button>
     </div>
   );
 }

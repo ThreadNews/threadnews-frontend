@@ -64,6 +64,7 @@ export default function Login(props) {
             console.log("Incorrect login");
           }
           if (result.status === 200) {
+            console.log("REsult",result.data);
             sessionStorage.setItem("access_token", result.data["access_token"]);
             store_user(result.data.user);
             history.push("/threads/");

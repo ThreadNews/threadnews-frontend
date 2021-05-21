@@ -19,6 +19,8 @@ export function ArticleCard(props) {
   const [showComments, toggleComments] = useState(false);
   const [new_comment, setComment] = useState("");
   let debug = true;
+  let loggedIn = sessionStorage.getItem("access_token") ? true: false;
+
 
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
@@ -225,7 +227,7 @@ export function ArticleCard(props) {
                 </Button>
               </Col>
               <Col xs={1}>
-                <Button variant="outline" onClick={() => share_article()}>
+                <Button variant="outline" onClick={share_article}>
                   <img
                     className="icon"
                     src={
@@ -248,6 +250,7 @@ export function ArticleCard(props) {
                 <CommentInput
                   post_comment={post_comment}
                   handleChange={handleChange}
+                  comment={new_comment}
                 />
               </Col>
             ) : (

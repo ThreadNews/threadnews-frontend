@@ -11,10 +11,12 @@ import { get_user, get_interests } from "./LocalStorageHelper";
 import ShareModal from "./ShareModal";
 import CategoryBubbleSet from "./category-bubbles";
 import BubbleRow from "./BubbleRow";
+import { LoginModal } from "./LoginModal.js";
 
 export function ThreadPage(props) {
   const [interests, setInterests] = useState(0);
   const [share, setShare] = useState(false);
+  const [promptLogin, setPromptLogin] = useState(false);
   const [shareArticle, setShareArticle] = useState(null);
   const [articles, setArticles] = useState([]);
 
@@ -22,7 +24,7 @@ export function ThreadPage(props) {
     let token = sessionStorage.getItem("access_token");
 
     let head = { headers: { Authorization: "Bearer " + token } };
-    
+
     let topic =
       window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
         .length === 0
@@ -32,17 +34,19 @@ export function ThreadPage(props) {
           );
     console.log(window.location.href);
     let data = { topic: topic, n: 50 };
-    axios.post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head).then((result) => {
-      if (result) {
-        console.log(Array(result.data.articles));
-        const shuffled = Array(result.data.articles)[0].sort(
-          () => 0.5 - Math.random()
-        );
-        // Get sub-array of first n elements after shuffled
-        let selected = shuffled.slice(0, 34);
-        setArticles(selected);
-      }
-    });
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head)
+      .then((result) => {
+        if (result) {
+          console.log(Array(result.data.articles));
+          const shuffled = Array(result.data.articles)[0].sort(
+            () => 0.5 - Math.random()
+          );
+          // Get sub-array of first n elements after shuffled
+          let selected = shuffled.slice(0, 34);
+          setArticles(selected);
+        }
+      });
   }, []);
 
   function remove_article(id) {
@@ -57,41 +61,23 @@ export function ThreadPage(props) {
   const interest_ls = sessionStorage.getItem("interests")
     ? get_interests()
     : default_interests;
-  const varients = ["primary", "secondary", "warning", "info"];
-  const pills = interest_ls.map((data, i) => {
-    return (
-      <LinkContainer to={`/threads/${data}`}>
-        <Badge style={{ paddingLeft: "10px" }} pill variant={varients[i]}>
-          {data}
-        </Badge>
-      </LinkContainer>
-    );
-  });
 
   const cards = articles.slice(0, 20).map((data, i) => {
     return (
       <Container>
-        <Row>
-          
-        </Row>
-        <Row>
-          <Col xs={10}>
-            <ArticleCard
-              article={data}
-              setShare={setShare}
-              setShareArticle={setShareArticle}
-              key={i}
-              i={i}
-              removeArticle={remove_article}
-            />
-          </Col>
-          <Col xs={2}></Col>
-        </Row>
+        <ArticleCard
+          article={data}
+          setShare={setShare}
+          setShareArticle={setShareArticle}
+          key={i}
+          i={i}
+          removeArticle={remove_article}
+          // promptLogin={() => setPromptLogin(!promptLogin)}
+        />
       </Container>
     );
   });
 
-  let user = get_user();
   return (
     <div>
       <div>
@@ -100,19 +86,23 @@ export function ThreadPage(props) {
       <div>
         <Container fluid>
           <Row>
-            <BubbleRow row={true} interests={interest_ls} header="Your Topics"/>
+            <BubbleRow
+              row={true}
+              interests={interest_ls}
+              header="Your Topics"
+            />
           </Row>
           <Row>
             <Col sm={10} className="thread-page-content">
               {cards}
             </Col>
-            <Col sm={2}>
-              {/* <SocialCol></SocialCol> */}
-            </Col>
+            <Col sm={2}>{/* <SocialCol></SocialCol> */}</Col>
           </Row>
           {share ? (
             <ShareModal {...shareArticle} share={true} setShare={setShare} />
           ) : null}
+
+          {promptLogin ? <LoginModal /> : null}
         </Container>
       </div>
     </div>
