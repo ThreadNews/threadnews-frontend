@@ -9,6 +9,7 @@ import ShareModal from "../modals/ShareModal";
 import BubbleRow from "../components/BubbleRow";
 import { get_user, get_interests } from "../functions/LocalStorageHelper";
 import "../css/ThreadPage.css";
+require('dotenv').config()
 
 export function ThreadPage(props) {
   const [share, setShare] = useState(false);

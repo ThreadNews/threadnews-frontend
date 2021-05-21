@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import "../css/ThreadPage.css";
 import "../css/edit_profile.css";
 import { get_user, store_user } from "../functions/LocalStorageHelper";
+require("dotenv").config();
 
 export function EditProfile(props) {
   const [first_name, setFirstname] = useState("");
@@ -148,7 +149,7 @@ export function EditProfile(props) {
                 </FormGroup>
               </Col>
             </div>
-            
+
             <hr />
             <div class="form-row">
               <div class="col-md-12 content-right">
