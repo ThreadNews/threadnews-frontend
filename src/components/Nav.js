@@ -1,10 +1,7 @@
 import {
   Navbar,
   Nav,
-  NavDropdown,
-  Container,
-  Button,
-  InputGroup,
+  Container
 } from "react-bootstrap";
 import "../css/bootstrap_theme.css";
 
@@ -19,7 +16,7 @@ export default function Top_nav(props) {
 
   let nav_items = (
     <Nav className="ml-auto" bg="primary" variant="light">
-      <Nav.Link style={{ color: "white" }} href="/threads">
+      <Nav.Link style={{ color: "white" }} href="/threads/">
         Threads
       </Nav.Link>
       {sessionStorage.getItem("access_token") ? (
@@ -36,6 +33,16 @@ export default function Top_nav(props) {
           {sessionStorage.getItem("access_token") ? "Log out" : "Login"}
         </Nav.Link>
       </LinkContainer>
+
+
+      {!sessionStorage.getItem("access_token") ? (
+        <LinkContainer to="/signup" onClick={logout}>
+        <Nav.Link style={{ color: "white" }}>
+          signup
+        </Nav.Link>
+      </LinkContainer>
+      ) : null}
+      
     </Nav>
   );
 
