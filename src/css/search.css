@@ -24,9 +24,10 @@ body,html{
     .search_input{
     color: white;
     border: 0;
-    outline: 0;
-    background: none;
-    width: 0;
+    outline: 2;
+    width: 40%;
+    margin-right: 2%;
+    border-radius: 30px;
     caret-color:transparent;
     line-height: 40px;
 
@@ -39,11 +40,11 @@ body,html{
         outline: none;
     }
 
-    .searchbar:hover > .search_input{
+    /* .searchbar:hover > .search_input{
     padding: 0 10px;
     width: 450px;
     caret-color:blue;
     transition: width 0.4s linear;
-    }
+    } */
 
     

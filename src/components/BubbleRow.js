@@ -20,12 +20,10 @@ export default function BubbleRow(props) {
 
   return (
     <div className="bubbleRow">
-      <Container className="bubbleRow">
-        <h3>{props.header}</h3>
-        <Col>
-          <Row>{bubbles}</Row>
-        </Col>
-      </Container>
+      <h3 className="headerText">{props.header}</h3>
+      <Col>
+        <Row>{bubbles}</Row>
+      </Col>
     </div>
   );
 }

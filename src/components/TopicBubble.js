@@ -25,8 +25,8 @@ export default function TopicBubble(props) {
             style={{
               color: '#2F4F4F', //"charcol",
               fontSize: 22,
-              marginBottom: 50,
-              marginTop:50,
+              marginBottom: 30,
+              marginTop:30,
               fontWeight: 1000,
               maxWidth: 100,
               textAlign: "center",
