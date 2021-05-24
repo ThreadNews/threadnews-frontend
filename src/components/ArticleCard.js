@@ -83,6 +83,7 @@ export function ArticleCard(props) {
         }];
         let commentListTemp = recentComment.concat(commentList);
         setCommentList(commentListTemp);
+        setComment("")
       }
     });
   }
