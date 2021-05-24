@@ -13,7 +13,9 @@ import { defaultCommentList } from "../data/defaultData";
 import {is_logged_in} from '../functions/LocalStorageHelper';
 import { CommentInput } from "./CommentInput";
 import {get_comments} from '../functions/Social';
+
 require('dotenv').config()
+
 export function ArticleCard(props) {
   let article = props.article;
   const [liked, toggleLiked] = useState(false);

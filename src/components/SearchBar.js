@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 //css imports
 import "../css/search.css";
+import { LinkContainer } from "react-router-bootstrap";
 // requre env variables
 require("dotenv").config();
 
@@ -14,7 +15,7 @@ export function SearchBar(props) {
   function search_user(search_string) {
     let token = sessionStorage.getItem("access_token");
     let head = { headers: { Authorization: "Bearer " + token } };
-    let data = { username: search_string };
+    let data = { user_name: search_string };
     //not currently implemented on backend going to fix
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/search_user", data, head)
@@ -45,14 +46,16 @@ export function SearchBar(props) {
           placeholder="       Username..."
           onChange={(v) => setSearchstring(v.target.value)}
         ></input>
-
+        <LinkContainer to={'/searchresults/' + search_string}>
         <Button
           variant="secondary"
           className="submit"
-          onClick={() => search_user(search_string)}
+          
+          // onClick={() => search_user(search_string)}
         >
           search
         </Button>
+        </LinkContainer>
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import { React,useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { ArticleCard } from "../components/ArticleCard";
@@ -8,9 +8,13 @@ import Navbar from "../components/Nav";
 import ShareModal from "../modals/ShareModal";
 import RepostModal from "../modals/repostModal";
 import BubbleRow from "../components/BubbleRow";
-import { get_user, get_interests, is_logged_in } from "../functions/LocalStorageHelper";
+import {
+  get_user,
+  get_interests,
+  is_logged_in,
+} from "../functions/LocalStorageHelper";
 import "../css/ThreadPage.css";
-require('dotenv').config()
+require("dotenv").config();
 
 export function ThreadPage(props) {
   const [share, setShare] = useState(false);
@@ -18,7 +22,7 @@ export function ThreadPage(props) {
   const [promptLogin, setPromptLogin] = useState(false);
   const [shareArticle, setShareArticle] = useState(null);
   const [articles, setArticles] = useState([]);
-  const [tempId, setTempId] = useState([])
+  const [tempId, setTempId] = useState([]);
   useEffect(() => {
     let token = sessionStorage.getItem("access_token");
 
@@ -71,9 +75,9 @@ export function ThreadPage(props) {
           key={i}
           i={i}
           removeArticle={remove_article}
-          setRepostArticle = {setRepostArticle}
+          setRepostArticle={setRepostArticle}
           promptLogin={() => setPromptLogin(!promptLogin)}
-          setTempId = {setTempId}
+          setTempId={setTempId}
         />
       </Container>
     );
@@ -103,9 +107,17 @@ export function ThreadPage(props) {
             <ShareModal {...shareArticle} share={true} setShare={setShare} />
           ) : null}
 
-
           {promptLogin ? <LoginModal setPrompt={setPromptLogin} /> : null}
-          {repostArticle?(repostArticle&&is_logged_in)  ? <RepostModal article_id = {tempId} setRepostArticle={setRepostArticle} /> : <LoginModal setPrompt={setPromptLogin}/>: null}
+          {repostArticle ? (
+            repostArticle && is_logged_in ? (
+              <RepostModal
+                article_id={tempId}
+                setRepostArticle={setRepostArticle}
+              />
+            ) : (
+              <LoginModal setPrompt={setPromptLogin} />
+            )
+          ) : null}
         </Container>
       </div>
     </div>

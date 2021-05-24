@@ -53,7 +53,7 @@ ReactDOM.render(
         <Route path="/editprofile/">
           <EditProfile />
         </Route>
-        <Route path="/searchresults/">
+        <Route path="/searchresults">
           <SearchResults />
         </Route>
       </Switch>

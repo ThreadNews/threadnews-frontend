@@ -10,9 +10,9 @@ import "../css/BubbleRow.css";
 export default function BubbleRow(props) {
   const bubbles = props.interests.map((topic, i) => {
     return (
-      <div className="topicBubbleContainer">
+      <div className="topicBubbleContainer" key ={i}>
         <LinkContainer to={`/threads/${topic}`}>
-          <TopicBubble topic={topic} key={i} className="topicBubble" />
+          <TopicBubble topic={topic} key={i} className="topicBubble"/>
         </LinkContainer>
       </div>
     );

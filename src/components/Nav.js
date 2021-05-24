@@ -61,4 +61,3 @@ export default function Top_nav(props) {
   );
 }
 
-Top_nav.defaultProps = { signedIn: false };
