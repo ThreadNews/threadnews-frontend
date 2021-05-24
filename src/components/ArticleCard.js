@@ -52,8 +52,8 @@ export function ArticleCard(props) {
   }
 
   function toggle_save_article(article_id) {
-    console.log("SAVE ARTICLE CLICKED");
-    save_article(article_id);
+    console.log("SAVE ARTICLE CLICKED",article_id);
+    save_article(article_id,saved);
     toggleSaved(!saved);
   }
 
@@ -241,7 +241,7 @@ export function ArticleCard(props) {
               <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={() => toggle_save_article(article.article_id)}
+                  onClick={() => toggle_save_article(article.id)}
                 >
                   <img
                     className="icon"

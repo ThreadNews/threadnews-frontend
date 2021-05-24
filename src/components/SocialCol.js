@@ -8,7 +8,7 @@ import "../css/SocialCol.css";
 import { UserBlockList } from "../components/UserBlock";
 
 //function imports
-import { get_users } from "./Social.js";
+import { get_users } from "../functions/Social.js";
 
 export function SocialCol(props) {
   let token = sessionStorage.getItem("access_token");
@@ -16,12 +16,10 @@ export function SocialCol(props) {
   let head = { headers: { Authorization: "Bearer " + token } };
   let ids = JSON.parse(sessionStorage.getItem("suggested_follows"));
   console.log("IDS: ", ids);
-  const users = get_users(ids);
-  console.log("USERS: ", users);
-
+  
   return (
     <Container>
-      {/* <UserBlockList user_ids={users} header="Suggested follows"/> */}
+      <UserBlockList user_ids={ids} header="Suggested follows"/>
     </Container>
   );
 }
