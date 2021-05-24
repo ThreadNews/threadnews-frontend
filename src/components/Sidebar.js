@@ -32,7 +32,7 @@ export function Sidebar(props) {
         }}
       >
         <Card.Title className="sidebarHeader">
-          please select {5 - props.num} more
+          please select {5 - props.num<1?0:5 - props.num<1} more
         </Card.Title>
 
         <Card.Body>
@@ -41,7 +41,7 @@ export function Sidebar(props) {
             please select {5 - props.num < 0 ? 0 : 5 - props.num} more
           </Card.Subtitle>
           <ProgressBar
-            progress={(props.num / 5) * 100}
+            progress={(props.num / 5) * 100>=100?100:(props.num / 5) * 100}
             radius={100}
             strokeColor={primary_color}
           >
