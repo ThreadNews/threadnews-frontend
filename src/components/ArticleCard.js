@@ -11,12 +11,18 @@ import {
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
 import { CommentInput } from "./CommentInput";
+import {get_comments} from '../functions/Social';
 require('dotenv').config()
 export function ArticleCard(props) {
   let article = props.article;
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
   const [showComments, toggleComments] = useState(false);
+  let defaultComments = defaultCommentList;
+  if (article != null && article.comments != null) {
+    defaultComments = article.comments.concat(defaultComments);
+  }
+  const [commentList, setCommentList] = useState(defaultComments);
   const [new_comment, setComment] = useState("");
   let debug = true;
   let loggedIn = sessionStorage.getItem("access_token") ? true: false;
@@ -71,16 +77,16 @@ export function ArticleCard(props) {
     console.log(head);
     axios.post(process.env.REACT_APP_BACKEND_URL + "/comment", data, head).then((result) => {
       if (result) {
-        setComment(new_comment);
+        let recentComment = [{
+          user_name: sessionStorage.getItem("user_name"),
+          comment: new_comment,
+        }];
+        let commentListTemp = recentComment.concat(commentList);
+        setCommentList(commentListTemp);
       }
     });
   }
 
-  let commentList = defaultCommentList;
-
-  if (article != null && article.comments != null) {
-    commentList = article.comments.concat(commentList);
-  }
 
   const comments = commentList.map((data, i) => {
     return (

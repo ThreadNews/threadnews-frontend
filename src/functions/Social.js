@@ -9,19 +9,20 @@ export async function follow(user_id) {
 }
 
 export async function get_users(user_ids) {
-  let res = null;
+  // let res = null;
   let token = sessionStorage.getItem("access_token");
   let data = { user_ids: user_ids, action: "follow" };
   let head = { headers: { Authorization: "Bearer " + token } };
-  axios.post(process.env.REACT_APP_BACKEND_URL + "/users", data, head).then((result) => {
-    if (result) {
-      // setUsers(result.data.result);
-      res = result.data.result;
-      console.log("result here:", result.data.result);
-      return result["result"];
-    }
-  });
-  console.log("recommended: ", res);
+  const res = await axios.post(process.env.REACT_APP_BACKEND_URL + "/users", data, head);
+  // .then((result) => {
+  //   if (result) {
+  //     res = result.data.result;
+  //     console.log("result here:", result.data.result);
+  //     return result["result"];
+  //   }
+  // });
+  console.log("recommended: ", res.data.result);
+  return res.data.result;
 }
 
 export async function repost_article(articleId) {

@@ -7,8 +7,8 @@ export function CommentCard(props) {
   }
   let following = sessionStorage.getItem("following");
   let color =
-    following.includes(props.id) &&
-    sessionStorage.getItem("following") !== "undefined"
+    sessionStorage.getItem("following") !== null &&
+    following.includes(props.id)
       ? "comment-card friend-card"
       : "comment-card";
   return (
