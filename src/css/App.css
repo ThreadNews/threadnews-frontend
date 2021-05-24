@@ -2,29 +2,29 @@
   text-align: center;
 }
 
-
 body {
   min-height: 100vh;
   font-weight: 400;
   font-family: TimesNewRoman;
   /* color:#eeeeee; */
-  background: #b3bcc9
-  
+  background: #b3bcc9;
 }
 
-body, html, .App, #root, .outer {
+body,
+html,
+.App,
+#root,
+.outer {
   width: 100%;
   height: 100%;
 }
 
-.ThreadInfo{
+.ThreadInfo {
   border-radius: 30px;
   background-color: #e3e6e9;
-  color:#222831;
+  color: #222831;
   width: 100%;
-
 }
-
 
 .App-logo {
   height: 40vmin;
@@ -47,5 +47,3 @@ body, html, .App, #root, .outer {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-

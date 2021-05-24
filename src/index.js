@@ -7,7 +7,7 @@ import Profile from "./pages/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TopNav from "./components/Nav";
 import { EditProfile } from "./pages/EditProfile";
-import {SearchResults} from "./pages/searchResults.js"; 
+import { SearchResults } from "./pages/searchResults.js";
 function view_threads() {
   ReactDOM.render(
     <React.StrictMode>

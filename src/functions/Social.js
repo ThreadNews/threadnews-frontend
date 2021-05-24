@@ -18,20 +18,23 @@ export function search_users(search_string) {
   let head = { headers: { Authorization: "Bearer " + token } };
   let data = { user_name: search_string };
 
-  return axios.post(process.env.REACT_APP_BACKEND_URL + "/search_user", data, head)
-    // .then((result) => {
-    //   if (result) {
-    //     console.log("finished searching user", result);
-    //     if (result.status === 200) {
-    //       let user_ids = result.data.users;
-    //       console.log("USER ids", user_ids);
-    //       return user_ids;
-    //     } else {
-    //       console.log("ERROR");
-    //       return null;
-    //     }
-    //   }
-    
+  return axios.post(
+    process.env.REACT_APP_BACKEND_URL + "/search_user",
+    data,
+    head
+  );
+  // .then((result) => {
+  //   if (result) {
+  //     console.log("finished searching user", result);
+  //     if (result.status === 200) {
+  //       let user_ids = result.data.users;
+  //       console.log("USER ids", user_ids);
+  //       return user_ids;
+  //     } else {
+  //       console.log("ERROR");
+  //       return null;
+  //     }
+  //   }
 
   // else{
   //   console.log("error");

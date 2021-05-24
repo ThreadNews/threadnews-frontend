@@ -10,11 +10,11 @@ import {
   post_comment,
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
-import {is_logged_in} from '../functions/LocalStorageHelper';
+import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
-import {get_comments} from '../functions/Social';
+import { get_comments } from "../functions/Social";
 
-require('dotenv').config()
+require("dotenv").config();
 
 export function ArticleCard(props) {
   let article = props.article;
@@ -29,8 +29,8 @@ export function ArticleCard(props) {
   const [commentList, setCommentList] = useState(defaultComments);
   const [new_comment, setComment] = useState("");
   let debug = true;
-  
-  let logged_in = is_logged_in()
+
+  let logged_in = is_logged_in();
 
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
@@ -79,19 +79,22 @@ export function ArticleCard(props) {
       },
     };
     console.log(head);
-    axios.post(process.env.REACT_APP_BACKEND_URL + "/comment", data, head).then((result) => {
-      if (result) {
-        let recentComment = [{
-          user_name: sessionStorage.getItem("user_name"),
-          comment: new_comment,
-        }];
-        let commentListTemp = recentComment.concat(commentList);
-        setCommentList(commentListTemp);
-        setComment("")
-      }
-    });
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL + "/comment", data, head)
+      .then((result) => {
+        if (result) {
+          let recentComment = [
+            {
+              user_name: sessionStorage.getItem("user_name"),
+              comment: new_comment,
+            },
+          ];
+          let commentListTemp = recentComment.concat(commentList);
+          setCommentList(commentListTemp);
+          setComment("");
+        }
+      });
   }
-
 
   const comments = commentList.map((data, i) => {
     return (
@@ -160,7 +163,11 @@ export function ArticleCard(props) {
                   className="comment-button"
                   style={{ float: "left" }}
                   variant="warning"
-                  onClick={logged_in ? () => update_comments(): ()=> props.promptLogin()}
+                  onClick={
+                    logged_in
+                      ? () => update_comments()
+                      : () => props.promptLogin()
+                  }
                 >
                   {showComments ? "Hide" : "Comments"}
                 </Button>
@@ -169,7 +176,7 @@ export function ArticleCard(props) {
                   className="repost-button"
                   variant="secondary"
                   // onClick={() => repost_article(article.id)}
-                  onClick= {() => {
+                  onClick={() => {
                     props.setRepostArticle(true);
                     props.setTempId(article.id);
                   }}
@@ -182,7 +189,11 @@ export function ArticleCard(props) {
                   className="not-for-me-button"
                   style={{ float: "left" }}
                   variant="outline-danger"
-                  onClick={ logged_in ? () => props.removeArticle(article.id) : ()=> props.promptLogin()}
+                  onClick={
+                    logged_in
+                      ? () => props.removeArticle(article.id)
+                      : () => props.promptLogin()
+                  }
                 >
                   Not for me
                 </Button>{" "}
@@ -208,7 +219,11 @@ export function ArticleCard(props) {
               <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={logged_in ? () => update_like(article.id) : () => props.promptLogin()}
+                  onClick={
+                    logged_in
+                      ? () => update_like(article.id)
+                      : () => props.promptLogin()
+                  }
                 >
                   <img
                     className="icon"

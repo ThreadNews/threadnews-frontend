@@ -7,7 +7,6 @@ import { topic_data } from "../data/topic_data.js";
 import TopicBubble from "./TopicBubble";
 
 export default function CategoryBubbleSet(props) {
-
   let topics = topic_data;
   let options = {
     size: 180,
@@ -23,19 +22,18 @@ export default function CategoryBubbleSet(props) {
     compact: true,
     gravitation: 5,
   };
-  if (props.row){
-    options.gutter=20;
-    options.numCols=5
-    options.numRows=1
-    options.size=120
-    options.minSize=80
+  if (props.row) {
+    options.gutter = 20;
+    options.numCols = 5;
+    options.numRows = 1;
+    options.size = 120;
+    options.minSize = 80;
     topics = props.interests;
-    options.gravitation=0;
+    options.gravitation = 0;
   }
-  
 
-  let children =null
-  if (!props.row){
+  let children = null;
+  if (!props.row) {
     children = topics.map((data, i) => {
       return (
         <TopicBubble
@@ -46,8 +44,7 @@ export default function CategoryBubbleSet(props) {
         />
       );
     });
-  }
-  else{
+  } else {
     children = topics.map((data, i) => {
       return (
         <TopicBubble
@@ -58,7 +55,7 @@ export default function CategoryBubbleSet(props) {
         />
       );
     });
-  } 
+  }
 
   return (
     <BubbleUI options={options} className="bubbleSet">

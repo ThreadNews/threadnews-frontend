@@ -122,7 +122,7 @@ export default function Profile(props) {
                   <Tab eventKey="Social" title="Social">
                     <Row>
                       <Col>
-                        <UserBlockList {...user.followers} header="Followers"/>
+                        <UserBlockList {...user.followers} header="Followers" />
                       </Col>
                       <Col>
                         <UserBlockList

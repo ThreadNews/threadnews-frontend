@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Button, Form } from "react-bootstrap";
 
 export function CommentInput(props) {
@@ -9,7 +9,7 @@ export function CommentInput(props) {
           <Form.Control
             as="textarea"
             rows={7}
-            onChange={(v)=>props.handleChange(v)}
+            onChange={(v) => props.handleChange(v)}
             placeholder="Tell us your thoughts"
             value={props.comment}
           />

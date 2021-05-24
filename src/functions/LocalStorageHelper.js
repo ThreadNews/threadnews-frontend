@@ -15,9 +15,17 @@ export function store_user(user, access_token = false) {
     "suggested_follows",
     JSON.stringify(user["suggested_follows"])
   );
+  sessionStorage.setItem(
+    "reposted_articles",
+    JSON.stringify(user["reposted_articles"])
+  );
+  sessionStorage.setItem(
+    "liked_articles",
+    JSON.stringify(user["liked_articles"])
+  );
 }
 
-export function is_logged_in(){
+export function is_logged_in() {
   return sessionStorage.getItem("user_name");
 }
 
@@ -33,12 +41,14 @@ export function get_user() {
     following_count: sessionStorage.getItem("following_count"),
     followers_count: sessionStorage.getItem("followers_count"),
     suggested_follows: JSON.parse(sessionStorage.getItem("suggested_follows")),
+    liked_articles: JSON.parse(sessionStorage.getItem("liked_articles")),
+    reposted_follows: JSON.parse(sessionStorage.getItem("reposted_articles")),
   };
   return user;
 }
 
-export function get_user_id(){
-    return sessionStorage.getItem("user_id");
+export function get_user_id() {
+  return sessionStorage.getItem("user_id");
 }
 
 export function get_interests() {

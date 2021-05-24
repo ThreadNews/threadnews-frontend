@@ -1,18 +1,18 @@
 .newsImg {
   display: block;
-  max-width:90%;
+  max-width: 90%;
   width: flex;
   height: flex;
   margin-top: 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-.icon{
+.icon {
   display: inline-block;
-  max-width:60%;
+  max-width: 60%;
   width: flex;
   height: flex;
 }
@@ -32,27 +32,25 @@
 .not-for-me-button {
   font-weight: 800;
   color: rgb(56, 56, 56);
-  background-color: #FFFFFF;
-  outline-color:  rgb(56, 56, 56);
-  border-color:  rgb(56, 56, 56);
+  background-color: #ffffff;
+  outline-color: rgb(56, 56, 56);
+  border-color: rgb(56, 56, 56);
 }
 
 .comment-button {
   font-weight: 800;
   color: rgb(56, 56, 56);
-  background-color: #FFFFFF;
-  border-color:  rgb(56, 56, 56);
-
+  background-color: #ffffff;
+  border-color: rgb(56, 56, 56);
 }
 
 .repost-button {
   font-weight: 800;
   color: rgb(56, 56, 56);
-  background-color: #FFFFFF;
-  outline-color:  rgb(56, 56, 56);
-  border-color:  rgb(56, 56, 56);
+  background-color: #ffffff;
+  outline-color: rgb(56, 56, 56);
+  border-color: rgb(56, 56, 56);
 }
-
 
 .article-author-date {
   max-height: 12%;
@@ -60,30 +58,29 @@
 .article-title {
   max-height: 37%;
   /* padding-top: 20px; */
-
 }
 
 .article-date {
   text-align: right;
 }
 
-.article-container{
+.article-container {
   font-family: "Times New Roman";
   color: #1f1919;
   padding-right: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   margin-top: 20px;
   margin-left: 20px;
   border-radius: 25px;
   width: 100%;
-  position:left;
+  position: left;
   float: left;
 }
-.like-num{
+.like-num {
   text-align: right;
 }
 
-.commentsBox{
+.commentsBox {
   width: auto;
   max-height: 250px;
   overflow-y: scroll;
@@ -91,7 +88,7 @@
   margin-left: 20px;
 }
 
-.commentsSection{
+.commentsSection {
   width: 100%;
   max-height: 250px;
   display: inline-block;
@@ -99,6 +96,6 @@
   margin-top: 20px;
 }
 
-.postComment{
+.postComment {
   padding: 10px;
 }

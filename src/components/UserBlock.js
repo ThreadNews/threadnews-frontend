@@ -21,9 +21,7 @@ export function UserBlock(user) {
             </div>
 
             <div className="ml-3 w-100">
-              <h4 className="mb-0 mt-0">
-                {user.user_name}
-              </h4>
+              <h4 className="mb-0 mt-0">{user.user_name}</h4>
               <div className="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                 <div className="d-flex flex-column">
                   {" "}

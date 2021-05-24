@@ -38,7 +38,7 @@ export function SearchBar(props) {
   }
 
   return (
-    <div className="search" >
+    <div className="search">
       <form>
         <input
           className="search_input"
@@ -46,15 +46,15 @@ export function SearchBar(props) {
           placeholder="       Username..."
           onChange={(v) => setSearchstring(v.target.value)}
         ></input>
-        <LinkContainer to={'/searchresults/' + search_string}>
-        <Button
-          variant="secondary"
-          className="submit"
-          
-          // onClick={() => search_user(search_string)}
-        >
-          search
-        </Button>
+        <LinkContainer to={"/searchresults/" + search_string}>
+          <Button
+            variant="secondary"
+            className="submit"
+
+            // onClick={() => search_user(search_string)}
+          >
+            search
+          </Button>
         </LinkContainer>
       </form>
     </div>

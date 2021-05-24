@@ -5,20 +5,20 @@
   font-size: 30px;
   /* marginBottom: 10px; */
   /* fontWeight: 1000, */
-  text-align:justify;
+  text-align: justify;
 }
 
-.sidebarListItem{
+.sidebarListItem {
   font-weight: 400;
   font-family: TimesNewRoman;
-  color:#00008B;
+  color: #00008b;
   background: #222831;
   font-size: 20px;
   float: center;
 }
 
-.sidebarListButton{
-  color:#222831;
+.sidebarListButton {
+  color: #222831;
   background: #122ab1;
   font-size: 12px;
   border-radius: 10px;
@@ -28,9 +28,8 @@
   vertical-align: top;
 }
 
-.sidebarList{
+.sidebarList {
   border-radius: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-
 }

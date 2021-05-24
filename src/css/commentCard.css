@@ -1,43 +1,39 @@
-
-.comment-card{
-   background-color: #393e46;
-   font-family: "Times New Roman";
-   font-size: 14px;
-   color: #dedede;
-   margin-top: 10px;
-   margin-left: 5px;
-   margin-right: 5px;
-   position:left;
-   float: left;
-   border-radius: 5px;
-   width:auto;
-   padding-left: 10px;
-   padding-right: 10px;
-   margin-bottom: 10px;
- }
-
-.friend-card{
-   background-color: deeppink;
+.comment-card {
+  background-color: #393e46;
+  font-family: "Times New Roman";
+  font-size: 14px;
+  color: #dedede;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: left;
+  float: left;
+  border-radius: 5px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
 }
 
+.friend-card {
+  background-color: deeppink;
+}
 
+.comment-author {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 0;
+  padding-top: 0;
+}
+.comment-content {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 5px;
+  padding-bottom: 0;
+}
 
-
- .comment-author{
-    font-weight: bold;
-    font-size: 20px;
-    margin-top:0;
-    padding-top: 0;
- }
- .comment-content{
-    margin-top: 0;
-    padding-top: 0;
-    margin-bottom: 5px;
-    padding-bottom: 0;
- }
-
- .line{
-    margin-top: 5px;
-    margin-bottom: 0;
-    background-color: black;
- }
+.line {
+  margin-top: 5px;
+  margin-bottom: 0;
+  background-color: black;
+}
