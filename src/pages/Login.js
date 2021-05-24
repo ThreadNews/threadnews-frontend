@@ -1,11 +1,13 @@
+//react imports
 import React, { useState, useCallback } from "react";
-
-import "../css/Login.css";
-import axios from "axios";
-import { Alert, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { store_user } from "../functions/LocalStorageHelper";
 import { LinkContainer } from "react-router-bootstrap";
+import { Alert, } from "react-bootstrap";
+import axios from "axios";
+//component imports
+import { store_user } from "../functions/LocalStorageHelper";
+//css imports
+import "../css/Login.css";
 
 require("dotenv").config();
 console.log();
@@ -78,7 +80,7 @@ export default function Login(props) {
   }
 
   return (
-    <div className="outer" style={{ height: "100%" }}>
+    <div className="outer">
       <div className="inner">
         <form>
           <h3 className="loginText" fontFamily="TimesNewRoman" color="black">
@@ -113,7 +115,7 @@ export default function Login(props) {
               placeholder="Enter password"
             />
           </div>
-          {errMsg == "" ? null : <Alert variant="danger">{errMsg}</Alert>}
+          {errMsg === "" ? null : <Alert variant="danger">{errMsg}</Alert>}
           <LinkContainer to="/threads/">
             <button
               type="submit"

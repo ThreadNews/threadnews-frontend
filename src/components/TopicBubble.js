@@ -1,4 +1,7 @@
+//react imports
 import React from "react";
+//css imports
+import '../css/TopicBubble.css';
 
 export default function TopicBubble(props) {
   return (
@@ -6,31 +9,16 @@ export default function TopicBubble(props) {
       style={{
         backgroundColor: '#F0FFFFd0',
       }}
-       className={"TopicBubble"}
+       className="TopicBubble"
        onClick={props.onClick}
     >
       {true ? (
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            transition: "opacity 0.1s ease",
-            pointerEvents: "none",
-          }}
+        className="bubbleContainer"
         >
           
           <p
-            style={{
-              color: '#2F4F4F', //"charcol",
-              fontSize: 22,
-              marginBottom: 30,
-              marginTop:30,
-              fontWeight: 1000,
-              maxWidth: 100,
-              textAlign: "center",
-            }}
+            className="bubbleText"
           >
             {props.topic}
           </p>         

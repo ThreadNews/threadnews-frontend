@@ -6,7 +6,8 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TopNav from "./components/Nav";
-import {EditProfile} from './pages/EditProfile'
+import { EditProfile } from "./pages/EditProfile";
+import {SearchResults} from "./pages/searchResults.js"; 
 function view_threads() {
   ReactDOM.render(
     <React.StrictMode>
@@ -28,15 +29,16 @@ function signup() {
   );
 }
 
-
-let user = sessionStorage.getItem("user")? sessionStorage.getItem("user") : null;
+let user = sessionStorage.getItem("user")
+  ? sessionStorage.getItem("user")
+  : null;
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <TopNav />
       <Switch>
         <Route exact path="/">
-          <InterestPage/>
+          <InterestPage />
         </Route>
         <Route path="/threads/" component={ThreadPage} />
         <Route path="/login/">
@@ -49,7 +51,10 @@ ReactDOM.render(
           <Profile {...user} />
         </Route>
         <Route path="/editprofile/">
-          <EditProfile/>
+          <EditProfile />
+        </Route>
+        <Route path="/searchresults/">
+          <SearchResults />
         </Route>
       </Switch>
     </Router>

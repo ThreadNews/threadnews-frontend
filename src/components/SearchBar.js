@@ -37,12 +37,12 @@ export function SearchBar(props) {
   }
 
   return (
-    <div className="search">
+    <div className="search" >
       <form>
         <input
-          className="searchbar"
+          className="search_input"
           type="search"
-          placeholder="Username.."
+          placeholder="       Username..."
           onChange={(v) => setSearchstring(v.target.value)}
         ></input>
 

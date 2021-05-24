@@ -33,6 +33,7 @@ export function UserBlock(user){
 }
 
 export function UserBlockList(users){
+    console.log("USER?Blok,", users);
     let blocks = users.user_ids.map((user, i) => {
         return (
           <div>
