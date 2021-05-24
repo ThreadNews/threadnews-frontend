@@ -17,9 +17,13 @@ export function store_user(user, access_token = false) {
   );
 }
 
+export function is_logged_in(){
+  return sessionStorage.getItem("user_name");
+}
+
 export function get_user() {
   let user = {
-    username: sessionStorage.getItem("username"),
+    user_name: sessionStorage.getItem("user_name"),
     first_name: sessionStorage.getItem("first_name"),
     last_name: sessionStorage.getItem("last_name"),
     interests: JSON.parse(sessionStorage.getItem("interests")),

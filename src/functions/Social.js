@@ -8,6 +8,33 @@ export async function follow(user_id) {
   axios.post(process.env.PUBLIC_URL + "/follow_user", data, head);
 }
 
+export function search_users(search_string) {
+  let token = sessionStorage.getItem("access_token");
+  let head = { headers: { Authorization: "Bearer " + token } };
+  let data = { username: search_string };
+  //not currently implemented on backend going to fix
+  const resul = axios.post(process.env.REACT_APP_BACKEND_URL + "/search_user", data, head).then((result)=>{
+  if (result) {
+      console.log("finished searching user", result);
+      if (result.status === 200) {
+          let user_ids = result.data.users;
+          console.log("USER ids", user_ids);
+          return user_ids;
+        }
+      else {
+          console.log("ERROR");
+          return null;
+        }
+      }
+    })
+    
+    // else{
+    //   console.log("error");
+    //   console.log("search string", search_string);
+    // }
+}
+
+
 export async function get_users(user_ids) {
   // let res = null;
   let token = sessionStorage.getItem("access_token");
@@ -29,6 +56,7 @@ export async function repost_article(articleId) {
   let token = sessionStorage.getItem("access_token");
   let data = { action: "add", article_id: articleId };
   let head = { headers: { Authorization: "Bearer " + token } };
+  console.log("data:", data);
   axios.post(process.env.REACT_APP_BACKEND_URL +"/repost", data, head);
 }
 
@@ -49,3 +77,5 @@ export function save_article(articleId, saved) {
   }
   axios.post(process.env.REACT_APP_BACKEND_URL +"/save", data, head);
 }
+
+

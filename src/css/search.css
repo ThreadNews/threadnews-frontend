@@ -6,8 +6,8 @@ body,html{
 
     }
 
+    
     .search{
-        /* float: left; */
         width: 800px;
         display:inline-block !important;
     }
@@ -22,15 +22,14 @@ body,html{
     }
 
     .search_input{
-    color: white;
+    color: rgb(65, 65, 65);
     border: 0;
     outline: 2;
     width: 40%;
     margin-right: 2%;
     border-radius: 30px;
-    caret-color:transparent;
+    padding-left: 3%;
     line-height: 40px;
-
     }
 
     .submit{
@@ -40,11 +39,3 @@ body,html{
         outline: none;
     }
 
-    /* .searchbar:hover > .search_input{
-    padding: 0 10px;
-    width: 450px;
-    caret-color:blue;
-    transition: width 0.4s linear;
-    } */
-
-    

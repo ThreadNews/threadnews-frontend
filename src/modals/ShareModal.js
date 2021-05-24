@@ -1,5 +1,7 @@
+//react imports
 import React from "react";
 import {Button,Modal} from "react-bootstrap";
+//external imports
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -10,6 +12,8 @@ import {
     LinkedinShareButton,
     LinkedinIcon,
   } from "react-share";
+//css imports
+import '../css/modal.css';
 
 export function ShareModal(article){
 

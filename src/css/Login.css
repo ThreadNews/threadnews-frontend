@@ -1,7 +1,7 @@
-/* * {
+* {
     box-sizing: border-box;
   }
-   */
+  
 
   
   .outer {
@@ -20,7 +20,7 @@
     font-family: TimesNewRoman;
     margin: auto;
     opacity: 0.9;
-    background: #3397da;
+    background: #eeeff0;
     padding: 40px;
     border-radius: 15px;
     transition: all .3s;

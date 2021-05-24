@@ -10,6 +10,7 @@ import {
   post_comment,
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
+import {is_logged_in} from '../functions/LocalStorageHelper';
 import { CommentInput } from "./CommentInput";
 import {get_comments} from '../functions/Social';
 require('dotenv').config()
@@ -18,6 +19,7 @@ export function ArticleCard(props) {
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
   const [showComments, toggleComments] = useState(false);
+
   let defaultComments = defaultCommentList;
   if (article != null && article.comments != null) {
     defaultComments = article.comments.concat(defaultComments);
@@ -25,8 +27,8 @@ export function ArticleCard(props) {
   const [commentList, setCommentList] = useState(defaultComments);
   const [new_comment, setComment] = useState("");
   let debug = true;
-  let loggedIn = sessionStorage.getItem("access_token") ? true: false;
-
+  
+  let logged_in = is_logged_in()
 
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
@@ -156,7 +158,7 @@ export function ArticleCard(props) {
                   className="comment-button"
                   style={{ float: "left" }}
                   variant="warning"
-                  onClick={() => update_comments()}
+                  onClick={logged_in ? () => update_comments(): ()=> props.promptLogin()}
                 >
                   {showComments ? "Hide" : "Comments"}
                 </Button>
@@ -164,7 +166,11 @@ export function ArticleCard(props) {
                 <Button
                   className="repost-button"
                   variant="secondary"
-                  onClick={() => repost_article(article.id)}
+                  // onClick={() => repost_article(article.id)}
+                  onClick= {() => {
+                    props.setRepostArticle(true);
+                    props.setTempId(article.id);
+                  }}
                 >
                   Repost
                 </Button>
@@ -174,7 +180,7 @@ export function ArticleCard(props) {
                   className="not-for-me-button"
                   style={{ float: "left" }}
                   variant="outline-danger"
-                  onClick={() => props.removeArticle(article.id)}
+                  onClick={ logged_in ? () => props.removeArticle(article.id) : ()=> props.promptLogin()}
                 >
                   Not for me
                 </Button>{" "}
@@ -200,7 +206,7 @@ export function ArticleCard(props) {
               <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={() => update_like(article.id)}
+                  onClick={logged_in ? () => update_like(article.id) : () => props.promptLogin()}
                 >
                   <img
                     className="icon"

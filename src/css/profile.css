@@ -34,11 +34,10 @@
     background-color:rgb(197, 197, 197); 
     width:3px;
     width:30%;
-    /* float: left; */
 }
 
 body{
-    background: -webkit-linear-gradient(top, #3398DB, #a1ebff);
+    background: -webkit-linear-gradient(top, #3398DB, #3398DB);
 }
 .profile{
     padding: 3%;

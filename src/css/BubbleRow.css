@@ -1,9 +1,9 @@
 .bubbleRow{
     width: 1200px;
-    height: 160px;
+    /* height: 160px; */
     display: inline-block;
     align-content:center;
-    float:center;
+    
     color: #ffffff
 
 }
