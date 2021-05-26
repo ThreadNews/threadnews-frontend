@@ -1,0 +1,19 @@
+.bubbleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100px;
+  transition: opacity 0.1s ease;
+  pointer-events: "none";
+}
+
+.bubbleText {
+  color: #2f4f4f;
+  font-size: 22px;
+  /* margin-bottom: 30px; */
+  margin-top: 30px;
+  font-weight: 1000;
+  max-width: 100;
+  text-align: center;
+}

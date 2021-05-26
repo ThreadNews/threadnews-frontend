@@ -1,11 +1,13 @@
+//react imports
 import React, { useState, useCallback } from "react";
-
-import "../css/Login.css";
-import axios from "axios";
-import { Alert, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { store_user } from "../functions/LocalStorageHelper";
 import { LinkContainer } from "react-router-bootstrap";
+import { Alert } from "react-bootstrap";
+import axios from "axios";
+//component imports
+import { store_user } from "../functions/LocalStorageHelper";
+//css imports
+import "../css/Login.css";
 
 require("dotenv").config();
 console.log();
@@ -55,7 +57,10 @@ export default function Login(props) {
   function login() {
     console.log("starting login...");
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + "/login", { email: email, password: password })
+      .post(process.env.REACT_APP_BACKEND_URL + "/login", {
+        email: email,
+        password: password,
+      })
       .then((result) => {
         console.log("status", result.status);
         if (result) {
@@ -64,7 +69,7 @@ export default function Login(props) {
             console.log("Incorrect login");
           }
           if (result.status === 200) {
-            console.log("REsult",result.data);
+            console.log("REsult", result.data);
             sessionStorage.setItem("access_token", result.data["access_token"]);
             store_user(result.data.user);
             history.push("/threads/");
@@ -78,7 +83,7 @@ export default function Login(props) {
   }
 
   return (
-    <div className="outer" style={{ height: "100%" }}>
+    <div className="outer">
       <div className="inner">
         <form>
           <h3 className="loginText" fontFamily="TimesNewRoman" color="black">
@@ -113,12 +118,12 @@ export default function Login(props) {
               placeholder="Enter password"
             />
           </div>
-          {errMsg == "" ? null : <Alert variant="danger">{errMsg}</Alert>}
+          {errMsg === "" ? null : <Alert variant="danger">{errMsg}</Alert>}
           <LinkContainer to="/threads/">
             <button
               type="submit"
               className="btn btn-dark btn-lg btn-block"
-              href={is_login?'/threads/':'/'}
+              href={is_login ? "/threads/" : "/"}
               onClick={is_login ? login : () => signUp()}
             >
               {is_login ? "Log in" : "Sign Up"}

@@ -1,13 +1,9 @@
-import {
-  Navbar,
-  Nav,
-  Container
-} from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import "../css/bootstrap_theme.css";
 
 import "../css/Nav.css";
 import { LinkContainer } from "react-router-bootstrap";
-import {SearchBar} from "./SearchBar"
+import { SearchBar } from "./SearchBar";
 export default function Top_nav(props) {
   function logout() {
     sessionStorage.clear();
@@ -34,15 +30,11 @@ export default function Top_nav(props) {
         </Nav.Link>
       </LinkContainer>
 
-
       {!sessionStorage.getItem("access_token") ? (
         <LinkContainer to="/signup" onClick={logout}>
-        <Nav.Link style={{ color: "white" }}>
-          signup
-        </Nav.Link>
-      </LinkContainer>
+          <Nav.Link style={{ color: "white" }}>signup</Nav.Link>
+        </LinkContainer>
       ) : null}
-      
     </Nav>
   );
 
@@ -54,11 +46,9 @@ export default function Top_nav(props) {
             <img className="logo" src={logo} alt="" />
           </Navbar.Brand>
         </Container>
-        <SearchBar/>
+        <SearchBar />
         {nav_items}
       </Navbar>
     </div>
   );
 }
-
-Top_nav.defaultProps = { signedIn: false };

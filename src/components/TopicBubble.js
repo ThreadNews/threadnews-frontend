@@ -1,39 +1,20 @@
+//react imports
 import React from "react";
+//css imports
+import "../css/TopicBubble.css";
 
 export default function TopicBubble(props) {
   return (
     <div
       style={{
-        backgroundColor: '#F0FFFFd0',
+        backgroundColor: "#F0FFFFd0",
       }}
-       className={"TopicBubble"}
-       onClick={props.onClick}
+      className="TopicBubble"
+      onClick={props.onClick}
     >
       {true ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            transition: "opacity 0.1s ease",
-            pointerEvents: "none",
-          }}
-        >
-          
-          <p
-            style={{
-              color: '#2F4F4F', //"charcol",
-              fontSize: 22,
-              marginBottom: 50,
-              marginTop:50,
-              fontWeight: 1000,
-              maxWidth: 100,
-              textAlign: "center",
-            }}
-          >
-            {props.topic}
-          </p>         
+        <div className="bubbleContainer">
+          <p className="bubbleText">{props.topic}</p>
         </div>
       ) : null}
     </div>
