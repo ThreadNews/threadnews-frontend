@@ -98,10 +98,10 @@ export function ThreadPage(props) {
             />
           </Row>
           <Row>
-            <Col sm={9} className="thread-page-content">
+            <Col sm={8} className="thread-page-content">
               {cards}
             </Col>
-            <Col sm={3}><SocialCol></SocialCol></Col>
+            <Col sm={{span:3, offset:1}}><SocialCol></SocialCol></Col>
           </Row>
           {share ? (
             <ShareModal {...shareArticle} share={true} setShare={setShare} />

@@ -23,7 +23,7 @@ export default function Profile(props) {
     axios
       .post(
         process.env.REACT_APP_BACKEND_URL + "/articles",
-        { article_ids: user.liked_articles },
+        data,
         head
       )
       .then((result) => {

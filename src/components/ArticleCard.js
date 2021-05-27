@@ -1,6 +1,6 @@
+//react imports
 import React, { useState } from "react";
 import { Col, Row, Container, Button, Form } from "react-bootstrap";
-import "../css/articleCard.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
@@ -12,7 +12,7 @@ import {
 import { defaultCommentList } from "../data/defaultData";
 import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
-import { get_comments } from "../functions/Social";
+import "../css/articleCard.css";
 
 require("dotenv").config();
 

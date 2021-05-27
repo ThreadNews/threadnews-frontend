@@ -1,13 +1,13 @@
+//react imports
 import React from "react";
+import {Button,Card,ListGroup} from "react-bootstrap";
 import ProgressBar from "react-customizable-progressbar";
-import "../css/bootstrap_theme.css";
-import "../css/sidebar.css";
-import Card from "react-bootstrap/Card";
 import { primary_color } from "../Colors";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
-import ListGroup from "react-bootstrap/ListGroup";
-import { Redirect } from "react-router-dom";
+//css imports
+import "../css/sidebar.css";
+import "../css/bootstrap_theme.css";
+
 
 require("dotenv").config();
 
@@ -18,7 +18,7 @@ export function Sidebar(props) {
       new_interests: props.interests,
     });
     console.log("updated user interests");
-    // props.onClick()
+
   }
 
   return (

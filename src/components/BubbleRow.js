@@ -1,6 +1,6 @@
 //react imports
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //component imports
 import TopicBubble from "../components/TopicBubble";

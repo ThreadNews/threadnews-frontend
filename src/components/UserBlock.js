@@ -22,12 +22,8 @@ export function UserBlock(user) {
 
             <div className="ml-3 w-100">
               <h4 className="mb-0 mt-0">{user.user_name}</h4>
-              <div className="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-                <div className="d-flex flex-column">
-                  {" "}
-                  <span className="followers"># Reposted </span>{" "}
-                  <span>{user.repost_count}</span>{" "}
-                </div>
+              <div className="p-2 mt-2 bg-primary d-flex justify-content-between stats">
+                
                 <div className="d-flex flex-column">
                   {" "}
                   <span className="followers">Followers</span>{" "}
@@ -41,7 +37,7 @@ export function UserBlock(user) {
               </div>
               <div className="button mt-2 d-flex flex-row align-items-center">
                 <button className="btn btn-sm btn-outline-primary w-100">
-                  View Profile
+                  View
                 </button>
                 <button
                   className="btn btn-sm btn-primary w-100 ml-2"
@@ -79,7 +75,7 @@ export function UserBlockList(props) {
 
   return (
     <div>
-      <h3>{props.header}</h3>
+      <p classwName="header">{props.header}</p>
       {blocks}
     </div>
   );
