@@ -10,8 +10,9 @@ import { ArticleCard } from "../components/ArticleCard";
 import { get_user } from "../functions/LocalStorageHelper";
 
 require("dotenv").config();
+
 export default function Profile(props) {
-  let user = get_user();
+  let user = get_user(); 
 
   const [key, setKey] = useState("home");
   const [articles, setArticles] = useState([""]);

@@ -1,7 +1,10 @@
 export function store_user(user, access_token = false) {
-  if (access_token) {
+  if (access_token) 
+  {
     sessionStorage.setItem("access_token", user["access_token"]);
   }
+  sessionStorage.setItem("email", user["email"]);
+  sessionStorage.setItem("bio", user["bio"]);
   sessionStorage.setItem("user_name", user["user_name"]);
   sessionStorage.setItem("first_name", user["first_name"]);
   sessionStorage.setItem("last_name", user["last_name"]);
@@ -31,6 +34,8 @@ export function is_logged_in() {
 
 export function get_user() {
   let user = {
+    bio: sessionStorage.getItem("bio"),
+    email: sessionStorage.getItem("email"),
     user_name: sessionStorage.getItem("user_name"),
     first_name: sessionStorage.getItem("first_name"),
     last_name: sessionStorage.getItem("last_name"),
