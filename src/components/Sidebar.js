@@ -1,3 +1,15 @@
+/**
+ * rounded sidebar on right side of page where user selects image
+ * contains list of selected interests that can also be removed
+ *shows donut chart indicating the users progress implemented from charts.js
+ * 
+ * @summary Interest page sidebar
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 04:38:39 
+ * Last modified  : 2021-05-28 04:40:23
+ */
+
 //react imports
 import React from "react";
 import {Button,Card,ListGroup} from "react-bootstrap";
