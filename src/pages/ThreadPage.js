@@ -1,3 +1,16 @@
+/**
+ * page serves as the main page for out site
+ * presents articles based of off different topics
+ * shows users to follow
+ * implements our LoginModal,ShareModal,SocialCol,BubbleRow components
+ *
+ * @summary page that presents news articles and some social info
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:17:23 
+ * Last modified  : 2021-05-28 10:20:41
+ */
+
 import { React, useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
