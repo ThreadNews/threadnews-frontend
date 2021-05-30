@@ -6,7 +6,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 22:37:40 
- * Last modified  : 2021-05-28 22:41:54
+ * Last modified  : 2021-05-29 14:50:48
  */
 
 import axios from "axios";
@@ -75,7 +75,7 @@ export function get_users(user_ids) {
   return res;
 }
 
-export async function repost_article(articleId) {
+export async function repost_article(articleId,) {
   let token = sessionStorage.getItem("access_token");
   let data = { action: "add", article_id: articleId };
   let head = { headers: { Authorization: "Bearer " + token } };

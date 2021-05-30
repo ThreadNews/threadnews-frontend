@@ -3,11 +3,11 @@
  * this component also relies on other implements CommentCard and CommentInput
  *
  *
- * @summary short description for the file
+ * @summary Article Component
  * @author Thread News
  *
  * Created at     : 2021-05-28 04:34:43 
- * Last modified  : 2021-05-28 04:37:09
+ * Last modified  : 2021-05-29 15:19:46
  */
 
 //react imports
