@@ -4,7 +4,6 @@ import axios from "axios";
 import { ArticleCard } from "../components/ArticleCard";
 import { LoginModal } from "../modals/LoginModal.js";
 import Navbar from "../components/Nav";
-import { SocialCol } from "../components/SocialCol.js";
 import ShareModal from "../modals/ShareModal";
 import RepostModal from "../modals/repostModal";
 import BubbleRow from "../components/BubbleRow";
@@ -101,7 +100,6 @@ export function ThreadPage(props) {
             <Col sm={9} className="thread-page-content">
               {cards}
             </Col>
-            <Col sm={3}><SocialCol></SocialCol></Col>
           </Row>
           {share ? (
             <ShareModal {...shareArticle} share={true} setShare={setShare} />
