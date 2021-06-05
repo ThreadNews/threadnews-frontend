@@ -78,6 +78,10 @@
 }
 .like-num {
   text-align: right;
+  color: #1f1919;
+  font-size: 30;
+  font-family: "TimesNewRoman",
+                  
 }
 
 .commentsBox {
