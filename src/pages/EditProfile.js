@@ -8,14 +8,11 @@ import "../css/edit_profile.css";
 import { get_user, store_user } from "../functions/LocalStorageHelper";
 require("dotenv").config();
 
- 
-
 
 export function EditProfile(props) {
+  let user = get_user();
 
-  let user = get_user()
-  
-  const [first_name, setFirstname] =  useState(user.first_name);
+  const [first_name, setFirstname] = useState(user.first_name);
   const [last_name, setLastname] = useState(user.last_name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
@@ -26,10 +23,8 @@ export function EditProfile(props) {
   const [errMsg, setErrMsg] = useState("");
   const [profile_pic, setProfileImage] = useState("");
 
-
   function update_user_data() {
-    
-    let user = {... get_user(), first_name:first_name, user_name: username}
+    let user = { ...get_user(), first_name: first_name, user_name: username };
 
     console.log("starting update_user_data");
     let token = sessionStorage.getItem("access_token");
@@ -42,7 +37,6 @@ export function EditProfile(props) {
       profile_pic: profile_pic,
       password: password,
       email: email,
-
     };
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/edit_profile", data, head)
@@ -67,12 +61,11 @@ export function EditProfile(props) {
     <div className="container profile profile-view" id="profile">
       <Form>
         <div className="form-row profile-row">
-          <Col md={8}> 
-            <h1> Edit Profile </h1> 
-            <hr /> 
-            <Row> 
-
-            <Col sm={12} md={6}>
+          <Col md={8}>
+            <h1> Edit Profile </h1>
+            <hr />
+            <Row>
+              <Col sm={12} md={6}>
                 <div class="form-group">
                   <label> Bio </label>
                   <input
@@ -82,9 +75,9 @@ export function EditProfile(props) {
                     name="firstname"
                   />
                 </div>
-            </Col>
+              </Col>
 
-            <Col sm={12} md={6}>
+              <Col sm={12} md={6}>
                 <div class="form-group">
                   <label>Image URL </label>
                   <input
@@ -95,7 +88,6 @@ export function EditProfile(props) {
                   />
                 </div>
               </Col>
-
 
               <Col sm={12} md={6}>
                 <div class="form-group">

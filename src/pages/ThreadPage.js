@@ -23,6 +23,9 @@ export function ThreadPage(props) {
   const [shareArticle, setShareArticle] = useState(null);
   const [articles, setArticles] = useState([]);
   const [tempId, setTempId] = useState([]);
+  const [podcasts, setPodcasts] = useState([]);
+
+
   useEffect(() => {
     let token = sessionStorage.getItem("access_token");
 
@@ -50,6 +53,21 @@ export function ThreadPage(props) {
           setArticles(selected);
         }
       });
+
+      let podcast_data = { interest_list: get_interests(), n: 50 };
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL + "/podcasts", podcast_data, head)
+      .then((result) => {
+        if (result) {
+          console.log(Array(result.data.podcasts));
+          const shuffled = Array(result.data.podcasts)[0].sort(
+            () => 0.5 - Math.random()
+          );
+          // Get sub-array of first n elements after shuffled
+          let selected = shuffled.slice(0, 34);
+          setPodcasts(selected);
+        }
+      });
   }, []);
 
   function remove_article(id) {
@@ -57,6 +75,14 @@ export function ThreadPage(props) {
     let rm = articles.find((obj) => obj.id === id);
     let n = articles.filter((item) => item !== rm);
     setArticles(n);
+    //update on db
+  }
+
+  function remove_podcast(id) {
+    console.log("removing with id");
+    let rm = podcasts.find((obj) => obj.id === id);
+    let n = podcasts.filter((item) => item !== rm);
+    setPodcasts(n);
     //update on db
   }
 
@@ -83,6 +109,21 @@ export function ThreadPage(props) {
     );
   });
 
+  const podcast_cards = articles.slice(0, 20).map((data, i) => {
+    return (
+      <Container>
+        <ArticleCard
+          article={data}
+          key={i}
+          i={i}
+          removePodcast={remove_podcast}
+          promptLogin={() => setPromptLogin(!promptLogin)}
+          setTempId={setTempId}
+        />
+      </Container>
+    );
+  });
+
   return (
     <div>
       <div>
@@ -101,7 +142,7 @@ export function ThreadPage(props) {
             <Col sm={9} className="thread-page-content">
               {cards}
             </Col>
-            <Col sm={3}><SocialCol></SocialCol></Col>
+            <Col sm={3}> {podcast_cards} </Col>
           </Row>
           {share ? (
             <ShareModal {...shareArticle} share={true} setShare={setShare} />
