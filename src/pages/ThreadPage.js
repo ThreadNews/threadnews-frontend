@@ -11,7 +11,7 @@ import {
   get_user,
   get_interests,
   is_logged_in,
-} from "../functions/LocalStorageHelper";
+} from "../functions/LocalStorageHelper"; 
 import "../css/ThreadPage.css";
 require("dotenv").config();
 
@@ -36,6 +36,7 @@ export function ThreadPage(props) {
           );
     console.log(window.location.href);
     let data = { topic: topic, n: 50 };
+    let data = { iterest_list: sessionStorage.getItem, n: 50 };
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head)
       .then((result) => {
