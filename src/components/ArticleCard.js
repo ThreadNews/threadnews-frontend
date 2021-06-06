@@ -158,7 +158,6 @@ export function ArticleCard(props) {
             </Row>
 
             <Row>
-              <Col xs={2}>
                 <Button
                   className="comment-button"
                   style={{ float: "left" }}
@@ -183,8 +182,6 @@ export function ArticleCard(props) {
                 >
                   Repost
                 </Button>
-              </Col>
-              <Col xs={2}>
                 <Button
                   className="not-for-me-button"
                   style={{ float: "left" }}
@@ -197,16 +194,15 @@ export function ArticleCard(props) {
                 >
                   Not for me
                 </Button>{" "}
-              </Col>
-              <Col xs={2}></Col>
+
               <Col
                 xs={3}
                 className="like-num"
-                style={{
-                  fontSize: 30,
-                  fontFamily: "TimesNewROman",
-                  color: "#eee",
-                }}
+                // style={{
+                //   fontSize: 30,
+                //   fontFamily: "TimesNewROman",
+                //   color: "#eee",
+                // }}
               >
                 {article.likes == null
                   ? liked
