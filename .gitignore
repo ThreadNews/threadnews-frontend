@@ -5,3 +5,4 @@ build/
 public/assets/.DS_Store
 public/assets/.DS_Store
 public/assets/.DS_Store
+.env
