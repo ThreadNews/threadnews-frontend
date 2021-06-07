@@ -1,3 +1,14 @@
+/**
+ * navigated to with the button next to the search feild on the navBar
+ * implements our component UserBlock to show the results
+ *
+ * @summary shows results from user search
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:21:53 
+ * Last modified  : 2021-05-28 10:23:28
+ */
+
 import React, { useState, useEffect } from "react";
 import { search_users } from "../functions/Social";
 import { UserBlock } from "../components/UserBlock";

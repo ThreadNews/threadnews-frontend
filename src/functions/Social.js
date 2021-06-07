@@ -1,3 +1,14 @@
+/**
+ * functions that interact with that interact with backend
+ * follow user, search users, repost, like, save
+ *
+ * @summary social functions
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 22:37:40 
+ * Last modified  : 2021-05-29 14:50:48
+ */
+
 import axios from "axios";
 
 //need to import react to avoid cors error

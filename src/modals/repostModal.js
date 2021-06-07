@@ -1,3 +1,13 @@
+/**
+ * displayed after user clicks repost button and prompts user for confirmation
+ *
+ * @summary repost confirmation modal
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 22:21:27 
+ * Last modified  : 2021-05-28 22:21:47
+ */
+
 //react imports
 import React from "react";
 import { Button, Modal } from "react-bootstrap";

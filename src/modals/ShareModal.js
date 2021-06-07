@@ -1,3 +1,14 @@
+/**
+ * creates popup modal which gives user option to share to other platforms
+ * share to twitter reddit, facebook
+ *
+ * @summary Sharing modal
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 22:19:55 
+ * Last modified  : 2021-05-28 22:21:24
+ */
+
 //react imports
 import React from "react";
 import { Button, Modal } from "react-bootstrap";

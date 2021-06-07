@@ -1,3 +1,14 @@
+/**
+ * page that user can change name,email,password
+ * user can also add a link to an image as a profile image
+ *
+ * @summary page that allows users to edit profile values
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:16:00 
+ * Last modified  : 2021-05-28 10:16:58
+ */
+
 import React from "react";
 import { useState } from "react";
 import axios from "axios";

@@ -41,7 +41,7 @@ export function UserBlock(user) {
               </div>
               <div className="button mt-2 d-flex flex-row align-items-center">
                 <button className="btn btn-sm btn-outline-primary w-100">
-                  View Profile
+                  View
                 </button>
                 <button
                   className="btn btn-sm btn-primary w-100 ml-2"
@@ -79,7 +79,7 @@ export function UserBlockList(props) {
 
   return (
     <div>
-      <h3>{props.header}</h3>
+      <p classwName="header">{props.header}</p>
       {blocks}
     </div>
   );

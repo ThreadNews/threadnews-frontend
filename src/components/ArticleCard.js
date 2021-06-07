@@ -1,3 +1,16 @@
+/**
+ * file contains the component that renders articles
+ * this component also relies on other implements CommentCard and CommentInput
+ *
+ *
+ * @summary Article Component
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 04:34:43 
+ * Last modified  : 2021-05-29 15:19:46
+ */
+
+//react imports
 import React, { useState } from "react";
 import { Col, Row, Container, Button} from "react-bootstrap";
 import "../css/card.css";
@@ -10,6 +23,7 @@ import {
 import { defaultCommentList } from "../data/defaultData";
 import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
+
 
 
 
@@ -160,6 +174,7 @@ export function ArticleCard(props) {
             </Row>
 
             <Row>
+
                 <Button
                   className="comment-button article-buttons"
                   style={{ float: "left" }}
@@ -184,6 +199,7 @@ export function ArticleCard(props) {
                 >
                   Repost
                 </Button>
+
                 <Button
                   className="not-for-me-button article-buttons"
                   style={{ float: "left" }}
@@ -196,16 +212,7 @@ export function ArticleCard(props) {
                 >
                   Not for me
                 </Button>{" "}
-
-              <Col
-                xs={3}
-                // className="like-num"
-                // style={{
-                //   fontSize: 30,
-                //   fontFamily: "TimesNewROman",
-                //   color: "#eee",
-                // }}
-              >
+              <Col xs={3}>
                 <p className="like-num">
                 {article.likes == null
                   ? liked

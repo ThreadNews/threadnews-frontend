@@ -1,3 +1,14 @@
+/**
+ * presents a modal pop-up that prompts user to login
+ * presented if user is not logged in and tries to comment or like
+ *
+ * @summary Login prompt modal
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:41:36 
+ * Last modified  : 2021-05-28 10:42:09
+ */
+
 //react imports
 import React from "react";
 import { Button, Modal } from "react-bootstrap";

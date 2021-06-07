@@ -48,7 +48,7 @@ ReactDOM.render(
           <Login onSignup={signup} is_login={false} />
         </Route>
         <Route path="/profile/">
-          <Profile {...user} />
+          <Profile  />
         </Route>
         <Route path="/editprofile/">
           <EditProfile />

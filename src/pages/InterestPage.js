@@ -1,3 +1,14 @@
+/**
+ * page is for users visiting site for the first time
+ * prompts the user to select interests which are saved in localstorage 
+ * im
+ * @summary short description for the file
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:28:53 
+ * Last modified  : 2021-05-28 10:29:27
+ */
+
 import CategoryBubbleSet from "../components/category-bubbles";
 import "../css/App.css";
 import "../css/bootstrap_theme.css";
