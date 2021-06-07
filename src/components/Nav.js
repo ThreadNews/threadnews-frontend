@@ -18,8 +18,8 @@ export default function Top_nav(props) {
       {sessionStorage.getItem("access_token") ? (
         <LinkContainer to="/profile">
           <Nav.Link style={{ color: "white" }}>
-            {sessionStorage.getItem("first_name")}{" "}
-            {sessionStorage.getItem("last_name")}
+            {sessionStorage.getItem("user_name")}{" "}
+            
           </Nav.Link>
         </LinkContainer>
       ) : null}
