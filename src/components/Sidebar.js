@@ -1,25 +1,18 @@
 import React from "react";
+import ListGroup from "react-bootstrap/ListGroup";
 import ProgressBar from "react-customizable-progressbar";
-import "../css/bootstrap_theme.css";
-import "../css/sidebar.css";
+import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { primary_color } from "../Colors";
-import Button from "react-bootstrap/Button";
-import axios from "axios";
-import ListGroup from "react-bootstrap/ListGroup";
-import { Redirect } from "react-router-dom";
+//css imports
+import "../css/sidebar.css";
+import "../css/bootstrap_theme.css";
+import {update_user_interests} from '..functions/Social.js';
 
 require("dotenv").config();
 
 export function Sidebar(props) {
-  function update_user_interests() {
-    axios.post(process.env.REACT_APP_BACKEND_URL + "/update_interests", {
-      user_id: "test user id",
-      new_interests: props.interests,
-    });
-    console.log("updated user interests");
-    // props.onClick()
-  }
+  
 
   return (
     <div style={{ paddingTop: "30px", alignItems: "center" }}>

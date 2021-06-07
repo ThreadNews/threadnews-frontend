@@ -3,7 +3,18 @@ import axios from "axios";
 //need to import react to avoid cors error
 import react from "react";
 
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
+
+
+export function update_user_interests() {
+  axios.post(process.env.REACT_APP_BACKEND_URL + "/update_interests", {
+    user_id: "test user id",
+    new_interests: props.interests,
+  });
+  console.log("updated user interests");
+  
+}
 
 export async function follow(user_id) {
   let token = sessionStorage.getItem("access_token");
@@ -14,6 +25,7 @@ export async function follow(user_id) {
 }
 
 export function search_users(search_string) {
+  
   let token = sessionStorage.getItem("access_token");
   let head = { headers: { Authorization: "Bearer " + token } };
   let data = { user_name: search_string };
