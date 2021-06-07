@@ -11,9 +11,11 @@ import {update_user_interests} from '..functions/Social.js';
 
 require("dotenv").config();
 
+// creates component that is shown on the side of page where user selects interests
+// shows donut graph and lists selected interests and user can remove interests
+// once enough topics choosen user can continue
 export function Sidebar(props) {
   
-
   return (
     <div style={{ paddingTop: "30px", alignItems: "center" }}>
       <Card
@@ -25,7 +27,7 @@ export function Sidebar(props) {
         }}
       >
         <Card.Title className="sidebarHeader">
-          please select {5 - props.num<1?0:5 - props.num<1} more
+            Interests
         </Card.Title>
 
         <Card.Body>
