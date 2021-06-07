@@ -1,7 +1,7 @@
 //react imports
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+
 import { repost } from "../functions/Social.js";
 //css imports
 import "../css/modal.css";

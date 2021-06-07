@@ -8,7 +8,6 @@ import ShareModal from "../modals/ShareModal";
 import RepostModal from "../modals/repostModal";
 import BubbleRow from "../components/BubbleRow";
 import {
-  get_user,
   get_interests,
   is_logged_in,
 } from "../functions/LocalStorageHelper";
@@ -120,7 +119,7 @@ export function ThreadPage(props) {
   });
 
     //creates list of PodcastCards components based of articles variable
-    const podcast_cards = podcasts.slice(0, 20).map((data, i) => {
+    const podcast_cards = podcasts.slice(0, 14).map((data, i) => {
     return (
       <PodcastCard
         podcast={data}

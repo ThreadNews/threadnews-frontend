@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { Col, Row, Container, Button, Form } from "react-bootstrap";
+import { Col, Row, Container, Button} from "react-bootstrap";
 import "../css/card.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
-  repost,
   like,
   save,
-  post_comment,
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
 import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
-import { get_comments } from "../functions/Social";
+
 
 
 //used to import env variables for frontend and backend urls

@@ -15,7 +15,7 @@ export function UserBlock(user) {
               <img
                 className="UserImg"
                 src={user.profile_img}
-                alt={ process.env.PUBLIC_URL + "/assets/article_card_icons/default.png"}
+                // alt={ process.env.PUBLIC_URL + "/assets/article_card_icons/default.png"}
                 width="150"
               />
             </div>
@@ -71,9 +71,9 @@ export function UserBlockList(props) {
 
   const blocks = users.map((user, i) => {
     return (
-      <div>
-        <UserBlock {...user}></UserBlock>
-      </div>
+      // <div>
+        <UserBlock {...user} key ={i}></UserBlock>
+      // </div>
     );
   });
 
