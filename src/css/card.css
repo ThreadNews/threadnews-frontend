@@ -30,6 +30,13 @@
   color: rgb(56, 56, 56);
 }
 
+.title-light {
+  font-weight: 600;
+  padding-left: 5%;
+  padding-top: 100px;
+  color: rgb(218, 211, 211);
+}
+
 .not-for-me-button {
   font-weight: 800;
   color: rgb(56, 56, 56);

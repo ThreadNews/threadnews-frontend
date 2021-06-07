@@ -25,7 +25,7 @@ export function SearchResults(props) {
 
   return (
   <div>
-    
+      <h2 className="title-light">Search Results</h2>    
       {searchResults}
   </div>);
 }
