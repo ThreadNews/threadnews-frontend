@@ -11,9 +11,11 @@ import {
   get_user,
   get_interests,
   is_logged_in,
-} from "../functions/LocalStorageHelper"; 
+} from "../functions/LocalStorageHelper";
 import "../css/ThreadPage.css";
 import { PodcastCard } from "../components/PodcastCard";
+
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export function ThreadPage(props) {
@@ -21,21 +23,22 @@ export function ThreadPage(props) {
   const [repostArticle, setRepostArticle] = useState(false);
   const [promptLogin, setPromptLogin] = useState(false);
   const [shareArticle, setShareArticle] = useState(null);
+  const [sharePodcast, setSharePodcast] = useState(null);
   const [articles, setArticles] = useState([]);
   const [tempId, setTempId] = useState([]);
   const [podcasts, setPodcasts] = useState([]);
 
-
+  //uses this default list if the user did not select topis
   let default_interests = ["DIY", "Sports", "Investing", "Crypto"];
   const interest_ls = sessionStorage.getItem("interests")
     ? get_interests()
     : default_interests;
 
   useEffect(() => {
+    //loads article data for article cards
+    //will search for different topic if there is topic at end of url
     let token = sessionStorage.getItem("access_token");
-
     let head = { headers: { Authorization: "Bearer " + token } };
-
     let topic =
       window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
         .length === 0
@@ -45,7 +48,7 @@ export function ThreadPage(props) {
           );
     console.log(window.location.href);
     let data = { topic: topic, n: 50 };
-    
+
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head)
       .then((result) => {
@@ -60,7 +63,9 @@ export function ThreadPage(props) {
         }
       });
 
-      let podcast_data = { interest_list: interest_ls, n: 50 };
+
+    //loads podcast data
+    let podcast_data = { interest_list: interest_ls, n: 50 };
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/podcasts", podcast_data, head)
       .then((result) => {
@@ -77,14 +82,18 @@ export function ThreadPage(props) {
   }, []);
 
   function remove_article(id) {
+    //triggered when not for me clicked on articleCard
+    //removes article from list 
     console.log("removing with id");
     let rm = articles.find((obj) => obj.id === id);
     let n = articles.filter((item) => item !== rm);
     setArticles(n);
-    //update on db
+    
   }
 
   function remove_podcast(id) {
+    //triggered when not for me clicked on articleCard
+    //removes article from list 
     console.log("removing with id");
     let rm = podcasts.find((obj) => obj.id === id);
     let n = podcasts.filter((item) => item !== rm);
@@ -92,38 +101,37 @@ export function ThreadPage(props) {
     //update on db
   }
 
-  
-
+  //creates list of article cards components based of articles variable
   const cards = articles.slice(0, 20).map((data, i) => {
     return (
-      // <Container>
-        <ArticleCard
-          article={data}
-          setShare={setShare}
-          setShareArticle={setShareArticle}
-          key={i}
-          i={i}
-          removeArticle={remove_article}
-          setRepostArticle={setRepostArticle}
-          promptLogin={() => setPromptLogin(!promptLogin)}
-          setTempId={setTempId}
-        />
-      // </Container>
+      
+      <ArticleCard
+        article={data}
+        setShare={setShare}
+        setShareArticle={setShareArticle}
+        key={i}
+        i={i}
+        removeArticle={remove_article}
+        setRepostArticle={setRepostArticle}
+        promptLogin={() => setPromptLogin(!promptLogin)}
+        setTempId={setTempId}
+      />
     );
   });
 
-  const podcast_cards = podcasts.slice(0, 20).map((data, i) => {
+    //creates list of PodcastCards components based of articles variable
+    const podcast_cards = podcasts.slice(0, 20).map((data, i) => {
     return (
-      // <Container>
-        <PodcastCard
-          podcast={data}
-          key={i}
-          i={i}
-          removePodcast={remove_podcast}
-          promptLogin={() => setPromptLogin(!promptLogin)}
-          setTempId={setTempId}
-        />
-      // </Container>
+      <PodcastCard
+        podcast={data}
+        key={i}
+        i={i}
+        removePodcast={remove_podcast}
+        setShare={setShare}
+        setSharePodcast={setSharePodcast}
+        promptLogin={() => setPromptLogin(!promptLogin)}
+        setTempId={setTempId}
+      />
     );
   });
 
@@ -143,13 +151,17 @@ export function ThreadPage(props) {
           </Row>
           <Row>
             <Col sm={7} className="thread-page-content">
-            
               {cards}
             </Col>
-            <Col sm={{span:3, offset:1}} >{podcast_cards} </Col>
+            <Col sm={{ span: 3, offset: 1 }}>{podcast_cards} </Col>
           </Row>
           {share ? (
-            <ShareModal {...shareArticle} share={true} setShare={setShare} />
+            <ShareModal
+              {...shareArticle}
+              {...sharePodcast}
+              share={true}
+              setShare={setShare}
+            />
           ) : null}
 
           {promptLogin ? <LoginModal setPrompt={setPromptLogin} /> : null}

@@ -15,6 +15,7 @@ import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
 import { get_comments } from "../functions/Social";
 
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export function PodcastCard(props) {

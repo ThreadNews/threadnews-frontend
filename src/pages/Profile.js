@@ -9,6 +9,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { ArticleCard } from "../components/ArticleCard";
 import { get_user } from "../functions/LocalStorageHelper";
 
+
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export default function Profile(props) {
@@ -64,7 +66,7 @@ export default function Profile(props) {
     );
   });
   
-  
+
   return (
     <div>
       <Navbar></Navbar>
