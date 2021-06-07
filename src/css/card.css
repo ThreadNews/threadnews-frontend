@@ -127,11 +127,15 @@
 
 .like-num {
   text-align: right;
-  vertical-align:middle;
+  /* vertical-align:middle; */
   color: #1f1919;
   font-size: 26px;
   font-family: "TimesNewRoman",
                   
+}
+
+.pod-like{
+  padding-left: 20px;
 }
 
 .iframe{

@@ -15,7 +15,7 @@ export function UserBlock(user) {
               <img
                 className="UserImg"
                 src={user.profile_img}
-                alt=""
+                alt={ process.env.PUBLIC_URL + "/assets/article_card_icons/default.png"}
                 width="150"
               />
             </div>
@@ -26,7 +26,7 @@ export function UserBlock(user) {
                 <div className="d-flex flex-column">
                   {" "}
                   <span className="followers"># Reposted </span>{" "}
-                  <span>{user.repost_count}</span>{" "}
+                  {/* <span>{user.repost_count!==undefined? user.repost_count: 0}</span>{" "} */}
                 </div>
                 <div className="d-flex flex-column">
                   {" "}

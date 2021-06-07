@@ -14,6 +14,8 @@ import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
 import { get_comments } from "../functions/Social";
 
+
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export function ArticleCard(props) {
@@ -22,6 +24,8 @@ export function ArticleCard(props) {
   const [saved, toggleSaved] = useState(false);
   const [showComments, toggleComments] = useState(false);
 
+  //sets value to list of default comments if 
+  //there are no comments on article
   let defaultComments = defaultCommentList;
   if (article != null && article.comments != null) {
     defaultComments = article.comments.concat(defaultComments);
@@ -33,12 +37,14 @@ export function ArticleCard(props) {
   let logged_in = is_logged_in();
 
   function update_like(article_id) {
+    //interacts with backend to store like on user and article
     if (sessionStorage.getItem("access_token") == null) return;
     toggleLiked(!liked);
     like(article_id);
   }
 
   function user_viewed() {
+    //stores that user has viewed this article in the backend
     let token = sessionStorage.getItem("access_token");
     if (token.length !== 1) {
       let data = { action: "add", article_id: article.id };
@@ -52,12 +58,14 @@ export function ArticleCard(props) {
   }
 
   function toggle_save_article(article_id) {
+    //interacts with backend to save article
     console.log("SAVE ARTICLE CLICKED",article_id);
     save(article_id,saved);
     toggleSaved(!saved);
   }
 
   function share_article() {
+    //sets share state variable which triggers modal
     console.log("SHARE ARTICLE CLICKED");
     props.setShare(true);
     props.setShareArticle(article);
@@ -65,6 +73,9 @@ export function ArticleCard(props) {
   
 
   function post_comment() {
+    //interacts with backend to post comment
+    //updates state variables to include new comment
+    // sets value of comment input to empty
     let data = { action: "add", comment: new_comment, id: article.id };
     let head = {
       headers: {
@@ -90,6 +101,7 @@ export function ArticleCard(props) {
   }
 
   const comments = commentList.map((data, i) => {
+    // creates list of comment card components
     return (
       <div>
         <CommentCard {...data} />
