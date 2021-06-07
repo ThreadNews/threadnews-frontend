@@ -62,14 +62,7 @@ export function ArticleCard(props) {
     props.setShare(true);
     props.setShareArticle(article);
   }
-
-  function update_comments() {
-    toggleComments(!showComments);
-  }
-
-  function handleChange(t) {
-    setComment(t.target.value);
-  }
+  
 
   function post_comment() {
     let data = { action: "add", comment: new_comment, id: article.id };
@@ -163,7 +156,7 @@ export function ArticleCard(props) {
                   variant="warning"
                   onClick={
                     logged_in
-                      ? () => update_comments()
+                      ? () => toggleComments(!showComments)
                       : () => props.promptLogin()
                   }
                 >
@@ -276,7 +269,7 @@ export function ArticleCard(props) {
               <Col xs={3}>
                 <CommentInput
                   post_comment={post_comment}
-                  handleChange={handleChange}
+                  handleChange={(t)=> setComment(t.target.value)}
                   comment={new_comment}
                 />
               </Col>
