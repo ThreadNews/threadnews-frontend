@@ -7,7 +7,7 @@ import { primary_color } from "../Colors";
 //css imports
 import "../css/sidebar.css";
 import "../css/bootstrap_theme.css";
-import {update_user_interests} from '..functions/Social.js';
+import {update_user_interests} from '../functions/Social';
 
 require("dotenv").config();
 
