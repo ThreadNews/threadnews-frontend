@@ -29,7 +29,6 @@ export function PodcastCard(props) {
   }
   const [commentList, setCommentList] = useState(defaultComments);
   const [new_comment, setComment] = useState("");
-  let debug = true;
 
   let logged_in = is_logged_in();
 
@@ -64,9 +63,7 @@ export function PodcastCard(props) {
     props.setSharePodcast(podcast);
   }
 
-  function update_comments() {
-    toggleComments(!showComments);
-  }
+  
 
   function handleChange(t) {
     setComment(t.target.value);
@@ -133,33 +130,17 @@ export function PodcastCard(props) {
                   variant="warning"
                   onClick={
                     logged_in
-                      ? () => update_comments()
+                      ? () => toggleComments(!showComments)
                       : () => props.promptLogin()
                   }
                 >
                   {showComments ? "Hide" : "Comments"}
                 </Button>
 
-                <Button
-                  className="repost-button pod-buttons"
-                  variant="secondary"
-                  onClick={() => {
-                    props.setRepostPodcast(true);
-                    props.setTempId(podcast.id);
-                  }}
-                >
-                  Repost
-                </Button>
               
-              {/* <p
+              <p
                 xs={3}
-                className="like-num"
-                style={{
-                  fontSize: 30,
-                  fontFamily: "TimesNewROman",
-                  color: "#eee",
-                }}
-              >
+                className="like-num pod-like">
                 {podcast.likes == null
                   ? liked
                     ? 1
@@ -167,7 +148,7 @@ export function PodcastCard(props) {
                   : liked
                   ? podcast.likes + 1
                   : podcast.likes}
-              </p> */}
+              </p>
                 <Button
                   variant="outline"
                   onClick={
@@ -183,7 +164,7 @@ export function PodcastCard(props) {
                         ? process.env.PUBLIC_URL +
                           "/assets/article_card_icons/heart_full.png"
                         : process.env.PUBLIC_URL +
-                          "/assets/podcast_card_icons/heart_empty.png"
+                          "/assets/article_card_icons/heart_empty.png"
                     }
                     alt=""
                   />
