@@ -7,10 +7,10 @@ import react from "react";
 require("dotenv").config();
 
 
-export function update_user_interests() {
+export function update_user_interests(interests) {
   axios.post(process.env.REACT_APP_BACKEND_URL + "/update_interests", {
     user_id: "test user id",
-    new_interests: props.interests,
+    new_interests: interests,
   });
   console.log("updated user interests");
   

@@ -46,7 +46,7 @@ export function Sidebar(props) {
           <Button
             variant={props.num < 5 ? "outline-warning" : "outline-success"}
             disabled={props.num < 5 ? true : false}
-            onClick={update_user_interests}
+            onClick={()=>update_user_interests(props.interests)}
             href="/threads/"
             hidden={props.num < 5}
             size="lg"
