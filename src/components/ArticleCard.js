@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Col, Row, Container, Button, Form } from "react-bootstrap";
-import "../css/articleCard.css";
+import "../css/card.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
-  repost_article,
-  like_article,
-  save_article,
+  repost,
+  like,
+  save,
   post_comment,
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
@@ -35,7 +35,7 @@ export function ArticleCard(props) {
   function update_like(article_id) {
     if (sessionStorage.getItem("access_token") == null) return;
     toggleLiked(!liked);
-    like_article(article_id);
+    like(article_id);
   }
 
   function user_viewed() {
@@ -53,7 +53,7 @@ export function ArticleCard(props) {
 
   function toggle_save_article(article_id) {
     console.log("SAVE ARTICLE CLICKED",article_id);
-    save_article(article_id,saved);
+    save(article_id,saved);
     toggleSaved(!saved);
   }
 
@@ -72,7 +72,7 @@ export function ArticleCard(props) {
   }
 
   function post_comment() {
-    let data = { action: "add", comment: new_comment, article_id: article.id };
+    let data = { action: "add", comment: new_comment, id: article.id };
     let head = {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("access_token"),
@@ -125,24 +125,23 @@ export function ArticleCard(props) {
           <Col xs={9} className="article-content">
             <a href={article.url}>
               <Row
-                className="article-title"
+                className="title"
                 style={{
                   fontSize: 22,
                   fontFamily: "TimesNewROman",
                 }}
               >
-                <p>{article.title}</p>
-                {debug ? <p>{article.main_topic}</p> : ""}
+                <p>{article.title!==undefined?article.title.slice(0,200):""}</p>
               </Row>
             </a>
 
-            <Row className="text-muted article-author-date">
+            <Row className="text-muted author-date">
               <Col xs={6}>
                 <p>
                   {article.author === "" ? article.source.name : article.author}
                 </p>
               </Col>
-              <Col xs={6} className="article-date">
+              <Col xs={6} className="date">
                 <p>
                   {article.publishedAt
                     ? article.publishedAt.substring(0, 10)
@@ -151,15 +150,15 @@ export function ArticleCard(props) {
               </Col>
             </Row>
             <Row
-              className="article-desc "
-              style={{ fontSize: 18, fontFamily: "TimesNewRoman" }}
+              className="description"
+              
             >
               <p>{article.description}</p>
             </Row>
 
             <Row>
                 <Button
-                  className="comment-button"
+                  className="comment-button article-buttons"
                   style={{ float: "left" }}
                   variant="warning"
                   onClick={
@@ -172,7 +171,7 @@ export function ArticleCard(props) {
                 </Button>
 
                 <Button
-                  className="repost-button"
+                  className="repost-button article-buttons"
                   variant="secondary"
                   // onClick={() => repost_article(article.id)}
                   onClick={() => {
@@ -183,7 +182,7 @@ export function ArticleCard(props) {
                   Repost
                 </Button>
                 <Button
-                  className="not-for-me-button"
+                  className="not-for-me-button article-buttons"
                   style={{ float: "left" }}
                   variant="outline-danger"
                   onClick={
@@ -197,13 +196,14 @@ export function ArticleCard(props) {
 
               <Col
                 xs={3}
-                className="like-num"
+                // className="like-num"
                 // style={{
                 //   fontSize: 30,
                 //   fontFamily: "TimesNewROman",
                 //   color: "#eee",
                 // }}
               >
+                <p className="like-num">
                 {article.likes == null
                   ? liked
                     ? 1
@@ -211,6 +211,7 @@ export function ArticleCard(props) {
                   : liked
                   ? article.likes + 1
                   : article.likes}
+                  </p>
               </Col>
               <Col xs={1}>
                 <Button

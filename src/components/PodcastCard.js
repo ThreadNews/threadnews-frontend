@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Col, Row, Container, Button, Form } from "react-bootstrap";
-import "../css/podcastCard.css";
+import "../css/card.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 
 import {
-  repost_podcast,
-  like_podcast,
-  save_podcast,
+  repost,
+  like,
+  save,
   post_comment,
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
@@ -36,13 +36,13 @@ export function PodcastCard(props) {
   function update_like(podcast_id) {
     if (sessionStorage.getItem("access_token") == null) return;
     toggleLiked(!liked);
-    like_podcast(podcast_id);
+    like(podcast_id,"podcast");
   }
 
   function user_viewed() {
     let token = sessionStorage.getItem("access_token");
     if (token.length !== 1) {
-      let data = { action: "add", podcast_id: podcast.id };
+      let data = { action: "add", id: podcast.id };
       let head = { headers: { Authorization: "Bearer " + token } };
       axios.post(process.env.REACT_APP_BACKEND_URL + "/view", data, head);
     }
@@ -54,7 +54,7 @@ export function PodcastCard(props) {
 
   function toggle_save_podcast(podcast_id) {
     console.log("SAVE podcast CLICKED",podcast_id);
-    save_podcast(podcast_id,saved);
+    save(podcast_id,saved,"podcast");
     toggleSaved(!saved);
   }
 
@@ -73,7 +73,7 @@ export function PodcastCard(props) {
   }
 
   function post_comment() {
-    let data = { action: "add", comment: new_comment, podcast_id: podcast.id };
+    let data = { action: "add", comment: new_comment, id: podcast.id };
     let head = {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("access_token"),
@@ -108,60 +108,27 @@ export function PodcastCard(props) {
   if (podcast === undefined) {
     return <div></div>;
   }
+
+  let iframe_url = "https://open.spotify.com/embed-podcast/show/" + podcast.uri.slice(13,podcast.uri.length)
+
   return (
-    <div className="podcast-card">
-      <Container className="podcast-container">
-        <Row float="left" className="">
-          <Col xs={3} className="">
-            <a href={podcast.url}>
-              <img
-                className="newsImg"
-                src={podcast === "undefined" ? null : podcast.urlToImage}
-                alt=""
-                onClick={user_viewed}
-              />
-            </a>
-          </Col>
-
-          <Col xs={9} className="podcast-content">
-            <a href={podcast.url}>
-              <Row
-                className="podcast-title"
-                style={{
-                  fontSize: 22,
-                  fontFamily: "TimesNewROman",
-                }}
-              >
-                <p>{podcast.title}</p>
-                {debug ? <p>{podcast.main_topic}</p> : ""}
-              </Row>
-            </a>
-
-            <Row className="text-muted podcast-author-date">
-              <Col xs={6}>
-                <p>
-                  {podcast.author === "" ? podcast.source.name : podcast.author}
-                </p>
-              </Col>
-              <Col xs={6} className="podcast-date">
-                <p>
-                  {podcast.publishedAt
-                    ? podcast.publishedAt.substring(0, 10)
-                    : ""}
-                </p>
-              </Col>
-            </Row>
-            <Row
-              className="podcast-desc "
-              style={{ fontSize: 18, fontFamily: "TimesNewRoman" }}
-            >
-              <p>{podcast.description}</p>
+    <div className="pod-card">
+      <Container className="pod-container">
+      
+      <Row width="100%">
+      <iframe src={iframe_url} width="100%" height="180" frameBorder="0" allowtransparency="true" allow="encrypted-media"/>
+      </Row>
+              
+        <Row float="center" className="pod-description">
+          
+          <Col xs={9} className="pod-content">
+            <Row>
+              <p>{podcast.description.slice(0,160)} ...</p>
             </Row>
 
             <Row>
-              <Col xs={2}>
                 <Button
-                  className="comment-button"
+                  className="comment-button pod-buttons"
                   style={{ float: "left" }}
                   variant="warning"
                   onClick={
@@ -174,9 +141,8 @@ export function PodcastCard(props) {
                 </Button>
 
                 <Button
-                  className="repost-button"
+                  className="repost-button pod-buttons"
                   variant="secondary"
-                  // onClick={() => repost_podcast(podcast.id)}
                   onClick={() => {
                     props.setRepostPodcast(true);
                     props.setTempId(podcast.id);
@@ -184,23 +150,8 @@ export function PodcastCard(props) {
                 >
                   Repost
                 </Button>
-              </Col>
-              <Col xs={2}>
-                <Button
-                  className="not-for-me-button"
-                  style={{ float: "left" }}
-                  variant="outline-danger"
-                  onClick={
-                    logged_in
-                      ? () => props.removePodcast(podcast.id)
-                      : () => props.promptLogin()
-                  }
-                >
-                  Not for me
-                </Button>{" "}
-              </Col>
-              <Col xs={2}></Col>
-              <Col
+              
+              {/* <p
                 xs={3}
                 className="like-num"
                 style={{
@@ -216,8 +167,7 @@ export function PodcastCard(props) {
                   : liked
                   ? podcast.likes + 1
                   : podcast.likes}
-              </Col>
-              <Col xs={1}>
+              </p> */}
                 <Button
                   variant="outline"
                   onClick={
@@ -231,15 +181,13 @@ export function PodcastCard(props) {
                     src={
                       liked
                         ? process.env.PUBLIC_URL +
-                          "/assets/podcast_card_icons/heart_full.png"
+                          "/assets/article_card_icons/heart_full.png"
                         : process.env.PUBLIC_URL +
                           "/assets/podcast_card_icons/heart_empty.png"
                     }
                     alt=""
                   />
                 </Button>
-              </Col>
-              <Col xs={1}>
                 <Button
                   variant="outline"
                   onClick={() => toggle_save_podcast(podcast.id)}
@@ -249,26 +197,24 @@ export function PodcastCard(props) {
                     src={
                       saved
                         ? process.env.PUBLIC_URL +
-                          "/assets/podcast_card_icons/bookmark_full.png"
+                          "/assets/article_card_icons/bookmark_full.png"
                         : process.env.PUBLIC_URL +
-                          "/assets/podcast_card_icons/bookmark_empty.png"
+                          "/assets/article_card_icons/bookmark_empty.png"
                     }
                     alt=""
                   />
                 </Button>
-              </Col>
-              <Col xs={1}>
                 <Button variant="outline" onClick={share_podcast}>
                   <img
                     className="icon"
                     src={
                       process.env.PUBLIC_URL +
-                      "/assets/podcast_card_icons/share.png"
+                      "/assets/article_card_icons/share.png"
                     }
                     alt=""
                   />
                 </Button>
-              </Col>
+              {/* </Col> */}
             </Row>
           </Col>
         </Row>

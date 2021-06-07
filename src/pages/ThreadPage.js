@@ -13,6 +13,7 @@ import {
   is_logged_in,
 } from "../functions/LocalStorageHelper"; 
 import "../css/ThreadPage.css";
+import { PodcastCard } from "../components/PodcastCard";
 require("dotenv").config();
 
 export function ThreadPage(props) {
@@ -24,6 +25,11 @@ export function ThreadPage(props) {
   const [tempId, setTempId] = useState([]);
   const [podcasts, setPodcasts] = useState([]);
 
+
+  let default_interests = ["DIY", "Sports", "Investing", "Crypto"];
+  const interest_ls = sessionStorage.getItem("interests")
+    ? get_interests()
+    : default_interests;
 
   useEffect(() => {
     let token = sessionStorage.getItem("access_token");
@@ -39,7 +45,7 @@ export function ThreadPage(props) {
           );
     console.log(window.location.href);
     let data = { topic: topic, n: 50 };
-    let data = { iterest_list: sessionStorage.getItem, n: 50 };
+    
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/threads", data, head)
       .then((result) => {
@@ -54,13 +60,13 @@ export function ThreadPage(props) {
         }
       });
 
-      let podcast_data = { interest_list: get_interests(), n: 50 };
+      let podcast_data = { interest_list: interest_ls, n: 50 };
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/podcasts", podcast_data, head)
       .then((result) => {
         if (result) {
           console.log(Array(result.data.podcasts));
-          const shuffled = Array(result.data.podcasts)[0].sort(
+          let shuffled = Array(result.data.podcasts)[0].sort(
             () => 0.5 - Math.random()
           );
           // Get sub-array of first n elements after shuffled
@@ -86,14 +92,11 @@ export function ThreadPage(props) {
     //update on db
   }
 
-  let default_interests = ["DIY", "Sports", "Investing", "Crypto"];
-  const interest_ls = sessionStorage.getItem("interests")
-    ? get_interests()
-    : default_interests;
+  
 
   const cards = articles.slice(0, 20).map((data, i) => {
     return (
-      <Container>
+      // <Container>
         <ArticleCard
           article={data}
           setShare={setShare}
@@ -105,22 +108,22 @@ export function ThreadPage(props) {
           promptLogin={() => setPromptLogin(!promptLogin)}
           setTempId={setTempId}
         />
-      </Container>
+      // </Container>
     );
   });
 
-  const podcast_cards = articles.slice(0, 20).map((data, i) => {
+  const podcast_cards = podcasts.slice(0, 20).map((data, i) => {
     return (
-      <Container>
-        <ArticleCard
-          article={data}
+      // <Container>
+        <PodcastCard
+          podcast={data}
           key={i}
           i={i}
           removePodcast={remove_podcast}
           promptLogin={() => setPromptLogin(!promptLogin)}
           setTempId={setTempId}
         />
-      </Container>
+      // </Container>
     );
   });
 
@@ -139,10 +142,11 @@ export function ThreadPage(props) {
             />
           </Row>
           <Row>
-            <Col sm={9} className="thread-page-content">
+            <Col sm={7} className="thread-page-content">
+            
               {cards}
             </Col>
-            <Col sm={3}> {podcast_cards} </Col>
+            <Col sm={{span:3, offset:1}} >{podcast_cards} </Col>
           </Row>
           {share ? (
             <ShareModal {...shareArticle} share={true} setShare={setShare} />

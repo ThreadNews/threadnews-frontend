@@ -2,7 +2,7 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { repost_article } from "../functions/Social.js";
+import { repost } from "../functions/Social.js";
 //css imports
 import "../css/modal.css";
 export function RepostModal(props) {
@@ -18,7 +18,7 @@ export function RepostModal(props) {
         <Button
           className="modalButton"
           onClick={() => {
-            repost_article(props.article_id);
+            repost(props.article_id);
             props.setRepostArticle(false);
           }}
         >

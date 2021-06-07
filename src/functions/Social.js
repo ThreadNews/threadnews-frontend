@@ -64,24 +64,24 @@ export function get_users(user_ids) {
   return res;
 }
 
-export async function repost_article(articleId) {
+export async function repost(id,type="article") {
   let token = sessionStorage.getItem("access_token");
-  let data = { action: "add", article_id: articleId };
+  let data = { action: "add", id: id };
   let head = { headers: { Authorization: "Bearer " + token } };
   console.log("data:", data);
   axios.post(process.env.REACT_APP_BACKEND_URL + "/repost", data, head);
 }
 
-export function like_article(articleId) {
+export function like(id,type="article") {
   let token = sessionStorage.getItem("access_token");
-  let data = { action: "add", article_id: articleId };
+  let data = { action: "add", id: id,type : type };
   console.log("data:", data);
   let head = { headers: { Authorization: "Bearer " + token } };
   axios.post(process.env.REACT_APP_BACKEND_URL + "/like", data, head);
 }
 
-export function save_article(articleId, saved) {
-  let data = { action: "add", article_id: articleId };
+export function save(id, saved,type="article",action="add") {
+  let data = { action: "add", id: id,type:type };
   let token = sessionStorage.getItem("access_token");
   let head = { headers: { Authorization: "Bearer " + token } };
   if (saved) {
