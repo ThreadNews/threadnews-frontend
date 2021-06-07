@@ -1,19 +1,22 @@
+/**
+ * creates container that is displayed in left side of news page
+ * uses UserBlockList componenent to show "suggested follows"
+ * 
+ * @summary Social Column 
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 04:37:26 
+ * Last modified  : 2021-05-28 09:49:02
+ */
+
 import React from "react";
-import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import axios from "axios";
 //css imports
 import "../css/SocialCol.css";
 //built component imports
 import { UserBlockList } from "../components/UserBlock";
 
-//function imports
-import { get_users } from "../functions/Social.js";
-
 export function SocialCol(props) {
-  let token = sessionStorage.getItem("access_token");
-  let data = { N: 10, following: "" };
-  let head = { headers: { Authorization: "Bearer " + token } };
   let ids = JSON.parse(sessionStorage.getItem("suggested_follows"));
   console.log("IDS: ", ids);
   

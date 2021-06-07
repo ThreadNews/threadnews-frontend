@@ -1,3 +1,15 @@
+/**
+ * profile page, shows users followers/following and reposted articles
+ * also contains links to the topics that the user has saved
+ *
+ * @summary Profile page
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 22:49:23 
+ * Last modified  : 2021-05-29 15:32:23
+ */
+
+
 import { React, useState, useEffect } from "react";
 import { Row, Col, Container, Tab, Tabs, Button } from "react-bootstrap";
 import axios from "axios";
@@ -10,6 +22,7 @@ import { ArticleCard } from "../components/ArticleCard";
 import { get_user } from "../functions/LocalStorageHelper";
 
 require("dotenv").config();
+
 export default function Profile(props) {
   let user = get_user();
 
@@ -23,7 +36,7 @@ export default function Profile(props) {
     axios
       .post(
         process.env.REACT_APP_BACKEND_URL + "/articles",
-        { article_ids: user.liked_articles },
+        data,
         head
       )
       .then((result) => {

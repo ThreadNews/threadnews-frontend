@@ -1,6 +1,17 @@
+/**
+ * used in the user interest page
+ * also used for users to switch between topics on threadpage
+ *
+ * @summary circle that contains text and of topic
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:40:14 
+ * Last modified  : 2021-05-28 10:41:05
+ */
+
 //react imports
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 //component imports
 import TopicBubble from "../components/TopicBubble";

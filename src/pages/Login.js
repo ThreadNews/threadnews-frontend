@@ -1,5 +1,16 @@
+/**
+ * handles both signin and login functionality
+ * based off if user has valid accesstoken
+ *
+ * @summary login and signup page
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:23:45
+ * Last modified  : 2021-05-28 22:53:01
+ */
+
 //react imports
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Alert } from "react-bootstrap";

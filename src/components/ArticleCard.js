@@ -1,6 +1,18 @@
+/**
+ * file contains the component that renders articles
+ * this component also relies on other implements CommentCard and CommentInput
+ *
+ *
+ * @summary Article Component
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 04:34:43 
+ * Last modified  : 2021-05-29 15:19:46
+ */
+
+//react imports
 import React, { useState } from "react";
 import { Col, Row, Container, Button, Form } from "react-bootstrap";
-import "../css/articleCard.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
@@ -12,7 +24,7 @@ import {
 import { defaultCommentList } from "../data/defaultData";
 import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
-import { get_comments } from "../functions/Social";
+import "../css/articleCard.css";
 
 require("dotenv").config();
 
@@ -158,7 +170,7 @@ export function ArticleCard(props) {
             </Row>
 
             <Row>
-              <Col xs={2}>
+              {/* <Col xs={2}> */}
                 <Button
                   className="comment-button"
                   style={{ float: "left" }}
@@ -173,7 +185,7 @@ export function ArticleCard(props) {
                 </Button>
 
                 <Button
-                  className="repost-button"
+                  className="comment-button"
                   variant="secondary"
                   // onClick={() => repost_article(article.id)}
                   onClick={() => {
@@ -183,10 +195,10 @@ export function ArticleCard(props) {
                 >
                   Repost
                 </Button>
-              </Col>
-              <Col xs={2}>
+              {/* </Col> */}
+              {/* <Col xs={2}> */}
                 <Button
-                  className="not-for-me-button"
+                  className="comment-button"
                   style={{ float: "left" }}
                   variant="outline-danger"
                   onClick={
@@ -197,10 +209,10 @@ export function ArticleCard(props) {
                 >
                   Not for me
                 </Button>{" "}
-              </Col>
-              <Col xs={2}></Col>
+              {/* </Col> */}
+              
               <Col
-                xs={3}
+                 xs={3} 
                 className="like-num"
                 style={{
                   fontSize: 30,
