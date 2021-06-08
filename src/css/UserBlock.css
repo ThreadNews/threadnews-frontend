@@ -6,15 +6,15 @@ body {
 .UserImg {
   position: relative;
   /* scale: absolute; */
-  width: 150px;
-  height: 150px;
+  width: 50%;
+  height: 70%;
   overflow: hidden;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .card {
-  width: 380px;
+  width: 90%;
   border: 2;
   outline: 5px;
   outline-color: black;
@@ -34,7 +34,13 @@ body {
 
 .articles {
   font-size: 10px;
-  color: #a1aab9;
+  color: #505050;
+}
+
+.header {
+  font-size: 30px;
+  color: #e669d5;
+  
 }
 
 .number1 {
@@ -43,6 +49,6 @@ body {
 
 .followers {
   font-size: 10px;
-  color: #a1aab9;
+  color: #020202;
   font-weight: 500;
 }

@@ -1,3 +1,14 @@
+/**
+ * navigated to with the button next to the search feild on the navBar
+ * implements our component UserBlock to show the results
+ *
+ * @summary shows results from user search
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 10:21:53 
+ * Last modified  : 2021-05-28 10:23:28
+ */
+
 import React, { useState, useEffect } from "react";
 import { search_users } from "../functions/Social";
 import { UserBlock } from "../components/UserBlock";
@@ -23,30 +34,9 @@ export function SearchResults(props) {
     });
   }, []);
 
-  //   function search_user(search_string) {
-  //     let token = sessionStorage.getItem("access_token");
-  //     let head = { headers: { Authorization: "Bearer " + token } };
-  //     let data = { username: search_string };
-  //     //not currently implemented on backend going to fix
-  //     axios
-  //       .post(process.env.REACT_APP_BACKEND_URL + "/search_user", data, head)
-  //       .then((result) => {
-  //         if (result) {
-  //           // console.log("finished searching user", result);
-  //           if (result.status === 200) {
-  //             console.log("t1", result.data.users);
-  //             set_user_ids(result.data.users);
-  //             console.log("USER ids", user_ids);
-  //           } else {
-  //             console.log("ERROR");
-  //           }
-  //         }
-  //       })
-  //       .catch(function (error) {
-  //         console.log("error");
-  //         console.log("search string", search_string);
-  //       });
-  //   }
-
-  return <div>{searchResults}</div>;
+  return (
+  <div>
+      <h2 className="title-light">Search Results</h2>    
+      {searchResults}
+  </div>);
 }

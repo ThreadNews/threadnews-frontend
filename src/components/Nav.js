@@ -1,3 +1,15 @@
+/**
+ * creates nav bar which shows signed in user
+ * if not signed in has buttons for user to login or create account
+ * implements SearchBar component
+ * 
+ * @summary navigation component at top of each page
+ * @author Thread News
+ *
+ * Last modified  : 2021-05-28 22:45:37
+ * Last modified  : 2021-05-28 22:44:19
+ */
+
 import { Navbar, Nav, Container } from "react-bootstrap";
 import "../css/bootstrap_theme.css";
 
@@ -18,7 +30,8 @@ export default function Top_nav(props) {
       {sessionStorage.getItem("access_token") ? (
         <LinkContainer to="/profile">
           <Nav.Link style={{ color: "white" }}>
-            {sessionStorage.getItem("user_name")}
+            {sessionStorage.getItem("user_name")}{" "}
+            
           </Nav.Link>
         </LinkContainer>
       ) : null}

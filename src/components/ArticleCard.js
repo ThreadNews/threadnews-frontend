@@ -1,19 +1,33 @@
+/**
+ * file contains the component that renders articles
+ * this component also relies on other implements CommentCard and CommentInput
+ *
+ *
+ * @summary Article Component
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 04:34:43 
+ * Last modified  : 2021-05-29 15:19:46
+ */
+
+//react imports
 import React, { useState } from "react";
-import { Col, Row, Container, Button, Form } from "react-bootstrap";
+import { Col, Row, Container, Button} from "react-bootstrap";
 import "../css/card.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
 import {
-  repost,
   like,
   save,
-  post_comment,
 } from "../functions/Social";
 import { defaultCommentList } from "../data/defaultData";
 import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
-import { get_comments } from "../functions/Social";
 
+
+
+
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export function ArticleCard(props) {
@@ -22,6 +36,8 @@ export function ArticleCard(props) {
   const [saved, toggleSaved] = useState(false);
   const [showComments, toggleComments] = useState(false);
 
+  //sets value to list of default comments if 
+  //there are no comments on article
   let defaultComments = defaultCommentList;
   if (article != null && article.comments != null) {
     defaultComments = article.comments.concat(defaultComments);
@@ -33,12 +49,14 @@ export function ArticleCard(props) {
   let logged_in = is_logged_in();
 
   function update_like(article_id) {
+    //interacts with backend to store like on user and article
     if (sessionStorage.getItem("access_token") == null) return;
     toggleLiked(!liked);
     like(article_id);
   }
 
   function user_viewed() {
+    //stores that user has viewed this article in the backend
     let token = sessionStorage.getItem("access_token");
     if (token.length !== 1) {
       let data = { action: "add", article_id: article.id };
@@ -52,26 +70,24 @@ export function ArticleCard(props) {
   }
 
   function toggle_save_article(article_id) {
+    //interacts with backend to save article
     console.log("SAVE ARTICLE CLICKED",article_id);
     save(article_id,saved);
     toggleSaved(!saved);
   }
 
   function share_article() {
+    //sets share state variable which triggers modal
     console.log("SHARE ARTICLE CLICKED");
     props.setShare(true);
     props.setShareArticle(article);
   }
-
-  function update_comments() {
-    toggleComments(!showComments);
-  }
-
-  function handleChange(t) {
-    setComment(t.target.value);
-  }
+  
 
   function post_comment() {
+    //interacts with backend to post comment
+    //updates state variables to include new comment
+    // sets value of comment input to empty
     let data = { action: "add", comment: new_comment, id: article.id };
     let head = {
       headers: {
@@ -97,6 +113,7 @@ export function ArticleCard(props) {
   }
 
   const comments = commentList.map((data, i) => {
+    // creates list of comment card components
     return (
       <div>
         <CommentCard {...data} />
@@ -157,13 +174,14 @@ export function ArticleCard(props) {
             </Row>
 
             <Row>
+
                 <Button
                   className="comment-button article-buttons"
                   style={{ float: "left" }}
                   variant="warning"
                   onClick={
                     logged_in
-                      ? () => update_comments()
+                      ? () => toggleComments(!showComments)
                       : () => props.promptLogin()
                   }
                 >
@@ -181,6 +199,7 @@ export function ArticleCard(props) {
                 >
                   Repost
                 </Button>
+
                 <Button
                   className="not-for-me-button article-buttons"
                   style={{ float: "left" }}
@@ -193,16 +212,7 @@ export function ArticleCard(props) {
                 >
                   Not for me
                 </Button>{" "}
-
-              <Col
-                xs={3}
-                // className="like-num"
-                // style={{
-                //   fontSize: 30,
-                //   fontFamily: "TimesNewROman",
-                //   color: "#eee",
-                // }}
-              >
+              <Col xs={3}>
                 <p className="like-num">
                 {article.likes == null
                   ? liked
@@ -277,7 +287,7 @@ export function ArticleCard(props) {
               <Col xs={3}>
                 <CommentInput
                   post_comment={post_comment}
-                  handleChange={handleChange}
+                  handleChange={(t)=> setComment(t.target.value)}
                   comment={new_comment}
                 />
               </Col>

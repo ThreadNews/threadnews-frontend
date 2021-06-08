@@ -1,3 +1,15 @@
+/**
+ * represents search bar component
+ * contains input field and button
+ * after search user is dirrected to search results page
+ *
+ * @summary Searchbar component
+ * @author Thread News
+ *
+ * Created at     : 2021-05-28 22:24:42 
+ * Last modified  : 2021-05-28 22:26:53
+ */
+
 //react imports
 import React, { useState, useCallback } from "react";
 import { Button } from "react-bootstrap";
@@ -5,6 +17,7 @@ import axios from "axios";
 //css imports
 import "../css/search.css";
 import { LinkContainer } from "react-router-bootstrap";
+
 // requre env variables
 require("dotenv").config();
 

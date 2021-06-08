@@ -30,6 +30,13 @@
   color: rgb(56, 56, 56);
 }
 
+.title-light {
+  font-weight: 600;
+  padding-left: 5%;
+  padding-top: 100px;
+  color: rgb(218, 211, 211);
+}
+
 .not-for-me-button {
   font-weight: 800;
   color: rgb(56, 56, 56);
@@ -67,7 +74,6 @@
   border-radius: 20px;
 
 }
-
 
 
 .repost-button {
@@ -127,11 +133,15 @@
 
 .like-num {
   text-align: right;
-  vertical-align:middle;
+  /* vertical-align:middle; */
   color: #1f1919;
   font-size: 26px;
   font-family: "TimesNewRoman",
                   
+}
+
+.pod-like{
+  padding-left: 20px;
 }
 
 .iframe{
