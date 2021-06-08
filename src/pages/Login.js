@@ -20,6 +20,7 @@ import { store_user } from "../functions/LocalStorageHelper";
 //css imports
 import "../css/Login.css";
 
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 console.log();
 

@@ -12,26 +12,22 @@
 
 //react imports
 import React from "react";
-import {Button,Card,ListGroup} from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
 import ProgressBar from "react-customizable-progressbar";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { primary_color } from "../Colors";
-import axios from "axios";
 //css imports
 import "../css/sidebar.css";
 import "../css/bootstrap_theme.css";
-
+import {update_user_interests} from '../functions/Social';
 
 require("dotenv").config();
 
+// creates component that is shown on the side of page where user selects interests
+// shows donut graph and lists selected interests and user can remove interests
+// once enough topics choosen user can continue
 export function Sidebar(props) {
-  function update_user_interests() {
-    axios.post(process.env.REACT_APP_BACKEND_URL + "/update_interests", {
-      user_id: "test user id",
-      new_interests: props.interests,
-    });
-    console.log("updated user interests");
-
-  }
 
   return (
     <div style={{ paddingTop: "30px", alignItems: "center" }}>
@@ -44,7 +40,7 @@ export function Sidebar(props) {
         }}
       >
         <Card.Title className="sidebarHeader">
-          please select {5 - props.num<1?0:5 - props.num<1} more
+            Interests
         </Card.Title>
 
         <Card.Body>
@@ -63,7 +59,7 @@ export function Sidebar(props) {
           <Button
             variant={props.num < 5 ? "outline-warning" : "outline-success"}
             disabled={props.num < 5 ? true : false}
-            onClick={update_user_interests}
+            onClick={()=>update_user_interests(props.interests)}
             href="/threads/"
             hidden={props.num < 5}
             size="lg"

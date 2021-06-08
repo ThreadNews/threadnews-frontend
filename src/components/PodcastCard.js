@@ -1,21 +1,9 @@
-/**
- * file contains the component that renders articles
- * this component also relies on other implements CommentCard and CommentInput
- *
- *
- * @summary Article Component
- * @author Thread News
- *
- * Created at     : 2021-05-28 04:34:43 
- * Last modified  : 2021-05-29 15:19:46
- */
-
-//react imports
 import React, { useState } from "react";
-import { Col, Row, Container, Button} from "react-bootstrap";
+import { Col, Row, Container, Button } from "react-bootstrap";
 import "../css/card.css";
 import axios from "axios";
 import { CommentCard } from "./CommentCard";
+
 import {
   like,
   save,
@@ -24,42 +12,34 @@ import { defaultCommentList } from "../data/defaultData";
 import { is_logged_in } from "../functions/LocalStorageHelper";
 import { CommentInput } from "./CommentInput";
 
-
-
-
 //used to import env variables for frontend and backend urls
 require("dotenv").config();
 
-export function ArticleCard(props) {
-  let article = props.article;
+export function PodcastCard(props) {
+  let podcast = props.podcast;
   const [liked, toggleLiked] = useState(false);
   const [saved, toggleSaved] = useState(false);
   const [showComments, toggleComments] = useState(false);
 
-  //sets value to list of default comments if 
-  //there are no comments on article
   let defaultComments = defaultCommentList;
-  if (article != null && article.comments != null) {
-    defaultComments = article.comments.concat(defaultComments);
+  if (podcast != null && podcast.comments != null) {
+    defaultComments = podcast.comments.concat(defaultComments);
   }
   const [commentList, setCommentList] = useState(defaultComments);
   const [new_comment, setComment] = useState("");
-  let debug = true;
 
   let logged_in = is_logged_in();
 
-  function update_like(article_id) {
-    //interacts with backend to store like on user and article
+  function update_like(podcast_id) {
     if (sessionStorage.getItem("access_token") == null) return;
     toggleLiked(!liked);
-    like(article_id);
+    like(podcast_id,"podcast");
   }
 
   function user_viewed() {
-    //stores that user has viewed this article in the backend
     let token = sessionStorage.getItem("access_token");
     if (token.length !== 1) {
-      let data = { action: "add", article_id: article.id };
+      let data = { action: "add", id: podcast.id };
       let head = { headers: { Authorization: "Bearer " + token } };
       axios.post(process.env.REACT_APP_BACKEND_URL + "/view", data, head);
     }
@@ -69,26 +49,26 @@ export function ArticleCard(props) {
     }
   }
 
-  function toggle_save_article(article_id) {
-    //interacts with backend to save article
-    console.log("SAVE ARTICLE CLICKED",article_id);
-    save(article_id,saved);
+  function toggle_save_podcast(podcast_id) {
+    console.log("SAVE podcast CLICKED",podcast_id);
+    save(podcast_id,saved,"podcast");
     toggleSaved(!saved);
   }
 
-  function share_article() {
-    //sets share state variable which triggers modal
-    console.log("SHARE ARTICLE CLICKED");
+  function share_podcast() {
+    console.log("SHARE podcast CLICKED");
     props.setShare(true);
-    props.setShareArticle(article);
+    props.setSharePodcast(podcast);
   }
+
   
 
+  function handleChange(t) {
+    setComment(t.target.value);
+  }
+
   function post_comment() {
-    //interacts with backend to post comment
-    //updates state variables to include new comment
-    // sets value of comment input to empty
-    let data = { action: "add", comment: new_comment, id: article.id };
+    let data = { action: "add", comment: new_comment, id: podcast.id };
     let head = {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("access_token"),
@@ -113,7 +93,6 @@ export function ArticleCard(props) {
   }
 
   const comments = commentList.map((data, i) => {
-    // creates list of comment card components
     return (
       <div>
         <CommentCard {...data} />
@@ -121,62 +100,30 @@ export function ArticleCard(props) {
     );
   });
 
-  if (article === undefined) {
+  if (podcast === undefined) {
     return <div></div>;
   }
+
+  let iframe_url = "https://open.spotify.com/embed-podcast/show/" + podcast.uri.slice(13,podcast.uri.length)
+
   return (
-    <div className="article-card">
-      <Container className="article-container">
-        <Row float="left" className="">
-          <Col xs={3} className="">
-            <a href={article.url}>
-              <img
-                className="newsImg"
-                src={article === "undefined" ? null : article.urlToImage}
-                alt=""
-                onClick={user_viewed}
-              />
-            </a>
-          </Col>
-
-          <Col xs={9} className="article-content">
-            <a href={article.url}>
-              <Row
-                className="title"
-                style={{
-                  fontSize: 22,
-                  fontFamily: "TimesNewROman",
-                }}
-              >
-                <p>{article.title!==undefined?article.title.slice(0,200):""}</p>
-              </Row>
-            </a>
-
-            <Row className="text-muted author-date">
-              <Col xs={6}>
-                <p>
-                  {article.author === "" ? article.source.name : article.author}
-                </p>
-              </Col>
-              <Col xs={6} className="date">
-                <p>
-                  {article.publishedAt
-                    ? article.publishedAt.substring(0, 10)
-                    : ""}
-                </p>
-              </Col>
-            </Row>
-            <Row
-              className="description"
+    <div className="pod-card">
+      <Container className="pod-container">
+      
+      <Row width="100%">
+      <iframe src={iframe_url} width="100%" height="180" frameBorder="0" allowtransparency="true" allow="encrypted-media"/>
+      </Row>
               
-            >
-              <p>{article.description}</p>
+        <Row float="center" className="pod-description">
+          
+          <Col xs={9} className="pod-content">
+            <Row>
+              <p>{podcast.description.slice(0,160)} ...</p>
             </Row>
 
             <Row>
-
                 <Button
-                  className="comment-button article-buttons"
+                  className="comment-button pod-buttons"
                   style={{ float: "left" }}
                   variant="warning"
                   onClick={
@@ -188,47 +135,23 @@ export function ArticleCard(props) {
                   {showComments ? "Hide" : "Comments"}
                 </Button>
 
-                <Button
-                  className="repost-button article-buttons"
-                  variant="secondary"
-                  // onClick={() => repost_article(article.id)}
-                  onClick={() => {
-                    props.setRepostArticle(true);
-                    props.setTempId(article.id);
-                  }}
-                >
-                  Repost
-                </Button>
-
-                <Button
-                  className="not-for-me-button article-buttons"
-                  style={{ float: "left" }}
-                  variant="outline-danger"
-                  onClick={
-                    logged_in
-                      ? () => props.removeArticle(article.id)
-                      : () => props.promptLogin()
-                  }
-                >
-                  Not for me
-                </Button>{" "}
-              <Col xs={3}>
-                <p className="like-num">
-                {article.likes == null
+              
+              <p
+                xs={3}
+                className="like-num pod-like">
+                {podcast.likes == null
                   ? liked
                     ? 1
                     : 0
                   : liked
-                  ? article.likes + 1
-                  : article.likes}
-                  </p>
-              </Col>
-              <Col xs={1}>
+                  ? podcast.likes + 1
+                  : podcast.likes}
+              </p>
                 <Button
                   variant="outline"
                   onClick={
                     logged_in
-                      ? () => update_like(article.id)
+                      ? () => update_like(podcast.id)
                       : () => props.promptLogin()
                   }
                 >
@@ -244,11 +167,9 @@ export function ArticleCard(props) {
                     alt=""
                   />
                 </Button>
-              </Col>
-              <Col xs={1}>
                 <Button
                   variant="outline"
-                  onClick={() => toggle_save_article(article.id)}
+                  onClick={() => toggle_save_podcast(podcast.id)}
                 >
                   <img
                     className="icon"
@@ -262,9 +183,7 @@ export function ArticleCard(props) {
                     alt=""
                   />
                 </Button>
-              </Col>
-              <Col xs={1}>
-                <Button variant="outline" onClick={share_article}>
+                <Button variant="outline" onClick={share_podcast}>
                   <img
                     className="icon"
                     src={
@@ -274,7 +193,7 @@ export function ArticleCard(props) {
                     alt=""
                   />
                 </Button>
-              </Col>
+              {/* </Col> */}
             </Row>
           </Col>
         </Row>
@@ -286,7 +205,7 @@ export function ArticleCard(props) {
               <Col xs={3}>
                 <CommentInput
                   post_comment={post_comment}
-                  handleChange={(t)=> setComment(t.target.value)}
+                  handleChange={handleChange}
                   comment={new_comment}
                 />
               </Col>

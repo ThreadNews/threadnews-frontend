@@ -19,21 +19,28 @@ import "../css/edit_profile.css";
 import { get_user, store_user } from "../functions/LocalStorageHelper";
 require("dotenv").config();
 
+
 export function EditProfile(props) {
-  const [first_name, setFirstname] = useState("");
-  const [last_name, setLastname] = useState("");
-  const [profile_pic, setProfilepic] = useState("");
-  const [email, setEmail] = useState("");
+  let user = get_user();
+
+  const [first_name, setFirstname] = useState(user.first_name);
+  const [last_name, setLastname] = useState(user.last_name);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [bio, setBio] = useState("");
+  const [username, setUsername] = useState(user.user_name);
+  const [bio, setBio] = useState(user.bio);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState("");
+  const [profile_pic, setProfileImage] = useState("");
 
   function update_user_data() {
+    let user = { ...get_user(), first_name: first_name, user_name: username };
+
+    console.log("starting update_user_data");
     let token = sessionStorage.getItem("access_token");
     let head = { headers: { Authorization: "Bearer " + token } };
+
     let data = {
       bio: bio,
       first_name: first_name,
@@ -48,7 +55,7 @@ export function EditProfile(props) {
         if (result) {
           console.log("finished updating user", result);
           if (result.status === 200) {
-            store_user(result.result, false);
+            store_user(user, false);
             history.push("/profile");
           } else {
             setErrMsg(result.data["msg"]);
@@ -65,23 +72,34 @@ export function EditProfile(props) {
     <div className="container profile profile-view" id="profile">
       <Form>
         <div className="form-row profile-row">
-          <Col md={4}>
-            <div className="avatar">
-              <div className="avatar-bg center"></div>
-              <div>
-                <input
-                  className="form-control-file form-control"
-                  type="file"
-                  name="avatar-file"
-                />
-              </div>
-            </div>
-          </Col>
           <Col md={8}>
             <h1> Edit Profile </h1>
             <hr />
-
             <Row>
+              <Col sm={12} md={6}>
+                <div class="form-group">
+                  <label> Bio </label>
+                  <input
+                    onChange={(v) => setBio(v.target.value)}
+                    class="form-control"
+                    type="text"
+                    name="firstname"
+                  />
+                </div>
+              </Col>
+
+              <Col sm={12} md={6}>
+                <div class="form-group">
+                  <label>Image URL </label>
+                  <input
+                    onChange={(v) => setProfileImage(v.target.value)}
+                    class="form-control"
+                    type="text"
+                    name="firstname"
+                  />
+                </div>
+              </Col>
+
               <Col sm={12} md={6}>
                 <div class="form-group">
                   <label>Firstname </label>

@@ -15,15 +15,19 @@ export function UserBlock(user) {
               <img
                 className="UserImg"
                 src={user.profile_img}
-                alt=""
+                // alt={ process.env.PUBLIC_URL + "/assets/article_card_icons/default.png"}
                 width="150"
               />
             </div>
 
             <div className="ml-3 w-100">
               <h4 className="mb-0 mt-0">{user.user_name}</h4>
-              <div className="p-2 mt-2 bg-primary d-flex justify-content-between stats">
-                
+              <div className="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                <div className="d-flex flex-column">
+                  {" "}
+                  <span className="followers"># Reposted </span>{" "}
+                  {/* <span>{user.repost_count!==undefined? user.repost_count: 0}</span>{" "} */}
+                </div>
                 <div className="d-flex flex-column">
                   {" "}
                   <span className="followers">Followers</span>{" "}
@@ -67,9 +71,9 @@ export function UserBlockList(props) {
 
   const blocks = users.map((user, i) => {
     return (
-      <div>
-        <UserBlock {...user}></UserBlock>
-      </div>
+      // <div>
+        <UserBlock {...user} key ={i}></UserBlock>
+      // </div>
     );
   });
 

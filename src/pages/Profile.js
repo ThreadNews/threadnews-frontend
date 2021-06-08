@@ -21,18 +21,22 @@ import { LinkContainer } from "react-router-bootstrap";
 import { ArticleCard } from "../components/ArticleCard";
 import { get_user } from "../functions/LocalStorageHelper";
 
+
+//used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export default function Profile(props) {
-  let user = get_user();
+  let user = get_user(); 
 
+  //key state var stores what tab the user is viewing
   const [key, setKey] = useState("home");
   const [articles, setArticles] = useState([""]);
 
   useEffect(() => {
+    //loads liked article data for user
     let token = sessionStorage.getItem("access_token");
     let head = { headers: { Authorization: "Bearer " + token } };
-    let data = { article_ids: user.liked_articles };
+    let data = { ids: user.liked_articles };
     axios
       .post(
         process.env.REACT_APP_BACKEND_URL + "/articles",
@@ -46,6 +50,8 @@ export default function Profile(props) {
       });
   }, []);
 
+
+  //creates list of user interests on left side of page 
   const interest_list = user.interests.map((interest, i) => {
     return (
       <div>
@@ -71,7 +77,8 @@ export default function Profile(props) {
       </div>
     );
   });
-  console.log("Articles;", articles);
+  
+
   return (
     <div>
       <Navbar></Navbar>

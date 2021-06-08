@@ -22,6 +22,7 @@ export default function InterestPage(props) {
   function add_interest(new_interest) {
     let n = [...interests, new_interest];
     setInterests(n);
+    sessionStorage.setItem("interests",JSON.stringify(n)); 
   }
 
   function remove_interest(old_interest) {

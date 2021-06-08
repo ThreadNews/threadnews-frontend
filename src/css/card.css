@@ -11,8 +11,9 @@
 }
 
 .icon {
-  display: inline-block;
-  max-width: 60%;
+  /* display: inline-block; */
+  max-width: 20px;
+  max-height: 20px;
   width: flex;
   height: flex;
 }
@@ -24,9 +25,16 @@
   border-style: solid;
 }
 
-.article-title {
+.title {
   font-weight: 800;
   color: rgb(56, 56, 56);
+}
+
+.title-light {
+  font-weight: 600;
+  padding-left: 5%;
+  padding-top: 100px;
+  color: rgb(218, 211, 211);
 }
 
 .not-for-me-button {
@@ -44,6 +52,30 @@
   border-color: rgb(56, 56, 56);
 }
 
+.pod-card{
+  background: white;
+  max-height: 300px;
+  /* padding-bottom: 50px; */
+}
+
+.pod-buttons{
+ max-width: 90px;
+ align-content: center;
+ max-height: 30px;
+ margin-right: 2%;
+ border-radius: 20px;
+}
+
+.article-buttons{
+  max-width: 100px;
+  max-height: 40px;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-radius: 20px;
+
+}
+
+
 .repost-button {
   font-weight: 800;
   color: rgb(56, 56, 56);
@@ -52,17 +84,26 @@
   border-color: rgb(56, 56, 56);
 }
 
-.article-author-date {
+.author-date {
   max-height: 12%;
 }
-.article-title {
+.title {
   max-height: 37%;
   /* padding-top: 20px; */
 }
 
-.article-date {
+.date {
   text-align: right;
 }
+
+.pod-description{
+  font-size: 18;
+  font-family: "TimesNewRoman";
+  margin-left: 12%;
+  width: 96%;
+  
+}
+
 
 .article-container {
   font-family: "Times New Roman";
@@ -76,8 +117,36 @@
   position: left;
   float: left;
 }
+
+.pod-container {
+  font-family: "Times New Roman";
+  color: #1f1919;
+  background-color: #ffffff;
+  /* opacity: 0.4; */
+  margin-top: 20px;
+  /* margin-left: 20px; */
+  border-radius: 25px;
+  width: 100%;
+  position: left;
+  float: left;
+}
+
 .like-num {
   text-align: right;
+  /* vertical-align:middle; */
+  color: #1f1919;
+  font-size: 26px;
+  font-family: "TimesNewRoman",
+                  
+}
+
+.pod-like{
+  padding-left: 20px;
+}
+
+.iframe{
+  align-items: center;
+  align-self: center;
 }
 
 .commentsBox {
