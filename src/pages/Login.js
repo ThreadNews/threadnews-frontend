@@ -94,7 +94,7 @@ export default function Login(props) {
               <label>Username</label>
               <input
                 onChange={(v) => setUsername(v.target.value)}
-                className="form-control"
+                className="form-control username-input"
                 placeholder="Enter username"
               />
             </div>
@@ -104,7 +104,7 @@ export default function Login(props) {
             <input
               onChange={(v) => setEmail(v.target.value)}
               type="email"
-              className="form-control"
+              className="form-control email-input"
               placeholder="Enter email"
             />
           </div>
@@ -114,7 +114,7 @@ export default function Login(props) {
             <input
               type="password"
               onChange={(v) => setPassword(v.target.value)}
-              className="form-control"
+              className="form-control password-input"
               placeholder="Enter password"
             />
           </div>
@@ -122,7 +122,7 @@ export default function Login(props) {
           <LinkContainer to="/threads/">
             <button
               type="submit"
-              className="btn btn-dark btn-lg btn-block"
+              className="submitBtn btn btn-dark btn-lg btn-block"
               href={is_login ? "/threads/" : "/"}
               onClick={is_login ? login : () => signUp()}
             >

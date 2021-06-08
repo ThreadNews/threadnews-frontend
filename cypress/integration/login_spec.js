@@ -1,24 +1,47 @@
-describe('Backend running -- Smoke test', () => {
+/* eslint-disable no-undef */
+describe('Login feature tests', () => {
     
-    context('Given I ran the backend (API)', () => {
 
-        before(() => {
-            cy.intercept({
-                method: 'GET',
-                url: 'http://localhost:5000/',
-            }).as('apiCheck');
+        it('should log in properly', () => {
+            cy.window().then((win) => {
+            win.sessionStorage.clear()
+          })
+            cy.visit('http://localhost:3000/');
+            cy.contains('Login').click();
+            cy.get('.email-input').type('cy@pre.ss');
+            cy.get('.password-input').type('cypress');
+            cy.get('.submitBtn').click();
+            cy.contains('cypressTester');
+            cy.url().should('include', '/threads')
         });
 
-        it('When I visit the root endpoint it does not smoke!', () => {
-            cy.visit('http://localhost:5000/');
-            cy.wait('@apiCheck').then((interception) => {
-              assert.isNotNull(interception.response.body, 'API is up and doesn\'t smoke!');
-              assert.equal(interception.response.body, 'Hello, World!')
-            }); // or
-            // cy.wait('@apiCheck').should(({ request, response }) => {
-            //     expect(response && response.body).to.include('Hello, World!');
-            //     expect(response && response.statusCode).to.be.equal(200);
-            // });
+        it('should be able to create a new account', () =>{
+            cy.window().then((win) => {
+                win.sessionStorage.clear()
+              })
+            cy.visit('http://localhost:3000/');
+            cy.contains('signup').click();
+            cy.get('.username-input').type('mom');
+            cy.get('.email-input').type('mom@mom.mom');
+            cy.get('.password-input').type('mom');
+            cy.intercept('/newUser')
+            cy.get('.submitBtn').click();
+            cy.url().should('include', '/threads')
+        })
+
+        
+        it('should not log in with a wrong passwork', () => {
+            cy.window().then((win) => {
+            win.sessionStorage.clear()
+          })
+            cy.visit('http://localhost:3000/');
+            cy.contains('Login').click();
+            cy.get('.email-input').type('cy@pre.ss');
+            cy.get('.password-input').type('wrongpass');
+            cy.get('.submitBtn').click();
+            cy.intercept('/login')
+            cy.contains('signup');
+            cy.url().should('include', '/threads')
         });
-    });
-});
+
+}); 

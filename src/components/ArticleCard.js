@@ -221,6 +221,7 @@ export function ArticleCard(props) {
                       ? () => update_like(article.id)
                       : () => props.promptLogin()
                   }
+                  className="likeBtn"
                 >
                   <img
                     className="icon"
