@@ -1,24 +1,63 @@
-describe('Backend running -- Smoke test', () => {
-    
-    context('Given I ran the backend (API)', () => {
+/* eslint-disable no-undef */
+describe('Login feature tests', () => {
 
+    context('given I am not logged in', () => {
         before(() => {
-            cy.intercept({
-                method: 'GET',
-                url: 'http://localhost:5000/',
-            }).as('apiCheck');
-        });
+        cy.window().then((win) => {
+        win.sessionStorage.clear()
+      })
+      cy.visit('http://localhost:3000/');
+      })
+      it('When I put in my credentials to login and click submit it should log me in ', () => {
+        cy.contains('Login').click();
+        cy.get('.email-input').type('cy@pre.ss');
+        cy.get('.password-input').type('cypress');
+        cy.get('.submitBtn').click();
+        cy.contains('cypressTester');
+        cy.url().should('include', '/threads')
+      });
+      });
 
-        it('When I visit the root endpoint it does not smoke!', () => {
-            cy.visit('http://localhost:5000/');
-            cy.wait('@apiCheck').then((interception) => {
-              assert.isNotNull(interception.response.body, 'API is up and doesn\'t smoke!');
-              assert.equal(interception.response.body, 'Hello, World!')
-            }); // or
-            // cy.wait('@apiCheck').should(({ request, response }) => {
-            //     expect(response && response.body).to.include('Hello, World!');
-            //     expect(response && response.statusCode).to.be.equal(200);
-            // });
-        });
-    });
-});
+      
+    context('given I am not logged in', () => {
+        before(() => {
+        cy.window().then((win) => {
+        win.sessionStorage.clear()
+      })
+      cy.visit('http://localhost:3000/');
+      })
+      it('When I put in my credentials to signup and click submit it should create a new account', () => {
+        cy.contains('signup').click();
+        cy.get('.username-input').type('mom');
+        cy.get('.email-input').type('mom@mom.mom');
+        cy.get('.password-input').type('mom');
+        cy.intercept('/newUser')
+        cy.get('.submitBtn').click();
+        cy.url().should('include', '/threads')
+      });
+      });
+
+      
+      
+    context('given I am not logged in', () => {
+        before(() => {
+        cy.window().then((win) => {
+        win.sessionStorage.clear()
+      })
+      cy.visit('http://localhost:3000/');
+      })
+      it('When I put in the wrong credentials to login and click submit it should not log me in ', () => {
+        cy.contains('Login').click();
+        cy.get('.email-input').type('cy@pre.ss');
+        cy.get('.password-input').type('wrongpass');
+        cy.get('.submitBtn').click();
+        cy.intercept('/login')
+        cy.contains('signup');
+        cy.url().should('include', '/threads')
+      });
+      });
+        
+
+      
+
+}); 
