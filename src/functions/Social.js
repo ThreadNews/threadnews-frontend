@@ -5,8 +5,8 @@
  * @summary social functions
  * @author Thread News
  *
- * Created at     : 2021-05-28 22:37:40 
- * Last modified  : 2021-06-08 21:36:55
+ * Created at     : 2021-05-28 22:37:40
+ * Last modified  : 2021-06-08 22:37:34
  */
 
 import axios from "axios";
@@ -17,14 +17,12 @@ import react from "react";
 //used to import env variables for frontend and backend urls
 require("dotenv").config();
 
-
-export function update_user_interests(interests,) {
+export function update_user_interests(interests) {
   axios.post(process.env.REACT_APP_BACKEND_URL + "/update_interests", {
     user_id: "test user id",
     add: interests,
   });
   console.log("updated user interests");
-  
 }
 
 export async function follow(user_id) {
@@ -36,7 +34,6 @@ export async function follow(user_id) {
 }
 
 export function search_users(search_string) {
-  
   let token = sessionStorage.getItem("access_token");
   let head = { headers: { Authorization: "Bearer " + token } };
   let data = { user_name: search_string };
@@ -87,7 +84,7 @@ export function get_users(user_ids) {
   return res;
 }
 
-export async function repost(id,type="article") {
+export async function repost(id, type = "article") {
   let token = sessionStorage.getItem("access_token");
   let data = { action: "add", id: id };
   let head = { headers: { Authorization: "Bearer " + token } };
@@ -95,16 +92,16 @@ export async function repost(id,type="article") {
   axios.post(process.env.REACT_APP_BACKEND_URL + "/repost", data, head);
 }
 
-export function like(id,type="article") {
+export function like(id, type = "article") {
   let token = sessionStorage.getItem("access_token");
-  let data = { action: "add", id: id,type : type };
+  let data = { action: "add", id: id, type: type };
   console.log("data:", data);
   let head = { headers: { Authorization: "Bearer " + token } };
   axios.post(process.env.REACT_APP_BACKEND_URL + "/like", data, head);
 }
 
-export function save(id, saved,type="article",action="add") {
-  let data = { action: "add", id: id,type:type };
+export function save(id, saved, type = "article", action = "add") {
+  let data = { action: "add", id: id, type: type };
   let token = sessionStorage.getItem("access_token");
   let head = { headers: { Authorization: "Bearer " + token } };
   if (saved) {

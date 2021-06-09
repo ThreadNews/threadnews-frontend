@@ -4,13 +4,12 @@
  * @summary functions to easily interact with sessionstorage
  * @author Thread News
  *
- * Created at     : 2021-05-28 22:23:04 
- * Last modified  : 2021-06-08 22:26:38
+ * Created at     : 2021-05-28 22:23:04
+ * Last modified  : 2021-06-08 22:37:29
  */
 
 export function store_user(user, access_token = false) {
-  if (access_token) 
-  {
+  if (access_token) {
     sessionStorage.setItem("access_token", user["access_token"]);
   }
   sessionStorage.setItem("email", user["email"]);
@@ -57,7 +56,10 @@ export function get_user() {
     following_count: sessionStorage.getItem("following_count"),
     followers_count: sessionStorage.getItem("followers_count"),
     likes_count: sessionStorage.getItem("likes_count"),
-    suggested_follows:sessionStorage.getItem("suggested_follows")!=='undefined' ? JSON.parse(sessionStorage.getItem("suggested_follows")): '',
+    suggested_follows:
+      sessionStorage.getItem("suggested_follows") !== "undefined"
+        ? JSON.parse(sessionStorage.getItem("suggested_follows"))
+        : "",
     liked_articles: JSON.parse(sessionStorage.getItem("liked_articles")),
     reposted_follows: JSON.parse(sessionStorage.getItem("reposted_articles")),
   };
