@@ -6,17 +6,17 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 10:23:45
- * Last modified  : 2021-05-28 22:53:01
+ * Last modified  : 2021-06-09 01:53:32
  */
 
 //react imports
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory, Redirect } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
 //component imports
-import { store_user } from "../functions/LocalStorageHelper";
+import { is_logged_in, store_user } from "../functions/LocalStorageHelper";
 //css imports
 import "../css/Login.css";
 
@@ -27,10 +27,11 @@ console.log();
 export default function Login(props) {
   const [email, setEmail] = useState("");
 
-  const history = useHistory();
+  // const history = useHistory();
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  
 
   const [login_count, setLoginCount] = useState(0);
   const is_login = props.is_login;
@@ -52,8 +53,7 @@ export default function Login(props) {
           if (result.status === 200) {
             sessionStorage.setItem("access_token", result.data["access_token"]);
             store_user(result.data.user);
-
-            history.push("/");
+  
           } else {
             setErrMsg(result.data["msg"]);
           }
@@ -84,13 +84,13 @@ export default function Login(props) {
             console.log("REsult", result.data);
             sessionStorage.setItem("access_token", result.data["access_token"]);
             store_user(result.data.user);
-            history.push("/threads/");
           }
         }
       })
       .catch(function (error) {
         setLoginCount(login_count + 1);
-        setErrMsg(error);
+        setErrMsg("Incorrect username or password");
+        // return <Redirect to="/login/"/>
       });
   }
 
@@ -137,10 +137,10 @@ export default function Login(props) {
               className="btn btn-dark btn-lg btn-block"
               href={is_login ? "/threads/" : "/"}
               onClick={is_login ? login : () => signUp()}
-            >
+              >
               {is_login ? "Log in" : "Sign Up"}
             </button>
-          </LinkContainer>
+            </LinkContainer>
         </form>
       </div>
     </div>

@@ -8,7 +8,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 10:17:23 
- * Last modified  : 2021-05-28 10:20:41
+ * Last modified  : 2021-06-09 01:10:44
  */
 
 import { React, useState, useEffect } from "react";
@@ -149,6 +149,7 @@ export function ThreadPage(props) {
 
   return (
     <div>
+      <title>dddd</title>
       <div>
         <Navbar></Navbar>
       </div>
@@ -157,7 +158,7 @@ export function ThreadPage(props) {
           <Row>
             <BubbleRow
               row={true}
-              interests={interest_ls}
+              interests={interest_ls.slice(0,5)}
               header="Your Topics"
             />
           </Row>
