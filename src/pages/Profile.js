@@ -6,7 +6,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 22:49:23
- * Last modified  : 2021-06-08 22:46:29
+ * Last modified  : 2021-06-08 22:59:25
  */
 
 import { React, useState, useEffect } from "react";
@@ -105,17 +105,10 @@ export default function Profile(props) {
                   <h6>{user.bio}</h6>
                   <p className="social">
                     Followers :{" "}
-                    <span className="counter">
-                      {user.followers_count}
-                    </span>
+                    <span className="counter">{user.followers_count}</span>
                     Following :{" "}
-                    <span className="counter">
-                      {user.following_count}
-                    </span>
-                    Likes :{" "}
-                    <span className="counter">
-                      {user.likes_count}
-                    </span>
+                    <span className="counter">{user.following_count}</span>
+                    Likes : <span className="counter">{user.likes_count}</span>
                   </p>
                 </div>
               </Col>
