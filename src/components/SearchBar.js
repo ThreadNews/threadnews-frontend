@@ -6,8 +6,8 @@
  * @summary Searchbar component
  * @author Thread News
  *
- * Created at     : 2021-05-28 22:24:42 
- * Last modified  : 2021-05-28 22:26:53
+ * Created at     : 2021-05-28 22:24:42
+ * Last modified  : 2021-06-08 22:37:38
  */
 
 //react imports

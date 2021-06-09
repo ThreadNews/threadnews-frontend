@@ -5,10 +5,9 @@
  * @summary Profile page
  * @author Thread News
  *
- * Created at     : 2021-05-28 22:49:23 
- * Last modified  : 2021-05-29 15:32:23
+ * Created at     : 2021-05-28 22:49:23
+ * Last modified  : 2021-06-08 22:59:25
  */
-
 
 import { React, useState, useEffect } from "react";
 import { Row, Col, Container, Tab, Tabs, Button } from "react-bootstrap";
@@ -21,12 +20,11 @@ import { LinkContainer } from "react-router-bootstrap";
 import { ArticleCard } from "../components/ArticleCard";
 import { get_user } from "../functions/LocalStorageHelper";
 
-
 //used to import env variables for frontend and backend urls
 require("dotenv").config();
 
 export default function Profile(props) {
-  let user = get_user(); 
+  let user = get_user();
 
   //key state var stores what tab the user is viewing
   const [key, setKey] = useState("home");
@@ -38,11 +36,7 @@ export default function Profile(props) {
     let head = { headers: { Authorization: "Bearer " + token } };
     let data = { ids: user.liked_articles };
     axios
-      .post(
-        process.env.REACT_APP_BACKEND_URL + "/articles",
-        data,
-        head
-      )
+      .post(process.env.REACT_APP_BACKEND_URL + "/articles", data, head)
       .then((result) => {
         if (result) {
           setArticles(result.data.result);
@@ -50,8 +44,7 @@ export default function Profile(props) {
       });
   }, []);
 
-
-  //creates list of user interests on left side of page 
+  //creates list of user interests on left side of page
   const interest_list = user.interests.map((interest, i) => {
     return (
       <div>
@@ -77,7 +70,6 @@ export default function Profile(props) {
       </div>
     );
   });
-  
 
   return (
     <div>
@@ -89,22 +81,32 @@ export default function Profile(props) {
               <Col md={3}>
                 <div className="profile-img">
                   <div className="profile-img-wrapper">
-                    <img src={user.profile_img} alt="" />
+                    <img
+                      src={
+                        user.profile_pic === "undefined"
+                          ? process.env.PUBLIC_URL +
+                            "/assets/article_card_icons/default-profile.png"
+                          : user.profile_pic
+                      }
+                      alt=""
+                    />
                   </div>
                 </div>
               </Col>
               <Col md={6}>
                 <div className="profile-head-text">
-                  <h3>
-                    {user.first_name} {user.last_name}
-                  </h3>
+                  <h3>{user.user_name}</h3>
+                  <h4>
+                    {user.first_name !== "undefined"
+                      ? user.first_name + " " + user.last_name
+                      : ""}
+                  </h4>
+                  <hr></hr>
                   <h6>{user.bio}</h6>
                   <p className="social">
                     Followers :{" "}
-                    <span className="counter">{user.follower_count}</span>
+                    <span className="counter">{user.followers_count}</span>
                     Following :{" "}
-                    <span className="counter">{user.following_count}</span>
-                    Articles Shared :{" "}
                     <span className="counter">{user.following_count}</span>
                     Likes : <span className="counter">{user.likes_count}</span>
                   </p>
