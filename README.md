@@ -46,7 +46,7 @@ To edit what the CI performs, edit .travis.yml to add new commands.
 
 ## Deployment
 
-The deployment server is heroku. Since the project splits the frontend and backend into separate repositories, code for the frontend will be ran within its own heroku app.
+The deployment server is [heroku](https://threadnews-frontend.herokuapp.com/). Since the project splits the frontend and backend into separate repositories, code for the frontend will be ran within its own heroku app.
 
 Heroku deploys the code from the dev branch once the CI passes after an update. Heroku deploys based on the commands set in Procfile.
 
