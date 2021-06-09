@@ -32,7 +32,7 @@ npx cypress run
 
 Testing notes:
 
-* The login API tests depend on what port you are using, and may fail if you are not using the proper port
++ The login API tests depend on what port you are using, and may fail if you are not using the proper port
 
 Acceptance testing as well as api route testing are performed within cypress/integrations. Within the folder exists all test. Test files with `*_api.js` are API tests while `_spec.js` are for acceptance specifications.
 
