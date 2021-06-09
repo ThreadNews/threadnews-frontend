@@ -5,7 +5,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 22:23:04
- * Last modified  : 2021-06-08 22:37:29
+ * Last modified  : 2021-06-08 22:43:11
  */
 
 export function store_user(user, access_token = false) {
@@ -53,9 +53,9 @@ export function get_user() {
     profile_pic: sessionStorage.getItem("profile_pic"),
     following: JSON.parse(sessionStorage.getItem("following")),
     followers: JSON.parse(sessionStorage.getItem("followers")),
-    following_count: sessionStorage.getItem("following_count"),
-    followers_count: sessionStorage.getItem("followers_count"),
-    likes_count: sessionStorage.getItem("likes_count"),
+    following_count: sessionStorage.getItem("following_count") !== "undefined"?sessionStorage.getItem("following_count"):0,
+    followers_count: sessionStorage.getItem("followers_count") !== "undefined"?sessionStorage.getItem("followers_count"):0,
+    likes_count: sessionStorage.getItem("likes_count")!=='undefined'?sessionStorage.getItem("likes_count"):0,
     suggested_follows:
       sessionStorage.getItem("suggested_follows") !== "undefined"
         ? JSON.parse(sessionStorage.getItem("suggested_follows"))
