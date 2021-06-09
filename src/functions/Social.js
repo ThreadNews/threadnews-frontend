@@ -6,7 +6,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 22:37:40 
- * Last modified  : 2021-05-29 14:50:48
+ * Last modified  : 2021-06-08 21:36:55
  */
 
 import axios from "axios";
@@ -18,10 +18,10 @@ import react from "react";
 require("dotenv").config();
 
 
-export function update_user_interests(interests) {
+export function update_user_interests(interests,) {
   axios.post(process.env.REACT_APP_BACKEND_URL + "/update_interests", {
     user_id: "test user id",
-    new_interests: interests,
+    add: interests,
   });
   console.log("updated user interests");
   
