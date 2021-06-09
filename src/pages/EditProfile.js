@@ -6,7 +6,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 10:16:00 
- * Last modified  : 2021-05-28 10:16:58
+ * Last modified  : 2021-06-08 21:46:12
  */
 
 import React from "react";
@@ -130,7 +130,6 @@ export function EditProfile(props) {
                   <input
                     onChange={(v) => setUsername(v.target.value)}
                     class="form-control"
-                    autocomplete="off"
                     required=""
                     name="username"
                   />
@@ -143,7 +142,6 @@ export function EditProfile(props) {
                     onChange={(v) => setEmail(v.target.value)}
                     class="form-control"
                     type="email"
-                    autocomplete="off"
                     required=""
                     name="email"
                   />
@@ -159,7 +157,6 @@ export function EditProfile(props) {
                     class="form-control"
                     type="password"
                     name="password"
-                    autocomplete="off"
                     required=""
                   />
                 </FormGroup>
@@ -172,7 +169,6 @@ export function EditProfile(props) {
                     type="password"
                     class="form-control"
                     name="confirmpass"
-                    autocomplete="off"
                     required=""
                   />
                 </FormGroup>

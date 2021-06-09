@@ -6,7 +6,7 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 22:49:23 
- * Last modified  : 2021-05-29 15:32:23
+ * Last modified  : 2021-06-08 22:33:40
  */
 
 
@@ -89,24 +89,28 @@ export default function Profile(props) {
               <Col md={3}>
                 <div className="profile-img">
                   <div className="profile-img-wrapper">
-                    <img src={user.profile_img} alt="" />
+                    <img src={user.profile_pic==='undefined'?process.env.PUBLIC_URL +
+                          "/assets/article_card_icons/default-profile.png": user.profile_pic} alt='' />
                   </div>
                 </div>
               </Col>
               <Col md={6}>
                 <div className="profile-head-text">
                   <h3>
-                    {user.first_name} {user.last_name}
+                    {user.user_name}
                   </h3>
+                  <h4>
+                    {user.first_name!=='undefined'?  user.first_name + " " +user.last_name:""}
+                  </h4>
+                  <hr></hr>
                   <h6>{user.bio}</h6>
                   <p className="social">
                     Followers :{" "}
-                    <span className="counter">{user.follower_count}</span>
+                    <span className="counter">{user.followers_count!=='undefined'?user.follower_count:0}</span>
                     Following :{" "}
-                    <span className="counter">{user.following_count}</span>
-                    Articles Shared :{" "}
-                    <span className="counter">{user.following_count}</span>
-                    Likes : <span className="counter">{user.likes_count}</span>
+                    <span className="counter">{user.following_count!=='undefined'?user.following_count:0}</span>
+                    
+                    Likes : <span className="counter">{user.likes_count!=='undefined'?user.likes_count:0}</span>
                   </p>
                 </div>
               </Col>
