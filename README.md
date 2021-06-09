@@ -40,7 +40,7 @@ Acceptance specifications can be found [here](https://docs.google.com/document/d
 
 ## CI Management
 
-This project uses Travis CI to run a set of programs to ensure tests are working and code formatting is valid. 
+This project uses [Travis CI](https://www.travis-ci.com/github/ThreadNews/threadnews-frontend) to run a set of programs to ensure tests are working and code formatting is valid.
 
 To edit what the CI performs, edit .travis.yml to add new commands.
 
