@@ -55,7 +55,7 @@ Cypress.Commands.add('login', () => {
             cy.setLocalStorage('jwt', resp.body.access_token);
         }
     );
-  });
+});
 
 // test like article
 describe('Like an article', () => {
