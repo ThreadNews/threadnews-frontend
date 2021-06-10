@@ -6,12 +6,12 @@
  * @author Thread News
  *
  * Created at     : 2021-05-28 10:23:45
- * Last modified  : 2021-06-09 01:53:32
+ * Last modified  : 2021-06-09 10:38:00
  */
 
 //react imports
 import React, { useState } from "react";
-// import { useHistory, Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
@@ -27,7 +27,7 @@ console.log();
 export default function Login(props) {
   const [email, setEmail] = useState("");
 
-  // const history = useHistory();
+  const history = useHistory();
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -53,6 +53,7 @@ export default function Login(props) {
           if (result.status === 200) {
             sessionStorage.setItem("access_token", result.data["access_token"]);
             store_user(result.data.user);
+            history.push("/")
   
           } else {
             setErrMsg(result.data["msg"]);
