@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TopNav from "./components/Nav";
 import { EditProfile } from "./pages/EditProfile";
 import { SearchResults } from "./pages/searchResults.js";
+import { Helmet } from 'react-helmet';
 function view_threads() {
   ReactDOM.render(
     <React.StrictMode>
@@ -20,11 +21,11 @@ function view_threads() {
 function signup() {
   console.log("was called");
   ReactDOM.render(
-    <React.StrictMode>
+    <React>
       {/* // go to bubbles  */}
       <InterestPage onFinish={view_threads} />
       {/* // path defined below  */}
-    </React.StrictMode>,
+    </React>,
     document.getElementById("root")
   );
 }
@@ -34,6 +35,9 @@ let user = sessionStorage.getItem("user")
   : null;
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet>
+      <title>Thread News</title>
+    </Helmet>
     <Router>
       <TopNav />
       <Switch>
